@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vscode-separators.helloWorld"
+		"onStartupFinished"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
