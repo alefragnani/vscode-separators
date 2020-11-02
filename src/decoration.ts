@@ -3,16 +3,16 @@
 *  Licensed under the MIT License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { ExtensionContext, workspace, window, ThemeColor, OverviewRulerLane, TextEditor, Range, TextEditorDecorationType, SymbolInformation, DecorationRenderOptions } from "vscode";
+import { ExtensionContext, window, ThemeColor, TextEditor, Range, TextEditorDecorationType, SymbolInformation, DecorationRenderOptions, DocumentSymbol } from "vscode";
 
 function createTopLineDecoration(
-  borderColor: string | ThemeColor, borderWidth: string, borderStyle: string
+    borderColor: string | ThemeColor, borderWidth: string, borderStyle: string
 ): TextEditorDecorationType {
     const decorationOptions: DecorationRenderOptions = {
-      isWholeLine: true,
-      borderWidth: `${borderWidth} 0 0 0`,
-      borderStyle: `${borderStyle}`,
-      borderColor: borderColor
+        isWholeLine: true,
+        borderWidth: `${borderWidth} 0 0 0`,
+        borderStyle: `${borderStyle}`,
+        borderColor: borderColor
     };
 
     return window.createTextEditorDecorationType(decorationOptions);
@@ -25,8 +25,8 @@ export function createTextEditorDecoration(context: ExtensionContext) {
     return createTopLineDecoration("#65EAB9", "1px", "solid");
 }
 
-export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined, 
-    symbols: SymbolInformation[] | undefined,
+export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
+    symbols: DocumentSymbol[] | undefined,
     bookmarkDecorationType: TextEditorDecorationType) {
     if (!activeEditor) {
         return;
@@ -42,7 +42,7 @@ export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undef
 
 
     for (const element of symbols) {
-        const decoration = new Range(element.location.range.start.line, 0, element.location.range.start.line, 0);
+        const decoration = new Range(element.range.start.line, 0, element.range.start.line, 0);
         books.push(decoration);
     }
 
