@@ -18,6 +18,27 @@
             "type": "object",
             "title": "%separators.configuration.title%",
             "properties": {
+                "separators.methods.supportedKinds": {
+                    "type": "array",
+                    "default": ["Method", "Function", "Constructor"],					
+					"items": {
+						"type": "string",
+						"enum": [
+							"Method",
+							"Function",
+							"Constructor"
+						],
+						"enumDescriptions": [
+							"Recognizes `Methods` as a method",
+							"Recognizes `Functions` as a method",
+							"Recognizes `Constructors` as a method"
+						]
+					},
+					"minItems": 1,
+					"maxItems": 3,
+					"uniqueItems": true,
+					"description": "%separators.methods.supportedKinds.description%"
+				},
                 "separators.methods.borderWidth": {
                     "type": "integer",
                     "default": 1,

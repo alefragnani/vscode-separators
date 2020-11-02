@@ -3,7 +3,21 @@
 *  Licensed under the MIT License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { commands, DocumentSymbol, SymbolKind, window } from "vscode";
+import { commands, DocumentSymbol, SymbolKind, window, workspace } from "vscode";
+
+function getSymbolKindAsString(kind: SymbolKind): string {
+    switch (kind) {
+        case SymbolKind.Method:
+            return "Method";
+        case SymbolKind.Function:
+            return "Function";
+        case SymbolKind.Constructor:
+            return "Constructor";
+
+        default:
+            return "";
+    }
+}
 
 function getSymbolsFrom(symbol: DocumentSymbol): DocumentSymbol[] {
     if (symbol.children.length === 0) {
@@ -44,11 +58,10 @@ export async function findMethods(): Promise<DocumentSymbol[] | undefined> {
         symbols.push(...ss);
     }
 
+    const kinds = workspace.getConfiguration("separators").get("methods.supportedKinds", [ "Method", "Function", "Constructor" ]);
+
     const docSymbolsFunctionsMethods = symbols
-        ? symbols.filter(symbol =>
-            symbol.kind === SymbolKind.Constructor ||
-            symbol.kind === SymbolKind.Function ||
-            symbol.kind === SymbolKind.Method)
+        ? symbols.filter(symbol => kinds.includes(getSymbolKindAsString(symbol.kind)))
         : undefined;
 
     return docSymbolsFunctionsMethods;
