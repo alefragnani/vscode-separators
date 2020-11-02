@@ -24,17 +24,16 @@ function getSymbolsFrom(symbol: DocumentSymbol): DocumentSymbol[] {
         return [ symbol ];
     }
 
-    const sym: DocumentSymbol[] = [];
-    sym.push(symbol);
+    const symbols: DocumentSymbol[] = [];
+    symbols.push(symbol);
     for (const children of symbol.children) {
         if (children.children.length === 0) {
-            sym.push(children);
+            symbols.push(children);
         } else {
-            const ss = getSymbolsFrom(children);
-            sym.push(...ss);
+            symbols.push(...getSymbolsFrom(children));
         }
     }
-    return sym;
+    return symbols;
 }
 
 export async function findMethods(): Promise<DocumentSymbol[] | undefined> {
@@ -54,8 +53,7 @@ export async function findMethods(): Promise<DocumentSymbol[] | undefined> {
     let symbols: DocumentSymbol[] = [];
 
     for (const symbol of docSymbols) {
-        const ss = getSymbolsFrom(symbol);
-        symbols.push(...ss);
+        symbols.push(...getSymbolsFrom(symbol));
     }
 
     const kinds = workspace.getConfiguration("separators").get("methods.supportedKinds", [ "Method", "Function", "Constructor" ]);
