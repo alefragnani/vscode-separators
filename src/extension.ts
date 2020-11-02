@@ -58,6 +58,19 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 	}, null, context.subscriptions);
 
+	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(cfg => {
+        if (cfg.affectsConfiguration("separators")) {
+            if (methodsDecorationType) {
+                methodsDecorationType.dispose();
+            }
+
+            methodsDecorationType = createTextEditorDecoration(context);
+            context.subscriptions.push(methodsDecorationType);
+
+            updateDecorations();
+        }
+    }));	
+
 }
 
 // this method is called when your extension is deactivated
