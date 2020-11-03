@@ -1,14 +1,33 @@
 {
 	"name": "vscode-separators",
-	"displayName": "vscode-separators",
-	"description": "Separators",
-	"version": "0.0.1",
+	"displayName": "Separators",
+	"description": "Improve the readability of your source code with lines on top of each method",
+	"version": "1.0.0",
+	"publisher": "alefragnani",
+	"galleryBanner": {
+		"color": "#0000FF",
+		"theme": "dark"
+	},
 	"engines": {
 		"vscode": "^1.50.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"icon": "images/icon.png",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"homepage": "https://github.com/alefragnani/vscode-separators/blob/master/README.md",
+	"repository": {
+	"type": "git",
+	"url": "https://github.com/alefragnani/vscode-separators.git"
+	},
+	"bugs": {
+	"url": "https://github.com/alefragnani/vscode-separators/issues"
+	},
 	"activationEvents": [
 		"onStartupFinished"
 	],
