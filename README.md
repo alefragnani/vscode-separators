@@ -25,9 +25,12 @@
 
 It improves the readability of your source code, by drawing lines on top of each method. 
 
+![Print](images/vscode-separators-print-readme.png)
+
 Here are some of the features that **Separators** provides:
 
-* **Customize** the separators appearance
+* Customize the separators appearance
+* Each kind of method has its own customization
 
 # Features
 
@@ -41,9 +44,9 @@ You can customize the appearance of each kind of Symbol.
 
 * Defines the border width _(in `px`)_
     ```json
-    "separators.methods.borderWidth": "1", 
-    "separators.functions.borderWidth": "1", 
-    "separators.constructors.borderWidth": "1", 
+    "separators.methods.borderWidth": 1, 
+    "separators.functions.borderWidth": 1, 
+    "separators.constructors.borderWidth": 1, 
     ```
 
 * Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
