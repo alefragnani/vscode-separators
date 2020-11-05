@@ -1,26 +1,49 @@
 {
 	"name": "vscode-separators",
-	"displayName": "vscode-separators",
-	"description": "Separators",
-	"version": "0.0.1",
+	"displayName": "Separators",
+	"description": "Improve the readability of your source code with lines on top of each method",
+	"version": "1.0.0",
+	"publisher": "alefragnani",
+	"galleryBanner": {
+		"color": "#0000FF",
+		"theme": "dark"
+	},
 	"engines": {
 		"vscode": "^1.50.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"icon": "images/icon.png",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"homepage": "https://github.com/alefragnani/vscode-separators/blob/master/README.md",
+	"repository": {
+	"type": "git",
+	"url": "https://github.com/alefragnani/vscode-separators.git"
+	},
+	"bugs": {
+	"url": "https://github.com/alefragnani/vscode-separators/issues"
+	},
 	"activationEvents": [
 		"onStartupFinished"
 	],
-	"main": "./out/extension.js",
+	"main": "./dist/extension",
 	"contributes": {
 		"configuration": {
-            "type": "object",
-            "title": "%separators.configuration.title%",
-            "properties": {
-                "separators.methods.supportedKinds": {
-                    "type": "array",
-                    "default": ["Method", "Function", "Constructor"],					
+			"type": "object",
+			"title": "%separators.configuration.title%",
+			"properties": {
+				"separators.methods.supportedKinds": {
+					"type": "array",
+					"default": [
+						"Method",
+						"Function",
+						"Constructor"
+					],
 					"items": {
 						"type": "string",
 						"enum": [
@@ -37,51 +60,61 @@
 					"minItems": 1,
 					"maxItems": 3,
 					"uniqueItems": true,
-					"description": "%separators.methods.supportedKinds.description%"
+					"description": "%separators.configuration.methods.supportedKinds.description%"
 				},
-                "separators.methods.borderWidth": {
-                    "type": "integer",
-                    "default": 1,
-                    "description": "%separators.methods.borderWidth.description%"
+				"separators.methods.borderWidth": {
+					"type": "integer",
+					"default": 1,
+					"description": "%separators.configuration.methods.borderWidth.description%"
 				},
-                "separators.methods.borderStyle": {
-                    "type": "string",
-                    "default": "solid",
-                    "enum": [
+				"separators.methods.borderStyle": {
+					"type": "string",
+					"default": "solid",
+					"enum": [
 						"solid",
 						"dotted",
 						"dashed",
 						"double"
-                    ],
-                    "enumDescriptions": [
-                        "Specifies a solid border",
-                        "Specifies a dotted border",
+					],
+					"enumDescriptions": [
+						"Specifies a solid border",
+						"Specifies a dotted border",
 						"Specifies a dashed border",
 						"Specifies a double bordere"
-                    ],
-                    "description": "%separators.methods.borderStyle.description%"
+					],
+					"description": "%separators.configuration.methods.borderStyle.description%"
 				}
 			}
 		},
 		"colors": [
-            {
-                "id": "separators.methods.borderColor",
-                "description": "%separators.methods.borderColor.description%",
-                "defaults": {
-                    "dark": "#65EAB9",
-                    "light": "#65EAB9",
-                    "highContrast": "#65EAB9"
-                }
-            }
-        ]
+			{
+				"id": "separators.methods.borderColor",
+				"description": "%separators.colors.methods.borderColor.description%",
+				"defaults": {
+					"dark": "#65EAB9",
+					"light": "#65EAB9",
+					"highContrast": "#65EAB9"
+				}
+			}
+		]
 	},
+	"eslintConfig": {
+		"extends": [
+		  "vscode-ext"
+		]
+	  },
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
+		"build": "webpack --mode development",
+		"watch": "webpack --watch --mode development --info-verbosity verbose",
+		"vscode:prepublish": "webpack --mode production",
+		"webpack": "webpack --mode development",
+		"webpack-dev": "webpack --mode development --watch",
 		"compile": "tsc -p ./",
-		"lint": "eslint src --ext ts",
-		"watch": "tsc -watch -p ./",
+		"lint": "eslint -c package.json --ext .ts src",
 		"pretest": "npm run compile && npm run lint",
-		"test": "node ./out/test/runTest.js"
+		"test-compile": "tsc -p ./ && npm run webpack",
+		"just-test": "node ./out/src/test/runTest.js",
+		"test": "npm run test-compile && npm run just-test"
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.50.0",
@@ -91,9 +124,14 @@
 		"eslint": "^7.9.0",
 		"@typescript-eslint/eslint-plugin": "^4.1.1",
 		"@typescript-eslint/parser": "^4.1.1",
+		"eslint-config-vscode-ext": "^1.0.0",
 		"glob": "^7.1.6",
 		"mocha": "^8.1.3",
 		"typescript": "^4.0.2",
-		"vscode-test": "^1.4.0"
+		"vscode-test": "^1.4.0",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11",
+		"terser-webpack-plugin": "^1.2.1",
+		"ts-loader": "^4.4.2"
 	}
 }

@@ -3,7 +3,7 @@
 *  Licensed under the MIT License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { ExtensionContext, window, ThemeColor, TextEditor, Range, TextEditorDecorationType, SymbolInformation, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
+import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
 
 function createTopLineDecoration(
     borderColor: string | ThemeColor, borderWidth: string, borderStyle: string
@@ -18,7 +18,7 @@ function createTopLineDecoration(
     return window.createTextEditorDecorationType(decorationOptions);
 }
 
-export function createTextEditorDecoration(context: ExtensionContext) {
+export function createTextEditorDecoration() {
 
     const borderColor = new ThemeColor('separators.methods.borderColor');
     const borderWidth = workspace.getConfiguration("separators").get("methods.borderWidth", 1);

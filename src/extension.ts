@@ -15,10 +15,10 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	let timeout: NodeJS.Timer;
 
-	let methodsDecorationType = createTextEditorDecoration(context);
+	let methodsDecorationType = createTextEditorDecoration();
 	context.subscriptions.push(methodsDecorationType);
 
-	let activeEditor = vscode.window.activeTextEditor;
+	const activeEditor = vscode.window.activeTextEditor;
 
 	if (activeEditor) {
 		triggerUpdateDecorations();
@@ -64,7 +64,7 @@ export async function activate(context: vscode.ExtensionContext) {
                 methodsDecorationType.dispose();
             }
 
-            methodsDecorationType = createTextEditorDecoration(context);
+            methodsDecorationType = createTextEditorDecoration();
             context.subscriptions.push(methodsDecorationType);
 
             updateDecorations();
@@ -72,6 +72,3 @@ export async function activate(context: vscode.ExtensionContext) {
     }));	
 
 }
-
-// this method is called when your extension is deactivated
-export function deactivate() { }

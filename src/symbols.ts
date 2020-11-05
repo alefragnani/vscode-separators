@@ -50,7 +50,7 @@ export async function findMethods(): Promise<DocumentSymbol[] | undefined> {
         return undefined;
     }
 
-    let symbols: DocumentSymbol[] = [];
+    const symbols: DocumentSymbol[] = [];
 
     for (const symbol of docSymbols) {
         symbols.push(...getSymbolsFrom(symbol));
