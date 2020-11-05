@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-  <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
+  <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
 ## Support
@@ -25,39 +25,36 @@
 
 It improves the readability of your source code, by drawing lines on top of each method. 
 
+![Print](images/vscode-separators-print-readme.png)
+
 Here are some of the features that **Separators** provides:
 
-* **Customize** the separators appearance
+* Customize the separators appearance
+* Each kind of method has its own customization
 
 # Features
 
 ## Available commands
 
-No new command, for now :smile: 
+* `Separators: Toggle Visibility` 
 
 ## Available settings
 
-You can customize not only the appearance of the separators, but also which `Symbols` are recognized as "Methods"
+You can customize the appearance of each kind of Symbol. 
 
-* Defines the border width (in `px`)
+* Defines the border width _(in `px`)_
     ```json
-    "separators.methods.borderWidth": "1" 
+    "separators.methods.borderWidth": 1, 
+    "separators.functions.borderWidth": 1, 
+    "separators.constructors.borderWidth": 1, 
     ```
 
-* Define how border style
+* Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
     ```json
-    "separators.methods.borderStyle": "solid" // or "dotted", "dashed", "double"
+    "separators.methods.borderStyle": "solid",
+    "separators.functions.borderStyle": "solid",
+    "separators.constructors.borderStyle": "solid",
     ```
-
-* Choose which kind of symbols are recognized as `Methods`
-    ```json
-    "separators.methods.supportedKinds": [
-                                          "Method",
-                                          "Function",
-                                          "Constructor"]
-    ```
-
-> Let's say you don't want `Contructors` to have separators, then you can just remove it from the list.
 
 ## Available colors
 
@@ -67,6 +64,8 @@ For more information about customizing colors in VSCode, see [Theme Color](https
 ```json
     "workbench.colorCustomizations": {
       "separators.methods.borderColor": "#65EAB9",  
+      "separators.functions.borderColor": "#65EAB9",  
+      "separators.constructors.borderColor": "#65EAB9",  
     }
 ```
 
