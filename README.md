@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-  <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
+  <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
 ## Support
@@ -33,7 +33,7 @@ Here are some of the features that **Separators** provides:
 
 ## Available commands
 
-No new command, for now :smile: 
+* `Separators: Toggle Visibility` 
 
 ## Available settings
 

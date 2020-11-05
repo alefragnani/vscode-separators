@@ -1,4 +1,5 @@
 {
+    "separators.commands.toggleVisibility.title": "Separators: Toggle Visibility",
     "separators.configuration.title": "Separators",
     "separators.configuration.methods.borderWidth.description": "Width of the border on top of Methods (in px)",
     "separators.configuration.methods.borderStyle.description": "Style of the border on top of Methods",

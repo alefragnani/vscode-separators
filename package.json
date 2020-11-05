@@ -33,6 +33,12 @@
 	],
 	"main": "./dist/extension",
 	"contributes": {
+		"commands": [
+            {
+                "command": "separators.toggleVisibility",
+                "title": "%separators.commands.toggleVisibility.title%"
+            }
+		],
 		"configuration": {
 			"type": "object",
 			"title": "%separators.configuration.title%",

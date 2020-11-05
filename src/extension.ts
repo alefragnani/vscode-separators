@@ -23,6 +23,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	const activeEditor = vscode.window.activeTextEditor;
 
+	let isVisible = context.workspaceState.get<boolean>('separators.visible', true);
+
 	if (activeEditor) {
 		triggerUpdateDecorations();
 	}
@@ -36,17 +38,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
-		const symbols = await findSymbols([SymbolKind.Method, SymbolKind.Function, SymbolKind.Constructor]);
-		if (!symbols) { return; }
+		let symbols: vscode.DocumentSymbol[] | undefined;
+		if (isVisible) { 
+			symbols = await findSymbols([SymbolKind.Method, SymbolKind.Function, SymbolKind.Constructor]);
+			if (!symbols) { return; }
+		} else {
+			symbols = [];
+		}
 
-		// methods.forEach(method => {
-		// 	console.log(`METHOD: ${method.name} / ${method.range.start.line}`);
-		// });
-
-		// updateDecorationsInActiveEditor(
-		// 	vscode.window.activeTextEditor,
-		// 	symbols,
-		// 	methodsDecorationType);
 		updateDecorationsInActiveEditor(
 			vscode.window.activeTextEditor,
 			symbols.filter(symbol => symbol.kind === SymbolKind.Method),
@@ -88,6 +87,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
             updateDecorations();
         }
-    }));	
+	}));	
+	
+	function toggleVisibility() {
+		isVisible = !isVisible;
+		context.workspaceState.update('separators.visible', isVisible);
+		updateDecorations();
+	}
+
+	vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility());
 
 }
