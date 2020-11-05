@@ -1,7 +1,12 @@
 {
     "separators.configuration.title": "Separators",
-    "separators.configuration.methods.supportedKinds.description": "Kinds of Symboles recognized as Methods",
     "separators.configuration.methods.borderWidth.description": "Width of the border on top of Methods (in px)",
     "separators.configuration.methods.borderStyle.description": "Style of the border on top of Methods",
-    "separators.colors.methods.borderColor.description": "Color of the border on top of Methods"
+    "separators.colors.methods.borderColor.description": "Color of the border on top of Methods",
+    "separators.configuration.functions.borderWidth.description": "Width of the border on top of Functions (in px)",
+    "separators.configuration.functions.borderStyle.description": "Style of the border on top of Functions",
+    "separators.colors.functions.borderColor.description": "Color of the border on top of Functions",
+    "separators.configuration.constructors.borderWidth.description": "Width of the border on top of Constructors (in px)",
+    "separators.configuration.constructors.borderStyle.description": "Style of the border on top of Constructors",
+    "separators.colors.constructors.borderColor.description": "Color of the border on top of Constructors"
 }

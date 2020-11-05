@@ -18,35 +18,34 @@ function createTopLineDecoration(
     return window.createTextEditorDecorationType(decorationOptions);
 }
 
-export function createTextEditorDecoration() {
+export function createTextEditorDecoration(symbolKind: string): TextEditorDecorationType {
 
-    const borderColor = new ThemeColor('separators.methods.borderColor');
-    const borderWidth = workspace.getConfiguration("separators").get("methods.borderWidth", 1);
-    const borderStyle = workspace.getConfiguration("separators").get("methods.borderStyle", "solid");
+    const borderColor = new ThemeColor(`separators.${symbolKind}.borderColor`);
+    const borderWidth = workspace.getConfiguration("separators").get(`${symbolKind}.borderWidth`, 1);
+    const borderStyle = workspace.getConfiguration("separators").get(`${symbolKind}.borderStyle`, "solid");
 
     return createTopLineDecoration(borderColor, `${borderWidth}px`, borderStyle);
 }
 
 export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
     symbols: DocumentSymbol[] | undefined,
-    bookmarkDecorationType: TextEditorDecorationType) {
+    decorationType: TextEditorDecorationType) {
     if (!activeEditor) {
         return;
     }
 
     if (!symbols) {
         const bks: Range[] = [];
-        activeEditor.setDecorations(bookmarkDecorationType, bks);
+        activeEditor.setDecorations(decorationType, bks);
         return;
     }
 
-    const books: Range[] = [];
-
+    const ranges: Range[] = [];
 
     for (const element of symbols) {
         const decoration = new Range(element.range.start.line, 0, element.range.start.line, 0);
-        books.push(decoration);
+        ranges.push(decoration);
     }
 
-    activeEditor.setDecorations(bookmarkDecorationType, books);
+    activeEditor.setDecorations(decorationType, ranges);
 }

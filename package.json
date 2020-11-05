@@ -37,31 +37,6 @@
 			"type": "object",
 			"title": "%separators.configuration.title%",
 			"properties": {
-				"separators.methods.supportedKinds": {
-					"type": "array",
-					"default": [
-						"Method",
-						"Function",
-						"Constructor"
-					],
-					"items": {
-						"type": "string",
-						"enum": [
-							"Method",
-							"Function",
-							"Constructor"
-						],
-						"enumDescriptions": [
-							"Recognizes `Methods` as a method",
-							"Recognizes `Functions` as a method",
-							"Recognizes `Constructors` as a method"
-						]
-					},
-					"minItems": 1,
-					"maxItems": 3,
-					"uniqueItems": true,
-					"description": "%separators.configuration.methods.supportedKinds.description%"
-				},
 				"separators.methods.borderWidth": {
 					"type": "integer",
 					"default": 1,
@@ -83,6 +58,50 @@
 						"Specifies a double bordere"
 					],
 					"description": "%separators.configuration.methods.borderStyle.description%"
+				},
+				"separators.functions.borderWidth": {
+					"type": "integer",
+					"default": 1,
+					"description": "%separators.configuration.functions.borderWidth.description%"
+				},
+				"separators.functions.borderStyle": {
+					"type": "string",
+					"default": "solid",
+					"enum": [
+						"solid",
+						"dotted",
+						"dashed",
+						"double"
+					],
+					"enumDescriptions": [
+						"Specifies a solid border",
+						"Specifies a dotted border",
+						"Specifies a dashed border",
+						"Specifies a double bordere"
+					],
+					"description": "%separators.configuration.functions.borderStyle.description%"
+				},
+				"separators.constructors.borderWidth": {
+					"type": "integer",
+					"default": 1,
+					"description": "%separators.configuration.constructors.borderWidth.description%"
+				},
+				"separators.constructors.borderStyle": {
+					"type": "string",
+					"default": "solid",
+					"enum": [
+						"solid",
+						"dotted",
+						"dashed",
+						"double"
+					],
+					"enumDescriptions": [
+						"Specifies a solid border",
+						"Specifies a dotted border",
+						"Specifies a dashed border",
+						"Specifies a double bordere"
+					],
+					"description": "%separators.configuration.constructors.borderStyle.description%"
 				}
 			}
 		},
@@ -90,6 +109,24 @@
 			{
 				"id": "separators.methods.borderColor",
 				"description": "%separators.colors.methods.borderColor.description%",
+				"defaults": {
+					"dark": "#65EAB9",
+					"light": "#65EAB9",
+					"highContrast": "#65EAB9"
+				}
+			},
+			{
+				"id": "separators.functions.borderColor",
+				"description": "%separators.colors.functions.borderColor.description%",
+				"defaults": {
+					"dark": "#65EAB9",
+					"light": "#65EAB9",
+					"highContrast": "#65EAB9"
+				}
+			},
+			{
+				"id": "separators.constructors.borderColor",
+				"description": "%separators.colors.constructors.borderColor.description%",
 				"defaults": {
 					"dark": "#65EAB9",
 					"light": "#65EAB9",
