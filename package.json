@@ -60,12 +60,12 @@
 					"minItems": 1,
 					"maxItems": 3,
 					"uniqueItems": true,
-					"description": "%separators.methods.supportedKinds.description%"
+					"description": "%separators.configuration.methods.supportedKinds.description%"
 				},
 				"separators.methods.borderWidth": {
 					"type": "integer",
 					"default": 1,
-					"description": "%separators.methods.borderWidth.description%"
+					"description": "%separators.configuration.methods.borderWidth.description%"
 				},
 				"separators.methods.borderStyle": {
 					"type": "string",
@@ -82,14 +82,14 @@
 						"Specifies a dashed border",
 						"Specifies a double bordere"
 					],
-					"description": "%separators.methods.borderStyle.description%"
+					"description": "%separators.configuration.methods.borderStyle.description%"
 				}
 			}
 		},
 		"colors": [
 			{
 				"id": "separators.methods.borderColor",
-				"description": "%separators.methods.borderColor.description%",
+				"description": "%separators.colors.methods.borderColor.description%",
 				"defaults": {
 					"dark": "#65EAB9",
 					"light": "#65EAB9",

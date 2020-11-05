@@ -1,65 +1,75 @@
-# vscode-separators README
+<p align="center">
+  <br />
+  <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
+</p>
 
-This is the README for your extension "vscode-separators". After writing up a brief description, we recommend including the following sections.
+## Support
 
-## Features
+**Separators** is an open source extension created for **Visual Studio Code**. While being free and open source, if you find it useful, please consider supporting it.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+<table align="center" width="60%" border="0">
+  <tr>
+    <td>
+      <a title="Paypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EP57F3B6FXKTU&lc=US&item_name=Alessandro%20Fragnani&item_number=vscode%20extensions&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"/></a>
+    </td>
+    <td>
+      <a title="Paypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EP57F3B6FXKTU&lc=BR&item_name=Alessandro%20Fragnani&item_number=vscode%20extensions&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/pt_BR/i/btn/btn_donate_SM.gif"/></a>
+    </td>
+    <td>
+      <a title="Patreon" href="https://www.patreon.com/alefragnani"><img src="https://raw.githubusercontent.com/alefragnani/oss-resources/master/images/button-become-a-patron-rounded-small.png"/></a>
+    </td>
+  </tr>
+</table>
 
-For example if there is an image subfolder under your extension project workspace:
+# Separators
 
-\!\[feature X\]\(images/feature-x.png\)
+It improves the readability of your source code, by drawing lines on top of each method. 
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Here are some of the features that **Separators** provides:
 
-## Requirements
+* **Customize** the separators appearance
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+# Features
 
-## Extension Settings
+## Available commands
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+No new command, for now :smile: 
 
-For example:
+## Available settings
 
-This extension contributes the following settings:
+You can customize not only the appearance of the separators, but also which `Symbols` are recognized as "Methods"
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* Defines the border width (in `px`)
+    ```json
+    "separators.methods.borderWidth": "1" 
+    ```
 
-## Known Issues
+* Define how border style
+    ```json
+    "separators.methods.borderStyle": "solid" // or "dotted", "dashed", "double"
+    ```
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+* Choose which kind of symbols are recognized as `Methods`
+    ```json
+    "separators.methods.supportedKinds": [
+                                          "Method",
+                                          "Function",
+                                          "Constructor"]
+    ```
 
-## Release Notes
+> Let's say you don't want `Contructors` to have separators, then you can just remove it from the list.
 
-Users appreciate release notes as you update your extension.
+## Available colors
 
-### 1.0.0
+For more information about customizing colors in VSCode, see [Theme Color](https://code.visualstudio.com/api/references/theme-color).
 
-Initial release of ...
+* Choose the color of the border 
+```json
+    "workbench.colorCustomizations": {
+      "separators.methods.borderColor": "#65EAB9",  
+    }
+```
 
-### 1.0.1
+# License
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT](LICENSE.md) &copy; Alessandro Fragnani
