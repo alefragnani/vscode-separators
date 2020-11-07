@@ -21,7 +21,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
 	symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
 
-	const activeEditor = vscode.window.activeTextEditor;
+	let activeEditor = vscode.window.activeTextEditor;
 
 	let isVisible = context.workspaceState.get<boolean>('separators.visible', true);
 
@@ -65,11 +65,16 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	vscode.window.onDidChangeActiveTextEditor(editor => {
 		if (editor) {
+			activeEditor = editor;
 			triggerUpdateDecorations();
 		}
 	}, null, context.subscriptions);
 
 	vscode.workspace.onDidChangeTextDocument(event => {
+		if (event.contentChanges.length === 0) {
+			return;
+		}
+		
 		if (activeEditor && event.document === activeEditor.document) {
 			updateDecorations();
 		}
