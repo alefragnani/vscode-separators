@@ -1,7 +1,9 @@
 {
     "separators.commands.toggleVisibility.title": "Separators: Toggle Visibility",
+    "separators.commands.selectSymbols.title": "Separators: Select Symbols",
     "separators.configuration.title": "Separators",
     "separators.configuration.methods.borderWidth.description": "Width of the border on top of Methods (in px)",
+    "separators.configuration.enabledSymbols.description": "List of symbols in which the separators will be drawn",
     "separators.configuration.methods.borderStyle.description": "Style of the border on top of Methods",
     "separators.colors.methods.borderColor.description": "Color of the border on top of Methods",
     "separators.configuration.functions.borderWidth.description": "Width of the border on top of Functions (in px)",
