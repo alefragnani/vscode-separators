@@ -8,6 +8,7 @@
 import * as vscode from 'vscode';
 import { SymbolKind } from 'vscode';
 import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
+import { showSelectSymbolsQuickPick } from './selectSymbols';
 import { findSymbols } from './symbols';
 
 // this method is called when your extension is activated
@@ -100,6 +101,16 @@ export async function activate(context: vscode.ExtensionContext) {
 		updateDecorations();
 	}
 
+	async function selectSymbols() {
+		const selected = vscode.workspace.getConfiguration("separators").get("enabledSymbols", [ "Methods", "Functions", "Constructors" ]);
+		const pick = await showSelectSymbolsQuickPick(selected); 
+        if (pick) {
+			vscode.workspace.getConfiguration("separators").update("enabledSymbols", pick);
+            updateDecorations();
+        }
+	}
+
 	vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility());
+	vscode.commands.registerCommand("separators.selectSymbols", () => selectSymbols());
 
 }
