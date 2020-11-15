@@ -59,7 +59,7 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
     }
 }
 
-export function getSymbolsAsKind(): SymbolKind[] {
+export function getEnabledSymbols(): SymbolKind[] {
     const symbols = workspace.getConfiguration("separators").get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS)
     const symbolsKind: SymbolKind[] = [];
     symbols.forEach(symbol => {

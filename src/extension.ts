@@ -8,7 +8,7 @@
 import * as vscode from 'vscode';
 import { SymbolKind } from 'vscode';
 import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
-import { getSymbolsAsKind, selectSymbols } from './selectSymbols';
+import { getEnabledSymbols, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 
 // this method is called when your extension is activated
@@ -41,7 +41,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	async function updateDecorations() {
 		let symbols: vscode.DocumentSymbol[] | undefined;
 		if (isVisible) {
-			const selectedSymbols = getSymbolsAsKind(); 
+			const selectedSymbols = getEnabledSymbols(); 
 			symbols = await findSymbols(selectedSymbols);
 			if (!symbols) { return; }
 		} else {
