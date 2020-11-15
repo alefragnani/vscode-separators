@@ -8,7 +8,7 @@
 import * as vscode from 'vscode';
 import { SymbolKind } from 'vscode';
 import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
-import { showSelectSymbolsQuickPick } from './selectSymbols';
+import { getSymbolsAsKind, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 
 // this method is called when your extension is activated
@@ -40,8 +40,9 @@ export async function activate(context: vscode.ExtensionContext) {
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
 		let symbols: vscode.DocumentSymbol[] | undefined;
-		if (isVisible) { 
-			symbols = await findSymbols([SymbolKind.Method, SymbolKind.Function, SymbolKind.Constructor]);
+		if (isVisible) {
+			const selectedSymbols = getSymbolsAsKind(); 
+			symbols = await findSymbols(selectedSymbols);
 			if (!symbols) { return; }
 		} else {
 			symbols = [];
@@ -101,16 +102,11 @@ export async function activate(context: vscode.ExtensionContext) {
 		updateDecorations();
 	}
 
-	async function selectSymbols() {
-		const selected = vscode.workspace.getConfiguration("separators").get("enabledSymbols", [ "Methods", "Functions", "Constructors" ]);
-		const pick = await showSelectSymbolsQuickPick(selected); 
-        if (pick) {
-			vscode.workspace.getConfiguration("separators").update("enabledSymbols", pick);
-            updateDecorations();
-        }
-	}
 
 	vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility());
-	vscode.commands.registerCommand("separators.selectSymbols", () => selectSymbols());
+	vscode.commands.registerCommand("separators.selectSymbols", () => {
+		if (selectSymbols()) {
+			updateDecorations();
+		}});
 
 }
