@@ -23,20 +23,22 @@
 
 # Separators
 
-It improves the readability of your source code, by drawing lines on top of each method. 
+It improves the readability of your source code, by drawing lines on top of each symbol. 
 
 ![Print](images/vscode-separators-print-readme.png)
 
 Here are some of the features that **Separators** provides:
 
 * Customize the separators appearance
-* Each kind of method has its own customization
+* Each kind of symbol has its own customization
+* Select which symbols will have separators
 
 # Features
 
 ## Available commands
 
 * `Separators: Toggle Visibility` 
+* `Separators: Select Symbols` 
 
 ## Available settings
 
@@ -54,6 +56,15 @@ You can customize the appearance of each kind of Symbol.
     "separators.methods.borderStyle": "solid",
     "separators.functions.borderStyle": "solid",
     "separators.constructors.borderStyle": "solid",
+    ```
+
+* List of symbols in which the separators will be drawn
+    ```json
+    "separators.enabledSymbols": [ 
+      "Methods", 
+      "Functions", 
+      "Constructors" 
+    ],
     ```
 
 ## Available colors
