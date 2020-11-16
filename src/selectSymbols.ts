@@ -38,7 +38,7 @@ export async function selectSymbols(): Promise<boolean> {
     const selected = workspace.getConfiguration("separators").get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS);
     const pick = await showSelectSymbolsQuickPick(selected); 
     if (pick.length > 0) {
-        workspace.getConfiguration("separators").update("enabledSymbols", pick, ConfigurationTarget.Global);
+        workspace.getConfiguration("separators").update("enabledSymbols", pick);
         return true;
     }
     return false;
