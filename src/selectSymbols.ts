@@ -3,7 +3,8 @@
 *  Licensed under the MIT License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationTarget, QuickPickItem, SymbolKind, window, workspace } from "vscode";
+import { QuickPickItem, SymbolKind, window, workspace } from "vscode";
+import { areEquivalent } from "./array";
 import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
 
 export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Promise<string[] > {
@@ -34,9 +35,16 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
     return picked?.map(item => item.label);
 }
 
+
+
 export async function selectSymbols(): Promise<boolean> {
     const selected = workspace.getConfiguration("separators").get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS);
     const pick = await showSelectSymbolsQuickPick(selected); 
+    
+    if (areEquivalent(pick, selected)) {
+        return false
+    }
+    
     if (pick.length > 0) {
         workspace.getConfiguration("separators").update("enabledSymbols", pick);
         return true;
