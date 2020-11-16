@@ -8,6 +8,7 @@
 import * as vscode from 'vscode';
 import { SymbolKind } from 'vscode';
 import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
+import { getEnabledSymbols, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 
 // this method is called when your extension is activated
@@ -39,8 +40,9 @@ export async function activate(context: vscode.ExtensionContext) {
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
 		let symbols: vscode.DocumentSymbol[] | undefined;
-		if (isVisible) { 
-			symbols = await findSymbols([SymbolKind.Method, SymbolKind.Function, SymbolKind.Constructor]);
+		if (isVisible) {
+			const selectedSymbols = getEnabledSymbols(); 
+			symbols = await findSymbols(selectedSymbols);
 			if (!symbols) { return; }
 		} else {
 			symbols = [];
@@ -100,6 +102,11 @@ export async function activate(context: vscode.ExtensionContext) {
 		updateDecorations();
 	}
 
+
 	vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility());
+	vscode.commands.registerCommand("separators.selectSymbols", () => {
+		if (selectSymbols()) {
+			updateDecorations();
+		}});
 
 }

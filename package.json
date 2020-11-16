@@ -37,12 +37,37 @@
 			{
 				"command": "separators.toggleVisibility",
 				"title": "%separators.commands.toggleVisibility.title%"
+			},
+			{
+				"command": "separators.selectSymbols",
+				"title": "%separators.commands.selectSymbols.title%"
 			}
 		],
 		"configuration": {
 			"type": "object",
 			"title": "%separators.configuration.title%",
 			"properties": {
+				"separators.enabledSymbols": {
+					"type": "array",
+                    "default": ["Methods", "Functions", "Constructors"],					
+					"items": {
+						"type": "string",
+						"enum": [
+							"Methods",
+							"Functions",
+							"Constructors"
+						],
+						"enumDescriptions": [
+							"Enable `Methods`",
+							"Enable `Functions`",
+							"Enable `Constructors`"
+						]
+					},
+					"minItems": 1,
+					"maxItems": 3,
+					"uniqueItems": true,
+					"description": "%separators.configuration.enabledSymbols.description%"
+				},
 				"separators.methods.borderWidth": {
 					"type": "integer",
 					"default": 1,
