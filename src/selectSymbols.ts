@@ -22,7 +22,10 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
         picked: selectedSymbols.includes("Functions")
     });
     
-    const picked = await window.showQuickPick(allSymbols, { canPickMany: true });
+    const picked = await window.showQuickPick(allSymbols, { 
+        placeHolder: "Select which symbols should have separators", 
+        canPickMany: true 
+    });
     if (!picked) {
         return [];
     }
