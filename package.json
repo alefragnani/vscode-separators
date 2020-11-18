@@ -14,6 +14,12 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"separator",
+		"organize",
+		"navigation",
+		"symbols"
+    ],
 	"extensionKind": [
 		"ui",
 		"workspace"
