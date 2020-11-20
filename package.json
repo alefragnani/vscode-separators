@@ -49,16 +49,16 @@
 			"properties": {
 				"separators.enabledSymbols": {
 					"type": "array",
-                    "default": ["Methods", "Functions", "Constructors", "Classes", "Interfaces", "Enums", "Namespaces"],					
+                    "default": ["Classes", "Constructors", "Enums", "Functions", "Interfaces", "Methods", "Namespaces"],					
 					"items": {
 						"type": "string",
 						"enum": [
-							"Methods",
-							"Functions",
-							"Constructors",
 							"Classes", 
-							"Interfaces", 
+							"Constructors",
 							"Enums", 
+							"Functions",
+							"Interfaces", 
+							"Methods",
 							"Namespaces"
 						],
 						"enumDescriptions": [

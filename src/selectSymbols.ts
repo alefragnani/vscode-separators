@@ -10,28 +10,28 @@ import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
 export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Promise<string[] > {
     const allSymbols: QuickPickItem[] = [];
     allSymbols.push({
+        label: "Classes",
+        picked: selectedSymbols.includes("Classes")
+    });
+    allSymbols.push({
         label: "Constructors",
         picked: selectedSymbols.includes("Constructors")
     });
     allSymbols.push({
-        label: "Methods",
-        picked: selectedSymbols.includes("Methods")
+        label: "Enums",
+        picked: selectedSymbols.includes("Enums")
     });
     allSymbols.push({
         label: "Functions",
         picked: selectedSymbols.includes("Functions")
     });
     allSymbols.push({
-        label: "Classes",
-        picked: selectedSymbols.includes("Classes")
-    });
-    allSymbols.push({
         label: "Interfaces",
         picked: selectedSymbols.includes("Interfaces")
     });
     allSymbols.push({
-        label: "Enums",
-        picked: selectedSymbols.includes("Enums")
+        label: "Methods",
+        picked: selectedSymbols.includes("Methods")
     });
     allSymbols.push({
         label: "Namespaces",
