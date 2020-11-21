@@ -53,6 +53,11 @@
 			"type": "object",
 			"title": "%separators.configuration.title%",
 			"properties": {
+				"separators.useOriginalGreenishSeparator": {
+					"type": "boolean",
+					"default": false,
+					"description": "%separators.configuration.useOriginalGreenishSeparator.description%"
+				},
 				"separators.enabledSymbols": {
 					"type": "array",
                     "default": [
