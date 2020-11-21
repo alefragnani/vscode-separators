@@ -3,4 +3,4 @@
 *  Licensed under the MIT License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-export const DEFAULT_ENABLED_SYMBOLS = [ "Methods", "Functions", "Constructors" ];
+export const DEFAULT_ENABLED_SYMBOLS = [ "Classes", "Constructors", "Enums", "Functions", "Interfaces", "Methods", "Namespaces" ];

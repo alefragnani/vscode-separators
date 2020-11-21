@@ -10,16 +10,32 @@ import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
 export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Promise<string[] > {
     const allSymbols: QuickPickItem[] = [];
     allSymbols.push({
+        label: "Classes",
+        picked: selectedSymbols.includes("Classes")
+    });
+    allSymbols.push({
         label: "Constructors",
         picked: selectedSymbols.includes("Constructors")
+    });
+    allSymbols.push({
+        label: "Enums",
+        picked: selectedSymbols.includes("Enums")
+    });
+    allSymbols.push({
+        label: "Functions",
+        picked: selectedSymbols.includes("Functions")
+    });
+    allSymbols.push({
+        label: "Interfaces",
+        picked: selectedSymbols.includes("Interfaces")
     });
     allSymbols.push({
         label: "Methods",
         picked: selectedSymbols.includes("Methods")
     });
     allSymbols.push({
-        label: "Functions",
-        picked: selectedSymbols.includes("Functions")
+        label: "Namespaces",
+        picked: selectedSymbols.includes("Namespaces")
     });
     
     const picked = await window.showQuickPick(allSymbols, { 
@@ -64,6 +80,14 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
             return SymbolKind.Function;
         case "Constructors":
             return SymbolKind.Constructor;
+        case "Classes":
+            return SymbolKind.Class;
+        case "Interfaces":
+            return SymbolKind.Interface;
+        case "Enums":
+            return SymbolKind.Enum;
+        case "Namespaces":
+            return SymbolKind.Namespace;
 
         default:
             return SymbolKind.Object;

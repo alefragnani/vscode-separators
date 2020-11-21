@@ -21,6 +21,10 @@ export async function activate(context: vscode.ExtensionContext) {
 	symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
 	symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
 	symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
+	symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
+	symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
+	symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
+	symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
 
 	let activeEditor = vscode.window.activeTextEditor;
 
@@ -63,6 +67,26 @@ export async function activate(context: vscode.ExtensionContext) {
 			symbols.filter(symbol => symbol.kind === SymbolKind.Constructor),
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			symbolsDecorationsType.get("constructors")!);
+		updateDecorationsInActiveEditor(
+			vscode.window.activeTextEditor,
+			symbols.filter(symbol => symbol.kind === SymbolKind.Class),
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			symbolsDecorationsType.get("classes")!);
+		updateDecorationsInActiveEditor(
+			vscode.window.activeTextEditor,
+			symbols.filter(symbol => symbol.kind === SymbolKind.Interface),
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			symbolsDecorationsType.get("interfaces")!);
+		updateDecorationsInActiveEditor(
+			vscode.window.activeTextEditor,
+			symbols.filter(symbol => symbol.kind === SymbolKind.Enum),
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			symbolsDecorationsType.get("enums")!);
+		updateDecorationsInActiveEditor(
+			vscode.window.activeTextEditor,
+			symbols.filter(symbol => symbol.kind === SymbolKind.Namespace),
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			symbolsDecorationsType.get("namespaces")!);
 	}
 
 	vscode.window.onDidChangeActiveTextEditor(editor => {
@@ -91,6 +115,10 @@ export async function activate(context: vscode.ExtensionContext) {
 			symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
 			symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
 			symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
+			symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
+			symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
+			symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
+			symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
 
             updateDecorations();
         }

@@ -11,5 +11,17 @@
     "separators.colors.functions.borderColor.description": "Color of the border on top of Functions",
     "separators.configuration.constructors.borderWidth.description": "Width of the border on top of Constructors (in px)",
     "separators.configuration.constructors.borderStyle.description": "Style of the border on top of Constructors",
-    "separators.colors.constructors.borderColor.description": "Color of the border on top of Constructors"
+    "separators.colors.constructors.borderColor.description": "Color of the border on top of Constructors",
+    "separators.configuration.classes.borderWidth.description": "Width of the border on top of Classes (in px)",
+    "separators.configuration.classes.borderStyle.description": "Style of the border on top of Classes",
+    "separators.colors.classes.borderColor.description": "Color of the border on top of Classes",
+    "separators.configuration.interfaces.borderWidth.description": "Width of the border on top of Interfaces (in px)",
+    "separators.configuration.interfaces.borderStyle.description": "Style of the border on top of Interfaces",
+    "separators.colors.interfaces.borderColor.description": "Color of the border on top of Interfaces",
+    "separators.configuration.enums.borderWidth.description": "Width of the border on top of Enums (in px)",
+    "separators.configuration.enums.borderStyle.description": "Style of the border on top of Enums",
+    "separators.colors.enums.borderColor.description": "Color of the border on top of Enums",
+    "separators.configuration.namespaces.borderWidth.description": "Width of the border on top of Namespaces (in px)",
+    "separators.configuration.namespaces.borderStyle.description": "Style of the border on top of Namespaces",
+    "separators.colors.namespaces.borderColor.description": "Color of the border on top of Namespaces"
 }
