@@ -30,7 +30,7 @@ It improves the readability of your source code, by drawing lines on top of each
 Here are some of the features that **Separators** provides:
 
 * Customize the separators appearance
-* Each kind of symbol has its own customization
+* Each kind of symbol can have its own customization
 * Select which symbols will have separators
 
 # Features
@@ -46,24 +46,36 @@ You can customize the appearance of each kind of Symbol.
 
 * Defines the border width _(in `px`)_
     ```json
-    "separators.methods.borderWidth": 1, 
-    "separators.functions.borderWidth": 1, 
+    "separators.classes.borderWidth": 1,
     "separators.constructors.borderWidth": 1, 
+    "separators.enums.borderWidth": 1,
+    "separators.functions.borderWidth": 1, 
+    "separators.interfaces.borderWidth": 1,
+    "separators.methods.borderWidth": 1, 
+    "separators.namespaces.borderWidth": 1,
     ```
 
 * Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
     ```json
-    "separators.methods.borderStyle": "solid",
-    "separators.functions.borderStyle": "solid",
+    "separators.classes.borderStyle": "solid",
     "separators.constructors.borderStyle": "solid",
+    "separators.enums.borderStyle": "solid",
+    "separators.functions.borderStyle": "solid",
+    "separators.interfaces.borderStyle": "solid",
+    "separators.methods.borderStyle": "solid",
+    "separators.namespaces.borderStyle": "solid",
     ```
 
 * List of symbols in which the separators will be drawn
     ```json
     "separators.enabledSymbols": [ 
-      "Methods", 
-      "Functions", 
-      "Constructors" 
+      "Classes", 
+      "Constructors",
+      "Enums", 
+      "Functions",
+      "Interfaces", 
+      "Methods",
+      "Namespaces"
     ],
     ```
 
@@ -74,9 +86,13 @@ For more information about customizing colors in VSCode, see [Theme Color](https
 * Choose the color of the border 
 ```json
     "workbench.colorCustomizations": {
-      "separators.methods.borderColor": "#65EAB9",  
-      "separators.functions.borderColor": "#65EAB9",  
+      "separators.classes.borderColor": "#65EAB9",  
       "separators.constructors.borderColor": "#65EAB9",  
+      "separators.enums.borderColor": "#65EAB9",  
+      "separators.functions.borderColor": "#65EAB9",  
+      "separators.interfaces.borderColor": "#65EAB9",  
+      "separators.methods.borderColor": "#65EAB9",  
+      "separators.namespaces.borderColor": "#65EAB9",  
     }
 ```
 
