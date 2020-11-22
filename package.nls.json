@@ -1,6 +1,8 @@
 {
     "separators.commands.toggleVisibility.title": "Separators: Toggle Visibility",
     "separators.commands.selectSymbols.title": "Separators: Select Symbols",
+    "separators.commands.whatsNew.title": "Separators: What's New",
+    "separators.commands.whatsNew#contextMenu.title": "What's New",
     "separators.configuration.title": "Separators",
     "separators.configuration.enabledSymbols.description": "List of symbols in which the separators will be drawn",
     "separators.configuration.useOriginalGreenishSeparator.description": "Use the original greenish separator for Methods, Functions and Constructors",
