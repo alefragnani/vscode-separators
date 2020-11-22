@@ -53,6 +53,11 @@
 			"type": "object",
 			"title": "%separators.configuration.title%",
 			"properties": {
+				"separators.useOriginalGreenishSeparator": {
+					"type": "boolean",
+					"default": false,
+					"description": "%separators.configuration.useOriginalGreenishSeparator.description%"
+				},
 				"separators.enabledSymbols": {
 					"type": "array",
                     "default": [
@@ -251,27 +256,27 @@
 				"id": "separators.methods.borderColor",
 				"description": "%separators.colors.methods.borderColor.description%",
 				"defaults": {
-					"dark": "#65EAB9",
-					"light": "#65EAB9",
-					"highContrast": "#65EAB9"
+					"light": "symbolIcon.methodForeground",
+					"dark": "symbolIcon.methodForeground",
+					"highContrast": "symbolIcon.methodForeground"
 				}
 			},
 			{
 				"id": "separators.functions.borderColor",
 				"description": "%separators.colors.functions.borderColor.description%",
 				"defaults": {
-					"dark": "#65EAB9",
-					"light": "#65EAB9",
-					"highContrast": "#65EAB9"
+					"light": "symbolIcon.functionForeground",
+					"dark": "symbolIcon.functionForeground",
+					"highContrast": "symbolIcon.functionForeground"
 				}
 			},
 			{
 				"id": "separators.constructors.borderColor",
 				"description": "%separators.colors.constructors.borderColor.description%",
 				"defaults": {
-					"dark": "#65EAB9",
-					"light": "#65EAB9",
-					"highContrast": "#65EAB9"
+					"light": "symbolIcon.constructorForeground",
+					"dark": "symbolIcon.constructorForeground",
+					"highContrast": "symbolIcon.constructorForeground"
 				}
 			},
 			{

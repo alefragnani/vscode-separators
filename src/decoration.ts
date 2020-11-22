@@ -4,6 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
+import { DEFAULT_GREENISH_COLOR } from "./constants";
 
 function createTopLineDecoration(
     borderColor: string | ThemeColor, borderWidth: string, borderStyle: string
@@ -18,9 +19,25 @@ function createTopLineDecoration(
     return window.createTextEditorDecorationType(decorationOptions);
 }
 
+function useOriginalGreenishSeparator(symbolKind: string): boolean {
+    if (!["methods", "functions", "constructors"].includes(symbolKind)) {
+        return false;
+    }
+
+    return workspace.getConfiguration("separators").get("useOriginalGreenishSeparator", false);
+}
+
+function getBorderColor(symbolKind: string): string | ThemeColor {
+    if (useOriginalGreenishSeparator(symbolKind)) {
+        return DEFAULT_GREENISH_COLOR;
+    }
+    
+    return new ThemeColor(`separators.${symbolKind}.borderColor`);
+}
+
 export function createTextEditorDecoration(symbolKind: string): TextEditorDecorationType {
 
-    const borderColor = new ThemeColor(`separators.${symbolKind}.borderColor`);
+    const borderColor = getBorderColor(symbolKind);    
     const borderWidth = workspace.getConfiguration("separators").get(`${symbolKind}.borderWidth`, 1);
     const borderStyle = workspace.getConfiguration("separators").get(`${symbolKind}.borderStyle`, "solid");
 

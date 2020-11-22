@@ -3,6 +3,12 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
+# What's new in Separators 2.0
+
+* Adds support for more symbols
+* Allows to select which symbols shows separators
+* Default separator color follows symbol icon color
+
 ## Support
 
 **Separators** is an open source extension created for **Visual Studio Code**. While being free and open source, if you find it useful, please consider supporting it.
@@ -44,6 +50,19 @@ Here are some of the features that **Separators** provides:
 
 You can customize the appearance of each kind of Symbol. 
 
+* List of symbols in which the separators will be drawn
+    ```json
+    "separators.enabledSymbols": [ 
+      "Classes", 
+      "Constructors",
+      "Enums", 
+      "Functions",
+      "Interfaces", 
+      "Methods",
+      "Namespaces"
+    ],
+    ```
+
 * Defines the border width _(in `px`)_
     ```json
     "separators.classes.borderWidth": 1,
@@ -66,18 +85,7 @@ You can customize the appearance of each kind of Symbol.
     "separators.namespaces.borderStyle": "solid",
     ```
 
-* List of symbols in which the separators will be drawn
-    ```json
-    "separators.enabledSymbols": [ 
-      "Classes", 
-      "Constructors",
-      "Enums", 
-      "Functions",
-      "Interfaces", 
-      "Methods",
-      "Namespaces"
-    ],
-    ```
+> Starting in v2.0 the separators for each symbol kind will use the corresponding `symbolIcon` color as new default. If you want `Methos`, `Functions` and `Constructors` to keep using the original _greenish_ color (`#65EAB9`) from v1.0, update the new `separators.useOriginalGreenishSeparator` setting to `true`.
 
 ## Available colors
 
