@@ -7,14 +7,20 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { SymbolKind } from 'vscode';
+import { Container } from './container';
 import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
 import { getEnabledSymbols, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
+import { registerWhatsNew } from './whats-new/command';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
 
+	Container.context = context;
+	
+	registerWhatsNew();
+	
 	let timeout: NodeJS.Timer;
 
 	const symbolsDecorationsType = new Map<string, vscode.TextEditorDecorationType>();

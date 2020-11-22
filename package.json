@@ -19,7 +19,7 @@
 		"organize",
 		"navigation",
 		"symbols"
-    ],
+	],
 	"extensionKind": [
 		"ui",
 		"workspace"
@@ -47,8 +47,31 @@
 			{
 				"command": "separators.selectSymbols",
 				"title": "%separators.commands.selectSymbols.title%"
+			},
+			{
+				"command": "separators.whatsNew",
+				"title": "%separators.commands.whatsNew.title%"
+			},
+			{
+				"command": "_separators.whatsNew#contextMenu",
+				"title": "%separators.commands.whatsNew#contextMenu.title%"
 			}
 		],
+		"menus": {
+            "commandPalette": [
+                {
+                    "command": "_separators.whatsNew#contextMenu",
+                    "when": "false"
+                }
+            ],
+            "extension/context": [
+                {
+                    "command": "_separators.whatsNew#contextMenu",
+                    "group": "separators",
+                    "when": "extension == alefragnani.separators && extensionStatus == installed"
+                }
+            ]
+        },
 		"configuration": {
 			"type": "object",
 			"title": "%separators.configuration.title%",
@@ -60,7 +83,7 @@
 				},
 				"separators.enabledSymbols": {
 					"type": "array",
-                    "default": [
+					"default": [
 						"Classes",
 						"Constructors",
 						"Enums",
@@ -68,15 +91,15 @@
 						"Interfaces",
 						"Methods",
 						"Namespaces"
-					],					
+					],
 					"items": {
 						"type": "string",
 						"enum": [
-							"Classes", 
+							"Classes",
 							"Constructors",
-							"Enums", 
+							"Enums",
 							"Functions",
-							"Interfaces", 
+							"Interfaces",
 							"Methods",
 							"Namespaces"
 						],
