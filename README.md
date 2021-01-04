@@ -1,3 +1,8 @@
+[![](https://vsmarketplacebadge.apphb.com/version-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
+[![](https://vsmarketplacebadge.apphb.com/downloads-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
+[![](https://vsmarketplacebadge.apphb.com/rating-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
+[![](https://img.shields.io/github/workflow/status/alefragnani/vscode-separators/CI)](https://github.com/alefragnani/vscode-separators/actions?query=workflow%3ACI)
+
 <p align="center">
   <br />
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
