@@ -9,7 +9,7 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.50.0"
+		"vscode": "^1.51.0"
 	},
 	"categories": [
 		"Other"
@@ -64,20 +64,20 @@
 			}
 		],
 		"menus": {
-            "commandPalette": [
-                {
-                    "command": "_separators.whatsNew#contextMenu",
-                    "when": "false"
-                }
-            ],
-            "extension/context": [
-                {
-                    "command": "_separators.whatsNew#contextMenu",
-                    "group": "separators",
-                    "when": "extension == alefragnani.separators && extensionStatus == installed"
-                }
-            ]
-        },
+			"commandPalette": [
+				{
+					"command": "_separators.whatsNew#contextMenu",
+					"when": "false"
+				}
+			],
+			"extension/context": [
+				{
+					"command": "_separators.whatsNew#contextMenu",
+					"group": "separators",
+					"when": "extension == alefragnani.separators && extensionStatus == installed"
+				}
+			]
+		},
 		"configuration": {
 			"type": "object",
 			"title": "%separators.configuration.title%",
@@ -369,7 +369,7 @@
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^12.11.7",
 		"@types/semver": "^7.3.4",
-		"@types/vscode": "^1.50.0",
+		"@types/vscode": "^1.51.0",
 		"@typescript-eslint/eslint-plugin": "^4.1.1",
 		"@typescript-eslint/parser": "^4.1.1",
 		"eslint": "^7.9.0",
