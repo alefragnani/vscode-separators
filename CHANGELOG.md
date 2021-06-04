@@ -1,3 +1,12 @@
+## [2.1.0] - 2021-06-04
+### Added
+- Support **Virtual Workspaces** (issue [#27](https://github.com/alefragnani/vscode-separators/issues/27))
+- Support **Workspace Trust** (issue [#26](https://github.com/alefragnani/vscode-separators/issues/26))
+
+### Internal
+- Do not show welcome message if installed by Settings Sync (issue [#29](https://github.com/alefragnani/vscode-separators/issues/29))
+- Security Alert: ini (dependabot [PR #20](https://github.com/alefragnani/vscode-separators/pull/20))
+
 ## [2.0.0] - 2020-11-22
 ### Added
 - Select which separators should be enabled (issue [#1](https://github.com/alefragnani/vscode-separators/issues/1))
