@@ -77,7 +77,7 @@ You can customize the appearance of each kind of Symbol.
     
     // per-language setting
     "[javascript]": {
-        "separators.functions.ignoreCallbackInline", true
+        "separators.functions.ignoreCallbackInline": true
     }
     ```
 > For now, only **JavaScript** and **TypeScript** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
