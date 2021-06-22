@@ -4,8 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { commands, DocumentSymbol, SymbolKind, TextDocument, window, workspace } from "vscode";
-
-const CALLBACK_LANGUAGE_IDS = ["javascript", "javascripreact", "typescript", "typescriptreact"];
+import { CALLBACK_LANGUAGE_IDS } from "./constants";
 
 function getSymbolsFrom(symbol: DocumentSymbol): DocumentSymbol[] {
     if (symbol.children.length === 0) {
