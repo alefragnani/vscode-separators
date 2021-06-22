@@ -65,6 +65,7 @@ You can customize the appearance of each kind of Symbol.
 
 * List of symbols in which the separators will be drawn
     ```json
+    // globally (user/workspace setting)
     "separators.enabledSymbols": [ 
       "Classes", 
       "Constructors",
@@ -74,6 +75,14 @@ You can customize the appearance of each kind of Symbol.
       "Methods",
       "Namespaces"
     ],
+
+    // per-language setting
+    "[typescript]": {
+        "separators.enabledSymbols": [
+            "Enums",
+            "Interfaces"
+        ],
+    }
     ```
 
 * Controls whether callback/inline Functions should be ignored _(default is `false`)_
