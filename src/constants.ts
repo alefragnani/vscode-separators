@@ -6,3 +6,5 @@
 export const DEFAULT_ENABLED_SYMBOLS = [ "Classes", "Constructors", "Enums", "Functions", "Interfaces", "Methods", "Namespaces" ];
 
 export const DEFAULT_GREENISH_COLOR = "#65EAB9";
+
+export const CALLBACK_LANGUAGE_IDS = ["javascript", "javascripreact", "typescript", "typescriptreact"];
