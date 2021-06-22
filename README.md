@@ -88,6 +88,16 @@ You can customize the appearance of each kind of Symbol.
     ```
 > For now, only **JavaScript** and **TypeScript** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
 
+* Indicates the maximum depth (level) which the separators should be rendered _(default is `0`)_
+    ```json
+    "separators.maxDepth": 1
+    
+    // per-language setting
+    "[javascript]": {
+        "separators.maxDepth": 2
+    }
+    ```
+
 * Defines the border width _(in `px`)_
     ```json
     "separators.classes.borderWidth": 1,
