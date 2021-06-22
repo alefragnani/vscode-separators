@@ -46,6 +46,12 @@ Here are some of the features that **Separators** provides:
 * Each kind of symbol can have its own customization
 * Select which symbols will have separators
 
+## Language Support
+
+The extension will automatically work with any language you have installed in VS Code. The only requirement is that the language itself does support `Go to Symbol`. 
+
+To be sure your desired language will work on Separators, take a look at `Outline` view in VS Code. If it display contents, then Separators will work perfectly.
+
 # Features
 
 ## Available commands
