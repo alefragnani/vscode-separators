@@ -93,6 +93,12 @@
 					"default": false,
 					"description": "%separators.configuration.useOriginalGreenishSeparator.description%"
 				},
+				"separators.maxDepth": {
+					"type": "integer",
+					"default": 0,
+					"description": "%separators.configuration.maxDepth.description%",
+                    "scope": "language-overridable"
+				},                
 				"separators.enabledSymbols": {
 					"type": "array",
 					"default": [
