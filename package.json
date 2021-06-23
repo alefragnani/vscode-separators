@@ -134,7 +134,8 @@
 					"minItems": 1,
 					"maxItems": 7,
 					"uniqueItems": true,
-					"description": "%separators.configuration.enabledSymbols.description%"
+					"description": "%separators.configuration.enabledSymbols.description%",
+                    "scope": "language-overridable"
 				},
 				"separators.methods.borderWidth": {
 					"type": "integer",

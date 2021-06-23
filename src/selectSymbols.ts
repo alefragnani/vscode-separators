@@ -7,7 +7,7 @@ import { QuickPickItem, SymbolKind, window, workspace } from "vscode";
 import { areEquivalent } from "./array";
 import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
 
-export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Promise<string[] > {
+export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Promise<string[] | undefined> {
     const allSymbols: QuickPickItem[] = [];
     allSymbols.push({
         label: "Classes",
@@ -43,11 +43,10 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
         canPickMany: true 
     });
     if (!picked) {
-        return [];
+        return undefined;
     }
 
     if (picked.length === 0) {
-        window.showErrorMessage("You must select at least on Symbol");
         return [];
     }
 
@@ -57,18 +56,19 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
 
 
 export async function selectSymbols(): Promise<boolean> {
-    const selected = workspace.getConfiguration("separators").get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS);
+    const selected = workspace.getConfiguration("separators", window.activeTextEditor?.document).get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS);
     const pick = await showSelectSymbolsQuickPick(selected); 
+
+    if (!pick) {
+        return false;
+    }
     
     if (areEquivalent(pick, selected)) {
         return false
     }
     
-    if (pick.length > 0) {
-        workspace.getConfiguration("separators").update("enabledSymbols", pick);
-        return true;
-    }
-    return false;
+    workspace.getConfiguration("separators").update("enabledSymbols", pick);
+    return true;
 }
 
 
@@ -95,7 +95,7 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
 }
 
 export function getEnabledSymbols(): SymbolKind[] {
-    const symbols = workspace.getConfiguration("separators").get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS)
+    const symbols = workspace.getConfiguration("separators", window.activeTextEditor?.document).get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS)
     const symbolsKind: SymbolKind[] = [];
     symbols.forEach(symbol => {
         symbolsKind.push(getSymbolKindAsKind(symbol));

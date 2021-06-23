@@ -138,8 +138,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
 
 	vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility());
-	vscode.commands.registerCommand("separators.selectSymbols", () => {
-		if (selectSymbols()) {
+	vscode.commands.registerCommand("separators.selectSymbols", async () => {
+		if (await selectSymbols()) {
 			updateDecorations();
 		}});
 
