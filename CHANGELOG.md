@@ -1,3 +1,12 @@
+## [2.2.0] - 2021-07-04
+### Added
+- New setting to configure `depth`/`level` of separators rendered (issue [#24](https://github.com/alefragnani/vscode-separators/issues/24))
+- Language support documentation (issue [#32](https://github.com/alefragnani/vscode-separators/issues/32))
+- New setting to ignore `callback`/`inline` functions (issue [#33](https://github.com/alefragnani/vscode-separators/issues/33))
+
+## Changed
+- Make `separators.enabledSymbols` setting customizable _per language_ (issue [#18](https://github.com/alefragnani/vscode-separators/issues/18))
+
 ## [2.1.0] - 2021-06-04
 ### Added
 - Support **Virtual Workspaces** (issue [#27](https://github.com/alefragnani/vscode-separators/issues/27))
