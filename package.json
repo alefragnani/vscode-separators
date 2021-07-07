@@ -131,7 +131,7 @@
 							"Enable `Namespaces`"
 						]
 					},
-					"minItems": 1,
+					"minItems": 0,
 					"maxItems": 7,
 					"uniqueItems": true,
 					"description": "%separators.configuration.enabledSymbols.description%",
