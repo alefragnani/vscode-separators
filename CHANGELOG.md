@@ -1,3 +1,13 @@
+## [2.2.1] - 2021-07-07
+### Fixed
+- Remove `minItems` limitation for `enabledSymbols` (issue [#43](https://github.com/alefragnani/vscode-separators/issues/43))
+
+### Internal
+- Security Alert: elliptic (dependabot [PR #42](https://github.com/alefragnani/vscode-separators/pull/42))
+- Security Alert: y18n (dependabot [PR #41](https://github.com/alefragnani/vscode-separators/pull/41))
+- Security Alert: ssri (dependabot [PR #40](https://github.com/alefragnani/vscode-separators/pull/40))
+- Security Alert: lodash (dependabot [PR #39](https://github.com/alefragnani/vscode-separators/pull/39))
+
 ## [2.2.0] - 2021-07-04
 ### Added
 - New setting to configure `depth`/`level` of separators rendered (issue [#24](https://github.com/alefragnani/vscode-separators/issues/24))
