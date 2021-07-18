@@ -7,8 +7,12 @@
   <br />
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
+## Seperators
 
-# What's new in Separators 2.2
+This extension adds subtle colored line delimiters between different sections of code to ease visual navigation.
+Instead of including comment blocks to add a visual delimiter, a colored line is automatically added to improve code navigation.
+
+## What's new in Separators 2.2
 
 * Adds **Virtual Workspaces** support
 * Adds **Workspace Trust** support
