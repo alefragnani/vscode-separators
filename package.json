@@ -82,12 +82,12 @@
 			"type": "object",
 			"title": "%separators.configuration.title%",
 			"properties": {
-                "separators.functions.ignoreCallbackInline": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "%separators.configuration.functions.ignoreCallbackInline.description%",
-                    "scope": "language-overridable"
-                },
+				"separators.functions.ignoreCallbackInline": {
+					"type": "boolean",
+					"default": false,
+					"description": "%separators.configuration.functions.ignoreCallbackInline.description%",
+					"scope": "language-overridable"
+				},
 				"separators.useOriginalGreenishSeparator": {
 					"type": "boolean",
 					"default": false,
@@ -97,8 +97,8 @@
 					"type": "integer",
 					"default": 0,
 					"description": "%separators.configuration.maxDepth.description%",
-                    "scope": "language-overridable"
-				},                
+					"scope": "language-overridable"
+				},
 				"separators.enabledSymbols": {
 					"type": "array",
 					"default": [
@@ -108,7 +108,8 @@
 						"Functions",
 						"Interfaces",
 						"Methods",
-						"Namespaces"
+						"Namespaces",
+						"Structs"
 					],
 					"items": {
 						"type": "string",
@@ -119,7 +120,8 @@
 							"Functions",
 							"Interfaces",
 							"Methods",
-							"Namespaces"
+							"Namespaces",
+							"Structs"
 						],
 						"enumDescriptions": [
 							"Enable `Methods`",
@@ -128,14 +130,15 @@
 							"Enable `Classes`",
 							"Enable `Interfaces`",
 							"Enable `Enums`",
-							"Enable `Namespaces`"
+							"Enable `Namespaces`",
+							"Enable `Structs`"
 						]
 					},
 					"minItems": 0,
-					"maxItems": 7,
+					"maxItems": 8,
 					"uniqueItems": true,
 					"description": "%separators.configuration.enabledSymbols.description%",
-                    "scope": "language-overridable"
+					"scope": "language-overridable"
 				},
 				"separators.methods.borderWidth": {
 					"type": "integer",
@@ -290,6 +293,28 @@
 						"Specifies a double border"
 					],
 					"description": "%separators.configuration.namespaces.borderStyle.description%"
+				},
+				"separators.structs.borderWidth": {
+					"type": "integer",
+					"default": 1,
+					"description": "%separators.configuration.structs.borderWidth.description%"
+				},
+				"separators.structs.borderStyle": {
+					"type": "string",
+					"default": "solid",
+					"enum": [
+						"solid",
+						"dotted",
+						"dashed",
+						"double"
+					],
+					"enumDescriptions": [
+						"Specifies a solid border",
+						"Specifies a dotted border",
+						"Specifies a dashed border",
+						"Specifies a double border"
+					],
+					"description": "%separators.configuration.structs.borderStyle.description%"
 				}
 			}
 		},
@@ -355,6 +380,15 @@
 					"light": "symbolIcon.namespaceForeground",
 					"dark": "symbolIcon.namespaceForeground",
 					"highContrast": "symbolIcon.namespaceForeground"
+				}
+			},
+			{
+				"id": "separators.structs.borderColor",
+				"description": "%separators.colors.structs.borderColor.description%",
+				"defaults": {
+					"light": "symbolIcon.structForeground",
+					"dark": "symbolIcon.structForeground",
+					"highContrast": "symbolIcon.structForeground"
 				}
 			}
 		]
