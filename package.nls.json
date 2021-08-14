@@ -28,5 +28,8 @@
     "separators.colors.enums.borderColor.description": "Color of the border on top of Enums",
     "separators.configuration.namespaces.borderWidth.description": "Width of the border on top of Namespaces (in px)",
     "separators.configuration.namespaces.borderStyle.description": "Style of the border on top of Namespaces",
-    "separators.colors.namespaces.borderColor.description": "Color of the border on top of Namespaces"
+    "separators.colors.namespaces.borderColor.description": "Color of the border on top of Namespaces",
+    "separators.configuration.structs.borderWidth.description": "Width of the border on top of Structs (in px)",
+    "separators.configuration.structs.borderStyle.description": "Style of the border on top of Structs",
+    "separators.colors.structs.borderColor.description": "Color of the border on top of Structs"
 }
