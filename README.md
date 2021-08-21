@@ -8,7 +8,7 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
-# What's new in Separators 2.2
+# What's new in Separators 2.3
 
 * Adds **Virtual Workspaces** support
 * Adds **Workspace Trust** support
@@ -148,4 +148,4 @@ For more information about customizing colors in VSCode, see [Theme Color](https
 
 # License
 
-[MIT](LICENSE.md) &copy; Alessandro Fragnani
+[GPL-3.0](LICENSE.md) &copy; Alessandro Fragnani

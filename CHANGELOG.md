@@ -1,3 +1,7 @@
+## [2.3.0] - 2021-08-21
+### Internal
+- License Update
+
 ## [2.2.1] - 2021-07-07
 ### Fixed
 - Remove `minItems` limitation for `enabledSymbols` (issue [#43](https://github.com/alefragnani/vscode-separators/issues/43))

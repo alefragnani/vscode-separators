@@ -2,7 +2,7 @@
 	"name": "separators",
 	"displayName": "Separators",
 	"description": "Improve the readability of your source code with lines on top of each method",
-	"version": "2.2.1",
+	"version": "2.3.0",
 	"publisher": "alefragnani",
 	"galleryBanner": {
 		"color": "#0000FF",
@@ -31,7 +31,7 @@
 		}
 	},
 	"icon": "images/icon.png",
-	"license": "SEE LICENSE IN LICENSE.md",
+	"license": "GPL-3.0",
 	"homepage": "https://github.com/alefragnani/vscode-separators/blob/master/README.md",
 	"repository": {
 		"type": "git",
