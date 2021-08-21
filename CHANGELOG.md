@@ -1,4 +1,7 @@
 ## [2.3.0] - 2021-08-21
+### Added
+- Add separators for `Struct` symbol (issue [#46](https://github.com/alefragnani/vscode-separators/issues/46))
+
 ### Internal
 - License Update
 
