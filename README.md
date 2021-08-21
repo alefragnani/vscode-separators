@@ -10,6 +10,7 @@
 
 # What's new in Separators 2.3
 
+* Adds separators for `Struct` symbol
 * Adds **Virtual Workspaces** support
 * Adds **Workspace Trust** support
 * Changes some settings to be _per language_
@@ -71,7 +72,8 @@ You can customize the appearance of each kind of Symbol.
       "Functions",
       "Interfaces", 
       "Methods",
-      "Namespaces"
+      "Namespaces",
+      "Structs"
     ],
 
     // per-language setting
@@ -114,6 +116,7 @@ You can customize the appearance of each kind of Symbol.
     "separators.interfaces.borderWidth": 1,
     "separators.methods.borderWidth": 1, 
     "separators.namespaces.borderWidth": 1,
+    "separators.structs.borderWidth": 1,
     ```
 
 * Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
@@ -125,6 +128,7 @@ You can customize the appearance of each kind of Symbol.
     "separators.interfaces.borderStyle": "solid",
     "separators.methods.borderStyle": "solid",
     "separators.namespaces.borderStyle": "solid",
+    "separators.structs.borderStyle": "solid",
     ```
 
 > Starting in v2.0 the separators for each symbol kind will use the corresponding `symbolIcon` color as new default. If you want `Methos`, `Functions` and `Constructors` to keep using the original _greenish_ color (`#65EAB9`) from v1.0, update the new `separators.useOriginalGreenishSeparator` setting to `true`.
@@ -143,6 +147,7 @@ For more information about customizing colors in VSCode, see [Theme Color](https
       "separators.interfaces.borderColor": "#65EAB9",  
       "separators.methods.borderColor": "#65EAB9",  
       "separators.namespaces.borderColor": "#65EAB9",  
+      "separators.structs.borderColor": "#65EAB9",  
     }
 ```
 

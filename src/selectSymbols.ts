@@ -37,6 +37,10 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
         label: "Namespaces",
         picked: selectedSymbols.includes("Namespaces")
     });
+    allSymbols.push({
+        label: "Structs",
+        picked: selectedSymbols.includes("Structs")
+    });
     
     const picked = await window.showQuickPick(allSymbols, { 
         placeHolder: "Select which symbols should have separators", 
@@ -88,6 +92,8 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
             return SymbolKind.Enum;
         case "Namespaces":
             return SymbolKind.Namespace;
+        case "Structs":
+            return SymbolKind.Struct;
 
         default:
             return SymbolKind.Object;
