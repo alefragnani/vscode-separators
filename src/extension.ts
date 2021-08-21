@@ -31,6 +31,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
 	symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
 	symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
+	symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
 
 	let activeEditor = vscode.window.activeTextEditor;
 
@@ -93,6 +94,11 @@ export async function activate(context: vscode.ExtensionContext) {
 			symbols.filter(symbol => symbol.kind === SymbolKind.Namespace),
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			symbolsDecorationsType.get("namespaces")!);
+		updateDecorationsInActiveEditor(
+			vscode.window.activeTextEditor,
+			symbols.filter(symbol => symbol.kind === SymbolKind.Struct),
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			symbolsDecorationsType.get("structs")!);
 	}
 
 	vscode.window.onDidChangeActiveTextEditor(editor => {
@@ -125,6 +131,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
 			symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
 			symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
+			symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
 
             updateDecorations();
         }
