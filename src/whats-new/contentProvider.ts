@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------------------------------
 *  Copyright (c) Alessandro Fragnani. All rights reserved.
-*  Licensed under the MIT License. See License.md in the project root for license information.
+*  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
 import { 
@@ -22,6 +22,12 @@ export class SeparatorsContentProvider implements ContentProvider {
 
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
+        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.3.0", releaseDate: "August 2021" } });
+        changeLog.push({
+            kind: ChangeLogKind.INTERNAL,
+            detail: "License Update"
+        });
+
         changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.2.0", releaseDate: "June 2021" } });
         changeLog.push({
             kind: ChangeLogKind.NEW,
