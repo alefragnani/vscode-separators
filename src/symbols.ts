@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { commands, DocumentSymbol, SymbolKind, TextDocument, window, workspace } from "vscode";
-import { CALLBACK_LANGUAGE_IDS } from "./constants";
+import { LanguageFactory } from "./language/factory";
 
 function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[] {
 
@@ -40,8 +40,12 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
         return false;
     }
 
-    return CALLBACK_LANGUAGE_IDS.includes(<string>textDocument?.languageId) &&
-        symbol.name.endsWith(' callback');
+    const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
+    if (!language) {
+        return false;
+    }
+    
+    return language?.isCallback(symbol);
 }
 
 export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[] | undefined> {
