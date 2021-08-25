@@ -3,18 +3,18 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { CALLBACK_LANGUAGE_IDS } from "../constants";
+import { JAVASCRIPT_TYPESCRIPT_LANGUAGE_IDS, LUA_LANGUAGE_IDS } from "../constants";
 import { JavaScriptTypeScriptLanguage } from "./javaScriptTypeScript";
 import { Language } from "./language";
-// import { LuaLanguage } from "./lua";
+import { LuaLanguage } from "./lua";
 
 export class LanguageFactory {
 
     static getLanguage(languageId: string): Language | undefined {
-        if (CALLBACK_LANGUAGE_IDS.includes(languageId)) {
+        if (JAVASCRIPT_TYPESCRIPT_LANGUAGE_IDS.includes(languageId)) {
             return new JavaScriptTypeScriptLanguage();
-        // } else if (languageId === "lua") {
-        //     return new LuaLanguage();
+        } else if (LUA_LANGUAGE_IDS.includes(languageId)) {
+            return new LuaLanguage();
         } else {
             return undefined
         }
