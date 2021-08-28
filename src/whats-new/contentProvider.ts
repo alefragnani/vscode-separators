@@ -26,6 +26,14 @@ export class SeparatorsContentProvider implements ContentProvider {
         changeLog.push({
             kind: ChangeLogKind.NEW,
             detail: {
+                message: "Add support to <b>Lua</b> language in <b>ignoreCallbackInline</b> setting",
+                id: 50,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.NEW,
+            detail: {
                 message: "Add separators for <b>Struct</b> symbol",
                 id: 46,
                 kind: IssueKind.Issue

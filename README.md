@@ -95,7 +95,7 @@ You can customize the appearance of each kind of Symbol.
         "separators.functions.ignoreCallbackInline": true
     }
     ```
-> For now, only **JavaScript** and **TypeScript** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
+> For now, only **JavaScript**, **TypeScript** and **Lua** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
 
 * Indicates the maximum depth (level) which the separators should be rendered _(default is `0`)_
     ```json
