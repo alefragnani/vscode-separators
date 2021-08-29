@@ -24,14 +24,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let timeout: NodeJS.Timer;
 
 	const symbolsDecorationsType = new Map<string, vscode.TextEditorDecorationType>();
-	symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
-	symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
-	symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
-	symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
-	symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
-	symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
-	symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
-	symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+	createDecorations();
 
 	let activeEditor = vscode.window.activeTextEditor;
 
@@ -40,6 +33,17 @@ export async function activate(context: vscode.ExtensionContext) {
 	if (activeEditor) {
 		triggerUpdateDecorations();
 	}
+
+    function createDecorations() {
+        symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
+        symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
+        symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
+        symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
+        symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
+        symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
+        symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
+        symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+    }
 
 	function triggerUpdateDecorations() {
 		if (timeout) {
@@ -124,15 +128,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				value.dispose();
 			})
 
-			symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
-			symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
-			symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
-			symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
-			symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
-			symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
-			symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
-			symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
-
+			createDecorations();
             updateDecorations();
         }
 	}));	
