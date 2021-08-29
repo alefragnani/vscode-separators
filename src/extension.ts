@@ -6,10 +6,10 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { SymbolKind } from 'vscode';
+import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
 import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
-import { getEnabledSymbols, selectSymbols } from './selectSymbols';
+import { getEnabledSymbols, getSymbolKindAsKind, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 import { registerWhatsNew } from './whats-new/command';
 
@@ -24,14 +24,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let timeout: NodeJS.Timer;
 
 	const symbolsDecorationsType = new Map<string, vscode.TextEditorDecorationType>();
-	symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
-	symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
-	symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
-	symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
-	symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
-	symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
-	symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
-	symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+	createDecorations();
 
 	let activeEditor = vscode.window.activeTextEditor;
 
@@ -40,6 +33,17 @@ export async function activate(context: vscode.ExtensionContext) {
 	if (activeEditor) {
 		triggerUpdateDecorations();
 	}
+
+    function createDecorations() {
+        symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
+        symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
+        symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
+        symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
+        symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
+        symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
+        symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
+        symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+    }
 
 	function triggerUpdateDecorations() {
 		if (timeout) {
@@ -59,46 +63,13 @@ export async function activate(context: vscode.ExtensionContext) {
 			symbols = [];
 		}
 
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Method),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("methods")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Function),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("functions")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Constructor),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("constructors")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Class),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("classes")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Interface),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("interfaces")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Enum),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("enums")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Namespace),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("namespaces")!);
-		updateDecorationsInActiveEditor(
-			vscode.window.activeTextEditor,
-			symbols.filter(symbol => symbol.kind === SymbolKind.Struct),
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			symbolsDecorationsType.get("structs")!);
+        for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
+            updateDecorationsInActiveEditor(
+                vscode.window.activeTextEditor,
+                symbols.filter(s => s.kind === getSymbolKindAsKind(symbol)),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
+        }
 	}
 
 	vscode.window.onDidChangeActiveTextEditor(editor => {
@@ -124,15 +95,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				value.dispose();
 			})
 
-			symbolsDecorationsType.set("methods", createTextEditorDecoration("methods"));
-			symbolsDecorationsType.set("functions", createTextEditorDecoration("functions"));
-			symbolsDecorationsType.set("constructors", createTextEditorDecoration("constructors"));
-			symbolsDecorationsType.set("classes", createTextEditorDecoration("classes"));
-			symbolsDecorationsType.set("interfaces", createTextEditorDecoration("interfaces"));
-			symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
-			symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
-			symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
-
+			createDecorations();
             updateDecorations();
         }
 	}));	
