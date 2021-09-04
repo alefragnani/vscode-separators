@@ -1,4 +1,4 @@
-## [2.3.0] - 2021-??-??
+## [2.3.0] - 2021-09-04
 ### Added
 - Add support to **Lua** language in `separators.functions.ignoreCallbackInline` setting (issue [#50](https://github.com/alefragnani/vscode-separators/issues/50))
 - Add separators for `Struct` symbol (issue [#46](https://github.com/alefragnani/vscode-separators/issues/46))
