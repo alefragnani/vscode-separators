@@ -6,7 +6,7 @@ When contributing to this project, please first discuss the changes you wish to 
 
 ## Your First Code Contribution
 
-Unsure where to begin contributing? You can start by looking through the [`help wanted`](https://github.com/alefragnani/vscode-separators/labels/help%20wanted) issues.
+Unsure where to begin contributing? You can start by looking through the [`good first issue`](https://github.com/alefragnani/vscode-separators/labels/good%20first%20issue) issues.
 
 ### Getting the code
 
