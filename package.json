@@ -78,246 +78,296 @@
 				}
 			]
 		},
-		"configuration": {
-			"type": "object",
-			"title": "%separators.configuration.title%",
-			"properties": {
-				"separators.functions.ignoreCallbackInline": {
-					"type": "boolean",
-					"default": false,
-					"description": "%separators.configuration.functions.ignoreCallbackInline.description%",
-					"scope": "language-overridable"
-				},
-				"separators.useOriginalGreenishSeparator": {
-					"type": "boolean",
-					"default": false,
-					"description": "%separators.configuration.useOriginalGreenishSeparator.description%"
-				},
-				"separators.maxDepth": {
-					"type": "integer",
-					"default": 0,
-					"description": "%separators.configuration.maxDepth.description%",
-					"scope": "language-overridable"
-				},
-				"separators.enabledSymbols": {
-					"type": "array",
-					"default": [
-						"Classes",
-						"Constructors",
-						"Enums",
-						"Functions",
-						"Interfaces",
-						"Methods",
-						"Namespaces",
-						"Structs"
-					],
-					"items": {
-						"type": "string",
-						"enum": [
-							"Classes",
-							"Constructors",
-							"Enums",
-							"Functions",
-							"Interfaces",
-							"Methods",
-							"Namespaces",
-							"Structs"
-						],
-						"enumDescriptions": [
-							"Enable `Methods`",
-							"Enable `Functions`",
-							"Enable `Constructors`",
-							"Enable `Classes`",
-							"Enable `Interfaces`",
-							"Enable `Enums`",
-							"Enable `Namespaces`",
-							"Enable `Structs`"
-						]
-					},
-					"minItems": 0,
-					"maxItems": 8,
-					"uniqueItems": true,
-					"description": "%separators.configuration.enabledSymbols.description%",
-					"scope": "language-overridable"
-				},
-				"separators.methods.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.methods.borderWidth.description%"
-				},
-				"separators.methods.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.methods.borderStyle.description%"
-				},
-				"separators.functions.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.functions.borderWidth.description%"
-				},
-				"separators.functions.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.functions.borderStyle.description%"
-				},
-				"separators.constructors.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.constructors.borderWidth.description%"
-				},
-				"separators.constructors.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.constructors.borderStyle.description%"
-				},
-				"separators.classes.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.classes.borderWidth.description%"
-				},
-				"separators.classes.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.classes.borderStyle.description%"
-				},
-				"separators.interfaces.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.interfaces.borderWidth.description%"
-				},
-				"separators.interfaces.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.interfaces.borderStyle.description%"
-				},
-				"separators.enums.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.enums.borderWidth.description%"
-				},
-				"separators.enums.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.enums.borderStyle.description%"
-				},
-				"separators.namespaces.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.namespaces.borderWidth.description%"
-				},
-				"separators.namespaces.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.namespaces.borderStyle.description%"
-				},
-				"separators.structs.borderWidth": {
-					"type": "integer",
-					"default": 1,
-					"description": "%separators.configuration.structs.borderWidth.description%"
-				},
-				"separators.structs.borderStyle": {
-					"type": "string",
-					"default": "solid",
-					"enum": [
-						"solid",
-						"dotted",
-						"dashed",
-						"double"
-					],
-					"enumDescriptions": [
-						"Specifies a solid border",
-						"Specifies a dotted border",
-						"Specifies a dashed border",
-						"Specifies a double border"
-					],
-					"description": "%separators.configuration.structs.borderStyle.description%"
-				}
+		"configuration": [
+            {
+                "id": "separators-general",
+                "title": "%separators.configuration.title%",
+                "properties": {                    
+                    "separators.useOriginalGreenishSeparator": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "%separators.configuration.useOriginalGreenishSeparator.description%"
+                    },
+                    "separators.maxDepth": {
+                        "type": "integer",
+                        "default": 0,
+                        "description": "%separators.configuration.maxDepth.description%",
+                        "scope": "language-overridable"
+                    },                
+                    "separators.enabledSymbols": {
+                        "type": "array",
+                        "default": [
+                            "Classes",
+                            "Constructors",
+                            "Enums",
+                            "Functions",
+                            "Interfaces",
+                            "Methods",
+                            "Namespaces",
+                            "Structs"
+                        ],
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Classes",
+                                "Constructors",
+                                "Enums",
+                                "Functions",
+                                "Interfaces",
+                                "Methods",
+                                "Namespaces",
+                                "Structs"
+                            ],
+                            "enumDescriptions": [
+                                "Enable `Methods`",
+                                "Enable `Functions`",
+                                "Enable `Constructors`",
+                                "Enable `Classes`",
+                                "Enable `Interfaces`",
+                                "Enable `Enums`",
+                                "Enable `Namespaces`",
+                                "Enable `Structs`"
+                            ]
+                        },
+                        "minItems": 0,
+                        "maxItems": 8,
+                        "uniqueItems": true,
+                        "description": "%separators.configuration.enabledSymbols.description%",
+                        "scope": "language-overridable"
+                    }
+                }
+            },
+            {
+                "id": "separators-classes",
+                "title": "Classes",
+                "properties": {
+                    "separators.classes.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.classes.borderWidth.description%"
+                    },
+                    "separators.classes.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.classes.borderStyle.description%"
+                    }
+                }
+            },            
+            {
+                "id": "separators-constructors",
+                "title": "Constructors",
+                "properties": {
+                    "separators.constructors.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.constructors.borderWidth.description%"
+                    },
+                    "separators.constructors.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.constructors.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-enums",
+                "title": "Enums",
+                "properties": {
+                    "separators.enums.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.enums.borderWidth.description%"
+                    },
+                    "separators.enums.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.enums.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-functions",
+                "title": "Functions",
+                "properties": {
+                    "separators.functions.ignoreCallbackInline": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "%separators.configuration.functions.ignoreCallbackInline.description%",
+                        "scope": "language-overridable"
+                    },
+                    "separators.functions.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.functions.borderWidth.description%"
+                    },
+                    "separators.functions.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.functions.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-interfaces",
+                "title": "Interfaces",
+                "properties": {
+                    "separators.interfaces.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.interfaces.borderWidth.description%"
+                    },
+                    "separators.interfaces.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.interfaces.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-methods",
+                "title": "Methods",
+                "properties": {				
+                    "separators.methods.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.methods.borderWidth.description%"
+                    },
+                    "separators.methods.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.methods.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-namespaces",
+                "title": "Namespaces",
+                "properties": {
+                    "separators.namespaces.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.namespaces.borderWidth.description%"
+                    },
+                    "separators.namespaces.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.namespaces.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-structs",
+                "title": "Structs",
+                "properties": {
+                    "separators.structs.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.structs.borderWidth.description%"
+                    },
+                    "separators.structs.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.structs.borderStyle.description%"
+                    }
+                }
 			}
-		},
+		],
 		"colors": [
 			{
 				"id": "separators.methods.borderColor",
