@@ -1,88 +1,88 @@
 {
-	"name": "separators",
-	"displayName": "Separators",
-	"description": "Improve the readability of your source code with lines on top of each method",
-	"version": "2.3.0",
-	"publisher": "alefragnani",
-	"galleryBanner": {
-		"color": "#0000FF",
-		"theme": "dark"
-	},
-	"engines": {
-		"vscode": "^1.61.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"keywords": [
-		"separator",
-		"organize",
-		"navigation",
-		"symbols"
-	],
-	"extensionKind": [
-		"ui",
-		"workspace"
-	],
-	"capabilities": {
-		"virtualWorkspaces": true,
-		"untrustedWorkspaces": {
-			"supported": true
-		}
-	},
-	"icon": "images/icon.png",
-	"license": "GPL-3.0",
-	"homepage": "https://github.com/alefragnani/vscode-separators/blob/master/README.md",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/alefragnani/vscode-separators.git"
-	},
-	"bugs": {
-		"url": "https://github.com/alefragnani/vscode-separators/issues"
-	},
-	"activationEvents": [
-		"onStartupFinished"
-	],
-	"main": "./dist/extension",
-	"contributes": {
-		"commands": [
-			{
-				"command": "separators.toggleVisibility",
-				"title": "%separators.commands.toggleVisibility.title%"
-			},
-			{
-				"command": "separators.selectSymbols",
-				"title": "%separators.commands.selectSymbols.title%"
-			},
-			{
-				"command": "separators.whatsNew",
-				"title": "%separators.commands.whatsNew.title%"
-			},
-			{
-				"command": "_separators.whatsNew#contextMenu",
-				"title": "%separators.commands.whatsNew#contextMenu.title%"
-			}
-		],
-		"menus": {
-			"commandPalette": [
-				{
-					"command": "_separators.whatsNew#contextMenu",
-					"when": "false"
-				}
-			],
-			"extension/context": [
-				{
-					"command": "_separators.whatsNew#contextMenu",
-					"group": "separators",
-					"when": "extension == alefragnani.separators && extensionStatus == installed"
-				}
-			]
-		},
-		"configuration": [
+    "name": "separators",
+    "displayName": "Separators",
+    "description": "Improve the readability of your source code with lines on top of each method",
+    "version": "2.3.0",
+    "publisher": "alefragnani",
+    "galleryBanner": {
+        "color": "#0000FF",
+        "theme": "dark"
+    },
+    "engines": {
+        "vscode": "^1.61.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "separator",
+        "organize",
+        "navigation",
+        "symbols"
+    ],
+    "extensionKind": [
+        "ui",
+        "workspace"
+    ],
+    "capabilities": {
+        "virtualWorkspaces": true,
+        "untrustedWorkspaces": {
+            "supported": true
+        }
+    },
+    "icon": "images/icon.png",
+    "license": "GPL-3.0",
+    "homepage": "https://github.com/alefragnani/vscode-separators/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/alefragnani/vscode-separators.git"
+    },
+    "bugs": {
+        "url": "https://github.com/alefragnani/vscode-separators/issues"
+    },
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./dist/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "separators.toggleVisibility",
+                "title": "%separators.commands.toggleVisibility.title%"
+            },
+            {
+                "command": "separators.selectSymbols",
+                "title": "%separators.commands.selectSymbols.title%"
+            },
+            {
+                "command": "separators.whatsNew",
+                "title": "%separators.commands.whatsNew.title%"
+            },
+            {
+                "command": "_separators.whatsNew#contextMenu",
+                "title": "%separators.commands.whatsNew#contextMenu.title%"
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "_separators.whatsNew#contextMenu",
+                    "when": "false"
+                }
+            ],
+            "extension/context": [
+                {
+                    "command": "_separators.whatsNew#contextMenu",
+                    "group": "separators",
+                    "when": "extension == alefragnani.separators && extensionStatus == installed"
+                }
+            ]
+        },
+        "configuration": [
             {
                 "id": "separators-general",
                 "title": "%separators.configuration.title%",
-                "properties": {                    
+                "properties": {
                     "separators.useOriginalGreenishSeparator": {
                         "type": "boolean",
                         "default": false,
@@ -93,7 +93,7 @@
                         "default": 0,
                         "description": "%separators.configuration.maxDepth.description%",
                         "scope": "language-overridable"
-                    },                
+                    },
                     "separators.enabledSymbols": {
                         "type": "array",
                         "default": [
@@ -164,7 +164,7 @@
                         "description": "%separators.configuration.classes.borderStyle.description%"
                     }
                 }
-            },            
+            },
             {
                 "id": "separators-constructors",
                 "title": "Constructors",
@@ -286,7 +286,7 @@
             {
                 "id": "separators-methods",
                 "title": "Methods",
-                "properties": {				
+                "properties": {
                     "separators.methods.borderWidth": {
                         "type": "integer",
                         "default": 1,
@@ -366,103 +366,103 @@
                         "description": "%separators.configuration.structs.borderStyle.description%"
                     }
                 }
-			}
-		],
-		"colors": [
-			{
-				"id": "separators.methods.borderColor",
-				"description": "%separators.colors.methods.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.methodForeground",
-					"dark": "symbolIcon.methodForeground",
-					"highContrast": "symbolIcon.methodForeground"
-				}
-			},
-			{
-				"id": "separators.functions.borderColor",
-				"description": "%separators.colors.functions.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.functionForeground",
-					"dark": "symbolIcon.functionForeground",
-					"highContrast": "symbolIcon.functionForeground"
-				}
-			},
-			{
-				"id": "separators.constructors.borderColor",
-				"description": "%separators.colors.constructors.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.constructorForeground",
-					"dark": "symbolIcon.constructorForeground",
-					"highContrast": "symbolIcon.constructorForeground"
-				}
-			},
-			{
-				"id": "separators.classes.borderColor",
-				"description": "%separators.colors.classes.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.classForeground",
-					"dark": "symbolIcon.classForeground",
-					"highContrast": "symbolIcon.classForeground"
-				}
-			},
-			{
-				"id": "separators.interfaces.borderColor",
-				"description": "%separators.colors.interfaces.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.interfaceForeground",
-					"dark": "symbolIcon.interfaceForeground",
-					"highContrast": "symbolIcon.interfaceForeground"
-				}
-			},
-			{
-				"id": "separators.enums.borderColor",
-				"description": "%separators.colors.enums.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.enumeratorForeground",
-					"dark": "symbolIcon.enumeratorForeground",
-					"highContrast": "symbolIcon.enumeratorForeground"
-				}
-			},
-			{
-				"id": "separators.namespaces.borderColor",
-				"description": "%separators.colors.namespaces.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.namespaceForeground",
-					"dark": "symbolIcon.namespaceForeground",
-					"highContrast": "symbolIcon.namespaceForeground"
-				}
-			},
-			{
-				"id": "separators.structs.borderColor",
-				"description": "%separators.colors.structs.borderColor.description%",
-				"defaults": {
-					"light": "symbolIcon.structForeground",
-					"dark": "symbolIcon.structForeground",
-					"highContrast": "symbolIcon.structForeground"
-				}
-			}
-		]
-	},
-	"eslintConfig": {
-		"extends": [
-			"vscode-ext"
-		]
-	},
-	"scripts": {
-		"build": "webpack --mode development",
-		"watch": "webpack --watch --mode development",
-		"vscode:prepublish": "webpack --mode production",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch",
-		"compile": "tsc -p ./",
-		"lint": "eslint -c package.json --ext .ts src vscode-whats-new",
-		"pretest": "npm run compile && npm run lint",
-		"test-compile": "tsc -p ./ && npm run webpack",
-		"just-test": "node ./out/src/test/runTest.js",
-		"test": "npm run test-compile && npm run just-test"
-	},
-	"devDependencies": {
-		"@types/node": "^14.17.27",
+            }
+        ],
+        "colors": [
+            {
+                "id": "separators.methods.borderColor",
+                "description": "%separators.colors.methods.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.methodForeground",
+                    "dark": "symbolIcon.methodForeground",
+                    "highContrast": "symbolIcon.methodForeground"
+                }
+            },
+            {
+                "id": "separators.functions.borderColor",
+                "description": "%separators.colors.functions.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.functionForeground",
+                    "dark": "symbolIcon.functionForeground",
+                    "highContrast": "symbolIcon.functionForeground"
+                }
+            },
+            {
+                "id": "separators.constructors.borderColor",
+                "description": "%separators.colors.constructors.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.constructorForeground",
+                    "dark": "symbolIcon.constructorForeground",
+                    "highContrast": "symbolIcon.constructorForeground"
+                }
+            },
+            {
+                "id": "separators.classes.borderColor",
+                "description": "%separators.colors.classes.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.classForeground",
+                    "dark": "symbolIcon.classForeground",
+                    "highContrast": "symbolIcon.classForeground"
+                }
+            },
+            {
+                "id": "separators.interfaces.borderColor",
+                "description": "%separators.colors.interfaces.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.interfaceForeground",
+                    "dark": "symbolIcon.interfaceForeground",
+                    "highContrast": "symbolIcon.interfaceForeground"
+                }
+            },
+            {
+                "id": "separators.enums.borderColor",
+                "description": "%separators.colors.enums.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.enumeratorForeground",
+                    "dark": "symbolIcon.enumeratorForeground",
+                    "highContrast": "symbolIcon.enumeratorForeground"
+                }
+            },
+            {
+                "id": "separators.namespaces.borderColor",
+                "description": "%separators.colors.namespaces.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.namespaceForeground",
+                    "dark": "symbolIcon.namespaceForeground",
+                    "highContrast": "symbolIcon.namespaceForeground"
+                }
+            },
+            {
+                "id": "separators.structs.borderColor",
+                "description": "%separators.colors.structs.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.structForeground",
+                    "dark": "symbolIcon.structForeground",
+                    "highContrast": "symbolIcon.structForeground"
+                }
+            }
+        ]
+    },
+    "eslintConfig": {
+        "extends": [
+            "vscode-ext"
+        ]
+    },
+    "scripts": {
+        "build": "webpack --mode development",
+        "watch": "webpack --watch --mode development",
+        "vscode:prepublish": "webpack --mode production",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --watch",
+        "compile": "tsc -p ./",
+        "lint": "eslint -c package.json --ext .ts src vscode-whats-new",
+        "pretest": "npm run compile && npm run lint",
+        "test-compile": "tsc -p ./ && npm run webpack",
+        "just-test": "node ./out/src/test/runTest.js",
+        "test": "npm run test-compile && npm run just-test"
+    },
+    "devDependencies": {
+        "@types/node": "^14.17.27",
         "@types/vscode": "^1.61.0",
         "@types/mocha": "^9.0.0",
         "@types/glob": "^7.1.4",
@@ -477,5 +477,5 @@
         "webpack": "^5.52.1",
         "webpack-cli": "^4.8.0",
         "mocha": "^9.1.3"
-	}
+    }
 }
