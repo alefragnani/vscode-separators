@@ -8,12 +8,12 @@ import { WhatsNewManager } from "../../vscode-whats-new/src/Manager";
 import { Container } from "../container";
 import { SeparatorsContentProvider, SeparatorsSocialMediaProvider } from "./contentProvider";
 
-export function registerWhatsNew() {
+export async function registerWhatsNew() {
     const provider = new SeparatorsContentProvider();
     const viewer = new WhatsNewManager(Container.context)
                         .registerContentProvider("alefragnani", "separators", provider)
                         .registerSocialMediaProvider(new SeparatorsSocialMediaProvider());
-    viewer.showPageInActivation();
+    await viewer.showPageInActivation();
     Container.context.subscriptions.push(commands.registerCommand("separators.whatsNew", () => viewer.showPage()));
     Container.context.subscriptions.push(commands.registerCommand("_separators.whatsNew#contextMenu", () => viewer.showPage()));
 }

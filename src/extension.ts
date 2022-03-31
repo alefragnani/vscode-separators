@@ -19,7 +19,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	Container.context = context;
 	
-	registerWhatsNew();
+	await registerWhatsNew();
 	
 	let timeout: NodeJS.Timer;
 

@@ -43,7 +43,8 @@
     "activationEvents": [
         "onStartupFinished"
     ],
-    "main": "./dist/extension",
+    "main": "./dist/extension-node.js",
+    "browser": "./dist/extension-web.js",
     "contributes": {
         "commands": [
             {
