@@ -1,3 +1,12 @@
+## [2.4.0] - 2022-03-31
+### Added
+- Add **Web** support (issue [#54](https://github.com/alefragnani/vscode-separators/issues/54))
+
+### Internal
+- Support Settings Categories API (issue [#58](https://github.com/alefragnani/vscode-separators/issues/58))
+- Add CONTRIBUTING documentation (issue [#57](https://github.com/alefragnani/vscode-separators/issues/57))
+- Bump devDependencies (issue [#59](https://github.com/alefragnani/vscode-separators/issues/59))
+
 ## [2.3.0] - 2021-09-04
 ### Added
 - Add support to **Lua** language in `separators.functions.ignoreCallbackInline` setting (issue [#50](https://github.com/alefragnani/vscode-separators/issues/50))

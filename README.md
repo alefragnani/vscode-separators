@@ -8,8 +8,9 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
-# What's new in Separators 2.3
+# What's new in Separators 2.4
 
+* Adds **Web** support
 * Adds separators for `Struct` symbol
 * Adds **Virtual Workspaces** support
 * Adds **Workspace Trust** support
