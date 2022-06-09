@@ -40,6 +40,9 @@
     "bugs": {
         "url": "https://github.com/alefragnani/vscode-separators/issues"
     },
+    "sponsor": {
+        "url": "https://github.com/sponsors/alefragnani"
+    },
     "activationEvents": [
         "onStartupFinished"
     ],
