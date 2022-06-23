@@ -159,11 +159,6 @@ export class SeparatorsContentProvider implements ContentProvider {
             message: "Become a Sponsor"
         });
         supportChannels.push({
-            title: "Become a sponsor on Patreon",
-            link: "https://www.patreon.com/alefragnani",
-            message: "Become a Patron"
-        });
-        supportChannels.push({
             title: "Donate via PayPal",
             link: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EP57F3B6FXKTU&lc=US&item_name=Alessandro%20Fragnani&item_number=vscode%20extensions&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted",
             message: "Donate via PayPal"
