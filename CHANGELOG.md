@@ -1,3 +1,7 @@
+## [2.4.1] - 2022-07-16
+### Internal
+- Add GitHub Sponsors support (PR [#54](https://github.com/alefragnani/vscode-separators/pull/71))
+
 ## [2.4.0] - 2022-03-31
 ### Added
 - Add **Web** support (issue [#54](https://github.com/alefragnani/vscode-separators/issues/54))
