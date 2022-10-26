@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
-import { DEFAULT_GREENISH_COLOR } from "./constants";
+import { DEFAULT_GREENISH_COLOR, Location } from "./constants";
 
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;
@@ -79,14 +79,21 @@ export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undef
         return;
     }
 
+    const location = workspace.getConfiguration("separators").get<string>("location", Location.aboveTheSymbol);
+
     const rangesAbove: Range[] = [];
     const rangesBelow: Range[] = [];
 
     for (const element of symbols) {
-        const decorationAbove = new Range(element.range.start.line, 0, element.range.start.line, 0);
-        const decorationBelow = new Range(element.range.end.line, 0, element.range.end.line, 0);
-        rangesAbove.push(decorationAbove);
-        rangesBelow.push(decorationBelow);
+        if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
+            const decorationAbove = new Range(element.range.start.line, 0, element.range.start.line, 0);
+            rangesAbove.push(decorationAbove);
+        }
+        
+        if (location === Location.belowTheSymbol || location === Location.surroundingTheSymbol) {
+            const decorationBelow = new Range(element.range.end.line, 0, element.range.end.line, 0);
+            rangesBelow.push(decorationBelow);
+        }
     }
 
     activeEditor.setDecorations(decorationType.above, rangesAbove);
