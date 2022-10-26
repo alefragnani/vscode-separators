@@ -138,6 +138,21 @@
                         "uniqueItems": true,
                         "description": "%separators.configuration.enabledSymbols.description%",
                         "scope": "language-overridable"
+                    },
+                    "separators.location": {
+                        "type": "string",
+                        "default": "aboveTheSymbol",
+                        "enum": [
+                            "aboveTheSymbol",
+                            "belowTheSymbol",
+                            "surroundingTheSymbol"
+                        ],
+                        "enumDescriptions": [
+                            "A single separator located above the symbol",
+                            "A single separator located below the symbol",
+                            "Two separators surrounding the symbol"
+                        ],
+                        "description": "%separators.configuration.location.description%"
                     }
                 }
             },
