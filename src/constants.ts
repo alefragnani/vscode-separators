@@ -10,3 +10,9 @@ export const DEFAULT_GREENISH_COLOR = "#65EAB9";
 export const JAVASCRIPT_TYPESCRIPT_LANGUAGE_IDS = ["javascript", "javascripreact", "typescript", "typescriptreact"];
 
 export const LUA_LANGUAGE_IDS = ["lua"];
+
+export enum Location {
+    aboveTheSymbol = "aboveTheSymbol",
+    belowTheSymbol = "belowTheSymbol",
+    surroundingTheSymbol = "surroundingTheSymbol"
+}

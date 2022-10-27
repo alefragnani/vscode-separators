@@ -8,7 +8,7 @@
 import * as vscode from 'vscode';
 import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
-import { createTextEditorDecoration, updateDecorationsInActiveEditor } from './decoration';
+import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor } from './decoration';
 import { getEnabledSymbols, getSymbolKindAsKind, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 import { registerWhatsNew } from './whats-new/command';
@@ -23,7 +23,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	
 	let timeout: NodeJS.Timer;
 
-	const symbolsDecorationsType = new Map<string, vscode.TextEditorDecorationType>();
+	const symbolsDecorationsType = new Map<string, TextEditorDecorationTypePair>();
 	createDecorations();
 
 	let activeEditor = vscode.window.activeTextEditor;
@@ -92,7 +92,8 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(cfg => {
         if (cfg.affectsConfiguration("separators")) {
 			symbolsDecorationsType.forEach((value) => {
-				value.dispose();
+				value.above.dispose();
+				value.below.dispose();
 			})
 
 			createDecorations();

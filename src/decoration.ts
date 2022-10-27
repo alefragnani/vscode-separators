@@ -4,7 +4,12 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
-import { DEFAULT_GREENISH_COLOR } from "./constants";
+import { DEFAULT_GREENISH_COLOR, Location } from "./constants";
+
+export interface TextEditorDecorationTypePair {
+    above: TextEditorDecorationType;
+    below: TextEditorDecorationType;
+}
 
 function createTopLineDecoration(
     borderColor: string | ThemeColor, borderWidth: string, borderStyle: string
@@ -12,6 +17,19 @@ function createTopLineDecoration(
     const decorationOptions: DecorationRenderOptions = {
         isWholeLine: true,
         borderWidth: `${borderWidth} 0 0 0`,
+        borderStyle: `${borderStyle}`,
+        borderColor: borderColor
+    };
+
+    return window.createTextEditorDecorationType(decorationOptions);
+}
+
+function createBottomLineDecoration(
+    borderColor: string | ThemeColor, borderWidth: string, borderStyle: string
+): TextEditorDecorationType {
+    const decorationOptions: DecorationRenderOptions = {
+        isWholeLine: true,
+        borderWidth: `0 0 ${borderWidth} 0`,
         borderStyle: `${borderStyle}`,
         borderColor: borderColor
     };
@@ -35,34 +53,49 @@ function getBorderColor(symbolKind: string): string | ThemeColor {
     return new ThemeColor(`separators.${symbolKind}.borderColor`);
 }
 
-export function createTextEditorDecoration(symbolKind: string): TextEditorDecorationType {
+export function createTextEditorDecoration(symbolKind: string): TextEditorDecorationTypePair {
 
     const borderColor = getBorderColor(symbolKind);    
     const borderWidth = workspace.getConfiguration("separators").get(`${symbolKind}.borderWidth`, 1);
     const borderStyle = workspace.getConfiguration("separators").get(`${symbolKind}.borderStyle`, "solid");
 
-    return createTopLineDecoration(borderColor, `${borderWidth}px`, borderStyle);
+    return { 
+        above: createTopLineDecoration(borderColor, `${borderWidth}px`, borderStyle),
+        below: createBottomLineDecoration(borderColor, `${borderWidth}px`, borderStyle)
+    }
 }
 
 export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
     symbols: DocumentSymbol[] | undefined,
-    decorationType: TextEditorDecorationType) {
+    decorationType: TextEditorDecorationTypePair) {
     if (!activeEditor) {
         return;
     }
 
     if (!symbols) {
         const bks: Range[] = [];
-        activeEditor.setDecorations(decorationType, bks);
+        activeEditor.setDecorations(decorationType.above, bks);
+        activeEditor.setDecorations(decorationType.below, bks);
         return;
     }
 
-    const ranges: Range[] = [];
+    const location = workspace.getConfiguration("separators").get<string>("location", Location.aboveTheSymbol);
+
+    const rangesAbove: Range[] = [];
+    const rangesBelow: Range[] = [];
 
     for (const element of symbols) {
-        const decoration = new Range(element.range.start.line, 0, element.range.start.line, 0);
-        ranges.push(decoration);
+        if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
+            const decorationAbove = new Range(element.range.start.line, 0, element.range.start.line, 0);
+            rangesAbove.push(decorationAbove);
+        }
+        
+        if (location === Location.belowTheSymbol || location === Location.surroundingTheSymbol) {
+            const decorationBelow = new Range(element.range.end.line, 0, element.range.end.line, 0);
+            rangesBelow.push(decorationBelow);
+        }
     }
 
-    activeEditor.setDecorations(decorationType, ranges);
+    activeEditor.setDecorations(decorationType.above, rangesAbove);
+    activeEditor.setDecorations(decorationType.below, rangesBelow);
 }
