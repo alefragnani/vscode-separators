@@ -1,3 +1,11 @@
 {
-    "Select which symbols should have separators": "Selecione quais símbolos deveriam apresentar separadores"
+    "Select which symbols should have separators": "Selecione quais símbolos deveriam apresentar separadores",
+    "Classes": "Classes",
+    "Constructors": "Construtores",
+    "Enums": "Enumerados",
+    "Functions": "Funções",
+    "Interfaces": "Interfaces",
+    "Methods": "Métodos",
+    "Namespaces": "Namespaces",
+    "Structs": "Estruturas"
 }

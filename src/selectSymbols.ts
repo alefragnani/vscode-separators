@@ -7,39 +7,51 @@ import { l10n, QuickPickItem, SymbolKind, window, workspace } from "vscode";
 import { areEquivalent } from "./array";
 import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
 
+interface SymbolQuickPickItem extends QuickPickItem {
+    pickLabel: string;
+}
+
 export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Promise<string[] | undefined> {
-    const allSymbols: QuickPickItem[] = [];
+    const allSymbols: SymbolQuickPickItem[] = [];
     allSymbols.push({
-        label: "Classes",
-        picked: selectedSymbols.includes("Classes")
+        label: l10n.t("Classes"),
+        picked: selectedSymbols.includes("Classes"),
+        pickLabel: "Classes"
     });
     allSymbols.push({
-        label: "Constructors",
-        picked: selectedSymbols.includes("Constructors")
+        label: l10n.t("Constructors"),
+        picked: selectedSymbols.includes("Constructors"),
+        pickLabel: "Constructors"
     });
     allSymbols.push({
-        label: "Enums",
-        picked: selectedSymbols.includes("Enums")
+        label: l10n.t("Enums"),
+        picked: selectedSymbols.includes("Enums"),
+        pickLabel: "Enums"
     });
     allSymbols.push({
-        label: "Functions",
-        picked: selectedSymbols.includes("Functions")
+        label: l10n.t("Functions"),
+        picked: selectedSymbols.includes("Functions"),
+        pickLabel: "Functions"
     });
     allSymbols.push({
-        label: "Interfaces",
-        picked: selectedSymbols.includes("Interfaces")
+        label: l10n.t("Interfaces"),
+        picked: selectedSymbols.includes("Interfaces"),
+        pickLabel: "Interfaces"
     });
     allSymbols.push({
-        label: "Methods",
-        picked: selectedSymbols.includes("Methods")
+        label: l10n.t("Methods"),
+        picked: selectedSymbols.includes("Methods"),
+        pickLabel: "Methods"
     });
     allSymbols.push({
-        label: "Namespaces",
-        picked: selectedSymbols.includes("Namespaces")
+        label: l10n.t("Namespaces"),
+        picked: selectedSymbols.includes("Namespaces"),
+        pickLabel: "Namespaces"
     });
     allSymbols.push({
-        label: "Structs",
-        picked: selectedSymbols.includes("Structs")
+        label: l10n.t("Structs"),
+        picked: selectedSymbols.includes("Structs"),
+        pickLabel: "Structs"
     });
     
     const picked = await window.showQuickPick(allSymbols, { 
@@ -54,7 +66,7 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
         return [];
     }
 
-    return picked?.map(item => item.label);
+    return picked?.map(item => item.pickLabel);
 }
 
 
