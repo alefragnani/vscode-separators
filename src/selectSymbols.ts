@@ -3,7 +3,7 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { QuickPickItem, SymbolKind, window, workspace } from "vscode";
+import { l10n, QuickPickItem, SymbolKind, window, workspace } from "vscode";
 import { areEquivalent } from "./array";
 import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
 
@@ -43,7 +43,7 @@ export async function showSelectSymbolsQuickPick(selectedSymbols: string[]): Pro
     });
     
     const picked = await window.showQuickPick(allSymbols, { 
-        placeHolder: "Select which symbols should have separators", 
+        placeHolder: l10n.t("Select which symbols should have separators"), 
         canPickMany: true 
     });
     if (!picked) {
