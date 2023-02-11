@@ -1,3 +1,11 @@
+## [2.5.0] - 2023-02-10
+### Added
+- New setting to choose the separator's location (issue [#74](https://github.com/alefragnani/vscode-separators/issues/74))
+
+### Internal
+- Support **Localization** API (issue [#79](https://github.com/alefragnani/vscode-separators/issues/79))
+- Security Alert: terser (dependabot [PR #76](https://github.com/alefragnani/vscode-separators/pull/76))
+
 ## [2.4.1] - 2022-07-16
 ### Internal
 - Add GitHub Sponsors support (PR [#54](https://github.com/alefragnani/vscode-separators/pull/71))

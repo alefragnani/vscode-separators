@@ -8,13 +8,13 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
-# What's new in Separators 2.4
+# What's new in Separators 2.5
 
+* Adds new setting to choose separator's location
+* Adds **Localization** support
 * Adds **Web** support
 * Adds separators for `Struct` symbol
 * Adds **Virtual Workspaces** support
-* Adds **Workspace Trust** support
-* Changes some settings to be _per language_
 
 ## Support
 
@@ -64,17 +64,17 @@ To be sure your desired language will work on Separators, take a look at `Outlin
 You can customize the appearance of each kind of Symbol. 
 
 * List of symbols in which the separators will be drawn
-    ```json
+```json
     // globally (user/workspace setting)
     "separators.enabledSymbols": [ 
-      "Classes", 
-      "Constructors",
-      "Enums", 
-      "Functions",
-      "Interfaces", 
-      "Methods",
-      "Namespaces",
-      "Structs"
+        "Classes", 
+        "Constructors",
+        "Enums", 
+        "Functions",
+        "Interfaces", 
+        "Methods",
+        "Namespaces",
+        "Structs"
     ],
 
     // per-language setting
@@ -84,32 +84,32 @@ You can customize the appearance of each kind of Symbol.
             "Interfaces"
         ],
     }
-    ```
+```
 
 * Controls whether callback/inline Functions should be ignored _(default is `false`)_
-    ```json
+```json
     // globally (user/workspace setting)
     "separators.functions.ignoreCallbackInline": true
-    
+
     // per-language setting
     "[javascript]": {
         "separators.functions.ignoreCallbackInline": true
     }
-    ```
+```
 > For now, only **JavaScript**, **TypeScript** and **Lua** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
 
 * Indicates the maximum depth (level) which the separators should be rendered _(default is `0`)_
-    ```json
+```json
     "separators.maxDepth": 1
-    
+
     // per-language setting
     "[javascript]": {
         "separators.maxDepth": 2
     }
-    ```
+```
 
 * Defines the border width _(in `px`)_
-    ```json
+```json
     "separators.classes.borderWidth": 1,
     "separators.constructors.borderWidth": 1, 
     "separators.enums.borderWidth": 1,
@@ -118,10 +118,10 @@ You can customize the appearance of each kind of Symbol.
     "separators.methods.borderWidth": 1, 
     "separators.namespaces.borderWidth": 1,
     "separators.structs.borderWidth": 1,
-    ```
+```
 
 * Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
-    ```json
+```json
     "separators.classes.borderStyle": "solid",
     "separators.constructors.borderStyle": "solid",
     "separators.enums.borderStyle": "solid",
@@ -130,9 +130,12 @@ You can customize the appearance of each kind of Symbol.
     "separators.methods.borderStyle": "solid",
     "separators.namespaces.borderStyle": "solid",
     "separators.structs.borderStyle": "solid",
-    ```
+```
 
-> Starting in v2.0 the separators for each symbol kind will use the corresponding `symbolIcon` color as new default. If you want `Methos`, `Functions` and `Constructors` to keep using the original _greenish_ color (`#65EAB9`) from v1.0, update the new `separators.useOriginalGreenishSeparator` setting to `true`.
+* Indicates the locations (relative to the symbols) where the separators will be drawn _(choose between `aboveTheSymbol`, `belowTheSymbol` and `surroundingTheSymbol`)
+```json
+   "separators.location": "aboveTheSymbol"
+```
 
 ## Available colors
 
