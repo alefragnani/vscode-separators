@@ -1,7 +1,7 @@
-[![](https://vsmarketplacebadge.apphb.com/version-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
-[![](https://vsmarketplacebadge.apphb.com/downloads-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
-[![](https://vsmarketplacebadge.apphb.com/rating-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
-[![](https://img.shields.io/github/workflow/status/alefragnani/vscode-separators/CI)](https://github.com/alefragnani/vscode-separators/actions?query=workflow%3ACI)
+[![](https://vsmarketplacebadges.dev/version-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
+[![](https://vsmarketplacebadges.dev/downloads-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
+[![](https://vsmarketplacebadges.dev/rating-short/alefragnani.separators.svg)](https://marketplace.visualstudio.com/items?itemName=alefragnani.separators)
+[![](https://img.shields.io/github/actions/workflow/status/alefragnani/vscode-separators/main.yml?branch=master)](https://github.com/alefragnani/vscode-separators/actions?query=workflow%3ACI)
 
 <p align="center">
   <br />
