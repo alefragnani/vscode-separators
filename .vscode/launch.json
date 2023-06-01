@@ -12,10 +12,9 @@
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
-			"outFiles": [
-				"${workspaceFolder}/out/**/*.js"
-			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"outFiles": ["${workspaceFolder}/dist/**/*.js"],
+            "smartStep": true,
+            "sourceMaps": true
 		},
 		{
 			"name": "Run Tests",
