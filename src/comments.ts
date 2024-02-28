@@ -15,11 +15,25 @@ export function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbo
 
     let lineAbove = documentSymbol.range.start.line - 1;
     let lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
-    while (lineTextAbove.trim().startsWith("//")) {
+    
+    if (language.isSingleLineComment(lineTextAbove)) {
+        while (language.isSingleLineComment(lineTextAbove)) {
+            lineAbove--;
+            lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
+        }
+        return lineAbove + 1;
+    }
+
+    if (language.isMultiLineCommentEnd(lineTextAbove)) {
         lineAbove--;
         lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
+        while (!language.isMultiLineCommentStart(lineTextAbove)) {
+            lineAbove--;
+            lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
+        }     
+        return lineAbove;   
     }
+    
     return lineAbove + 1;
-
 }
 
