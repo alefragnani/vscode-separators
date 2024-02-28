@@ -5,6 +5,7 @@
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
 import { DEFAULT_GREENISH_COLOR, Location } from "./constants";
+import { shiftTopLineAboveComment } from "./comments";
 
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;
@@ -86,7 +87,8 @@ export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undef
 
     for (const element of symbols) {
         if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
-            const decorationAbove = new Range(element.range.start.line, 0, element.range.start.line, 0);
+            const topLine = shiftTopLineAboveComment(activeEditor, element)
+            const decorationAbove = new Range(topLine, 0, topLine, 0);
             rangesAbove.push(decorationAbove);
         }
         
