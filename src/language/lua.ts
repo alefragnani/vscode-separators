@@ -7,6 +7,11 @@ import { DocumentSymbol } from "vscode";
 import { Language } from "./language";
 
 export class LuaLanguage implements Language {
+    
+    supportsComments(): boolean {
+        return false;
+    }
+    
     isCallback(symbol: DocumentSymbol): boolean {
         return symbol.name === "<Anonymous>" && symbol.detail.includes("-> function");
     }

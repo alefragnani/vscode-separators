@@ -6,5 +6,6 @@
 import { DocumentSymbol } from "vscode";
 
 export interface Language {
+    supportsComments(): boolean;
     isCallback(symbol: DocumentSymbol): boolean;
 }

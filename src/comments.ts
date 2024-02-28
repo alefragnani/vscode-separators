@@ -3,26 +3,23 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { DocumentSymbol, TextDocument, TextEditor } from "vscode";
+import { DocumentSymbol, TextEditor } from "vscode";
 import { LanguageFactory } from "./language/factory";
 
 export function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): number {
 
-    if (!languageSupportsComments(activeEditor.document)) {
+    const language = LanguageFactory.getLanguage(<string>activeEditor.document?.languageId);
+    if (!language?.supportsComments()) {
         return documentSymbol.range.start.line;
     }
 
-    const lineAbove = documentSymbol.range.start.line - 1;
-    const lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
-    const commentIndex = lineTextAbove.indexOf("//");
-    if (commentIndex > 0) {
-        return lineAbove;
+    let lineAbove = documentSymbol.range.start.line - 1;
+    let lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
+    while (lineTextAbove.trim().startsWith("//")) {
+        lineAbove--;
+        lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
     }
-    return documentSymbol.range.start.line;
+    return lineAbove + 1;
+
 }
 
-function languageSupportsComments(textDocument: TextDocument) {
-    
-    const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
-    return language !== undefined;
-}
