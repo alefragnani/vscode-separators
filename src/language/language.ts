@@ -7,8 +7,8 @@ import { DocumentSymbol } from "vscode";
 
 export interface Language {
     isMultiLineCommentStart(lineText: string): boolean;
-    isMultiLineCommentEnd(lineText: string): boolean;
-    isSingleLineComment(lineText: string): boolean;
+    isMultiLineCommentEnd(lineText: string | undefined): boolean;
+    isSingleLineComment(lineText: string | undefined): boolean;
     supportsComments(): boolean;
     isCallback(symbol: DocumentSymbol): boolean;
 }

@@ -11,11 +11,15 @@ export class JavaScriptTypeScriptLanguage implements Language {
     isMultiLineCommentStart(lineText: string): boolean {
         return lineText.trim().startsWith("/*") || lineText.trim().startsWith("/**");
     }
-    isMultiLineCommentEnd(lineText: string): boolean {
+    isMultiLineCommentEnd(lineText: string | undefined): boolean {
+        if (!lineText) return false;
+
         return lineText.trim().endsWith("*/");
     }
     
-    isSingleLineComment(lineText: string): boolean {
+    isSingleLineComment(lineText: string | undefined): boolean {
+        if (!lineText) return false;
+        
         return lineText.trim().startsWith("//");
     }
     

@@ -12,28 +12,47 @@ export function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbo
     if (!language?.supportsComments()) {
         return documentSymbol.range.start.line;
     }
-
+    
     let lineAbove = documentSymbol.range.start.line - 1;
-    let lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
+    let lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
+
+    if (lineAbove < 0) return 0;
     
     if (language.isSingleLineComment(lineTextAbove)) {
         while (language.isSingleLineComment(lineTextAbove)) {
             lineAbove--;
-            lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
+            lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
         }
         return lineAbove + 1;
     }
-
+    
     if (language.isMultiLineCommentEnd(lineTextAbove)) {
         lineAbove--;
-        lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
-        while (!language.isMultiLineCommentStart(lineTextAbove)) {
+        lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
+        let didFoundMultiLineCommentStart = language.isMultiLineCommentStart(lineTextAbove);
+        while (!didFoundMultiLineCommentStart) {
             lineAbove--;
-            lineTextAbove = activeEditor.document.lineAt(lineAbove).text;
-        }     
+            lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
+            
+            if (!lineTextAbove) break;
+            
+            didFoundMultiLineCommentStart = language.isMultiLineCommentStart(lineTextAbove);
+        } 
+        
+        if (!didFoundMultiLineCommentStart) {
+            return documentSymbol.range.start.line;
+        }
+
         return lineAbove;   
     }
     
     return lineAbove + 1;
+}
+
+function getLineTextAbove(activeEditor: TextEditor, lineAbove: number): string | undefined {
+    if (lineAbove < 0) {
+        return undefined;
+    }
+    return activeEditor.document.lineAt(lineAbove).text;
 }
 
