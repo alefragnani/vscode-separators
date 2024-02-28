@@ -20,7 +20,7 @@ export class LuaLanguage implements Language {
     }
     
     supportsComments(): boolean {
-        return false;
+        return true;
     }
     
     isCallback(symbol: DocumentSymbol): boolean {
