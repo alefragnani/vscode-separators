@@ -4,6 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { JAVASCRIPT_TYPESCRIPT_LANGUAGE_IDS, LUA_LANGUAGE_IDS } from "../constants";
+import { GenericLanguage } from "./generic";
 import { JavaScriptTypeScriptLanguage } from "./javaScriptTypeScript";
 import { Language } from "./language";
 import { LuaLanguage } from "./lua";
@@ -16,7 +17,7 @@ export class LanguageFactory {
         } else if (LUA_LANGUAGE_IDS.includes(languageId)) {
             return new LuaLanguage();
         } else {
-            return undefined
+            return new GenericLanguage();
         }
     }
 }

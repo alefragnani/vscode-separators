@@ -5,6 +5,7 @@
 
 import { commands, DocumentSymbol, SymbolKind, TextDocument, window, workspace } from "vscode";
 import { LanguageFactory } from "./language/factory";
+import { GenericLanguage } from "./language/generic";
 
 function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[] {
 
@@ -41,7 +42,7 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
     }
 
     const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
-    if (!language) {
+    if (language instanceof GenericLanguage) {
         return false;
     }
     
