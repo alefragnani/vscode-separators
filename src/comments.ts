@@ -3,10 +3,15 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { DocumentSymbol, TextEditor } from "vscode";
+import { DocumentSymbol, TextEditor, workspace } from "vscode";
 import { LanguageFactory } from "./language/factory";
 
 export function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): number {
+
+    const isEnabled = workspace.getConfiguration('separators.aboveComments').get<boolean>('enabled', false);
+    if (!isEnabled) {
+        return documentSymbol.range.start.line;
+    }
 
     const language = LanguageFactory.getLanguage(<string>activeEditor.document?.languageId);
     if (!language?.supportsComments()) {

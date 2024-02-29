@@ -154,6 +154,26 @@
                             "Two separators surrounding the symbol"
                         ],
                         "description": "%separators.configuration.location.description%"
+                    },
+                    "separators.aboveComments.enabled": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "%separators.configuration.aboveComments.enabled.description%"
+                    },
+                    "separators.aboveComments.singleLineCommentRegex": {
+                        "type": "string",
+                        "default": "^\\s*\/\/",
+                        "description": "%separators.configuration.aboveComments.singleLineCommentRegex.description%"
+                    },
+                    "separators.aboveComments.multiLineCommentStartRegex": {
+                        "type": "string",
+                        "default": "^\\s*\\/\\*",
+                        "description": "%separators.configuration.aboveComments.multiLineCommentStartRegex.description%"
+                    },
+                    "separators.aboveComments.multiLineCommentEndRegex": {
+                        "type": "string",
+                        "default": "\\*\\/\\s*$", 
+                        "description": "%separators.configuration.aboveComments.multiLineCommentEndRegex.description%"
                     }
                 }
             },
