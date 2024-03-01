@@ -4,6 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { ExtensionContext } from "vscode";
+import { RulesProvider } from "./comments/rulesProvider";
 
 export class Container {
     private static _extContext: ExtensionContext;
@@ -14,6 +15,15 @@ export class Container {
   
     public static set context(ec: ExtensionContext) {
       this._extContext = ec;
+    }
+
+    private static _rulesProvider: RulesProvider;
+    static get rulesProvider() {
+        if (!this._rulesProvider) {
+            this._rulesProvider = new RulesProvider(this.context);
+        }
+
+        return this._rulesProvider;
     }
   }
   
