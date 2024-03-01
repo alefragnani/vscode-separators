@@ -64,7 +64,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
-            updateDecorationsInActiveEditor(
+            await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
                 symbols.filter(s => s.kind === getSymbolKindAsKind(symbol)),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

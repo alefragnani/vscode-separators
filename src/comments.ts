@@ -4,60 +4,23 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { DocumentSymbol, TextEditor, workspace } from "vscode";
-import { LanguageFactory } from "./language/factory";
+import { RulesProvider } from "./comments/rulesProvider";
+import { RegexComment } from "./comments/regexComment";
 
-export function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): number {
+export async function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): Promise<number> {
 
     const isEnabled = workspace.getConfiguration('separators.aboveComments').get<boolean>('enabled', false);
     if (!isEnabled) {
         return documentSymbol.range.start.line;
     }
 
-    const language = LanguageFactory.getLanguage(<string>activeEditor.document?.languageId);
-    if (!language?.supportsComments()) {
-        return documentSymbol.range.start.line;
+    const ruleProvider = new RulesProvider();
+    const ruleConfig = await ruleProvider.getRuleConfigForLanguage(<string>activeEditor.document?.languageId);
+    if (ruleConfig) {
+        const regexComment = new RegexComment(ruleConfig);
+        return regexComment.shiftTopLineAboveComment(activeEditor, documentSymbol);
     }
-    
-    let lineAbove = documentSymbol.range.start.line - 1;
-    let lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
 
-    if (lineAbove < 0) return 0;
-    
-    if (language.isSingleLineComment(lineTextAbove)) {
-        while (language.isSingleLineComment(lineTextAbove)) {
-            lineAbove--;
-            lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
-        }
-        return lineAbove + 1;
-    }
-    
-    if (language.isMultiLineCommentEnd(lineTextAbove)) {
-        lineAbove--;
-        lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
-        let didFoundMultiLineCommentStart = language.isMultiLineCommentStart(lineTextAbove);
-        while (!didFoundMultiLineCommentStart) {
-            lineAbove--;
-            lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
-            
-            if (!lineTextAbove) break;
-            
-            didFoundMultiLineCommentStart = language.isMultiLineCommentStart(lineTextAbove);
-        } 
-        
-        if (!didFoundMultiLineCommentStart) {
-            return documentSymbol.range.start.line;
-        }
-
-        return lineAbove;   
-    }
-    
-    return lineAbove + 1;
-}
-
-function getLineTextAbove(activeEditor: TextEditor, lineAbove: number): string | undefined {
-    if (lineAbove < 0) {
-        return undefined;
-    }
-    return activeEditor.document.lineAt(lineAbove).text;
+    return documentSymbol.range.start.line;
 }
 

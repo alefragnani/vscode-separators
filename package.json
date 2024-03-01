@@ -160,6 +160,69 @@
                         "default": false,
                         "description": "%separators.configuration.aboveComments.enabled.description%"
                     },
+                    "separators.aboveComments.rules": {
+                        "type": "array",
+						"default": [],
+						"items": {
+							"type": "object",
+							"required": [
+								"name",
+                                "languageIds",
+								"rules"
+							],
+							"properties": {
+								"name": {
+									"type": "string",
+									"description": "Specifies the name of the rule"
+								},
+                                "languageIds": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "uniqueItems": true
+                                    },
+                                    "description": "Specifies the list of language IDs to which this rule applies"
+                                },
+								"rules": {
+									"type": "object",
+									"items": {
+										"type": "object",
+										"required": [
+											"singleLine",
+											"multiLine"
+										],
+										"properties": {
+											"singleLine": {
+												"type": "string",
+												"description": "Specifies the glob pattern to match single line comments"
+											},
+                                            "multiLine": {
+                                                "type": "object",
+                                                "required": [
+                                                    "start",
+                                                    "end"
+                                                ],
+                                                "properties": {
+                                                    "start": {
+                                                        "type": "string",
+                                                        "description": "Specifies the glob pattern to match multi line comments start"
+                                                    },
+                                                    "end": {
+                                                        "type": "string",
+                                                        "description": "Specifies the glob pattern to match multi line comments end"
+                                                    }
+                                                }
+                                            }
+										},
+										"uniqueItems": true
+									},
+									"description": "Specifies the list of rules to match comments"
+								}
+							}
+						},
+						"markdownDescription": "%separators.configuration.aboveComments.rules.description%",
+						"scope": "window"
+                    },
                     "separators.aboveComments.singleLineCommentRegex": {
                         "type": "string",
                         "default": "^\\s*\/\/",

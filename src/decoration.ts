@@ -66,7 +66,7 @@ export function createTextEditorDecoration(symbolKind: string): TextEditorDecora
     }
 }
 
-export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
+export async function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
     symbols: DocumentSymbol[] | undefined,
     decorationType: TextEditorDecorationTypePair) {
     if (!activeEditor) {
@@ -87,7 +87,7 @@ export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undef
 
     for (const element of symbols) {
         if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
-            const topLine = shiftTopLineAboveComment(activeEditor, element)
+            const topLine = await shiftTopLineAboveComment(activeEditor, element)
             const decorationAbove = new Range(topLine, 0, topLine, 0);
             rangesAbove.push(decorationAbove);
         }
