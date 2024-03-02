@@ -7,7 +7,7 @@ import { DocumentSymbol, TextEditor, workspace } from "vscode";
 import { RegexComment } from "./comments/regexComment";
 import { Container } from "./container";
 
-export async function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): Promise<number> {
+export async function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol, documentSymbolAbove: DocumentSymbol): Promise<number> {
 
     const isEnabled = workspace.getConfiguration('separators.aboveComments').get<boolean>('enabled', false);
     if (!isEnabled) {
@@ -16,7 +16,7 @@ export async function shiftTopLineAboveComment(activeEditor: TextEditor, documen
 
     if (Container.ruleConfig) {
         const regexComment = new RegexComment(Container.ruleConfig);
-        return regexComment.shiftTopLineAboveComment(activeEditor, documentSymbol);
+        return regexComment.shiftTopLineAboveComment(activeEditor, documentSymbol, documentSymbolAbove);
     }
 
     return documentSymbol.range.start.line;

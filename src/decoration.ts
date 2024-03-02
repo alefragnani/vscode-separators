@@ -85,9 +85,11 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
     const rangesAbove: Range[] = [];
     const rangesBelow: Range[] = [];
 
-    for (const element of symbols) {
+    for (let i = 0; i < symbols.length; i++) {
+        const element = symbols[i];
+        const elementAbove = i === 0 ? undefined : symbols[i - 1];
         if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
-            const topLine = await shiftTopLineAboveComment(activeEditor, element)
+            const topLine = await shiftTopLineAboveComment(activeEditor, element, elementAbove);
             const decorationAbove = new Range(topLine, 0, topLine, 0);
             rangesAbove.push(decorationAbove);
         }

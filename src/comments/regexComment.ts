@@ -15,8 +15,9 @@ export class RegexComment {
     }
     
     // TODO [OK]: Multiline comments on the same line are not supported
-    // TODO: Multiline comments with empty lines are not supported
-    public shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): number {
+    // TODO [OK]: Multiline comments with empty lines are not supported
+    // TODO [OK]: Multiline comments with no start are not supported
+    public shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol, documentSymbolAbove: DocumentSymbol): number {
         let lineAbove = documentSymbol.range.start.line - 1;
         let lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
 
@@ -38,13 +39,15 @@ export class RegexComment {
             lineAbove--;
             lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
             let didFoundMultiLineCommentStart = this.isMultiLineCommentStart(lineTextAbove);
-            while (!didFoundMultiLineCommentStart) {
+            let didFoundSymbolAbove = false;
+            while (!didFoundMultiLineCommentStart && !didFoundSymbolAbove) {
                 lineAbove--;
                 lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
                 
                 if (lineTextAbove === undefined) break;
                 
                 didFoundMultiLineCommentStart = this.isMultiLineCommentStart(lineTextAbove);
+                didFoundSymbolAbove = documentSymbolAbove?.range.end.line === lineAbove;
             } 
             
             if (!didFoundMultiLineCommentStart) {
