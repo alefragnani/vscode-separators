@@ -14,10 +14,8 @@ export async function shiftTopLineAboveComment(activeEditor: TextEditor, documen
         return documentSymbol.range.start.line;
     }
 
-    // const ruleProvider = new RulesProvider(Container.context);
-    const ruleConfig = await Container.rulesProvider.getRuleConfigForLanguage(<string>activeEditor.document?.languageId);
-    if (ruleConfig) {
-        const regexComment = new RegexComment(ruleConfig);
+    if (Container.ruleConfig) {
+        const regexComment = new RegexComment(Container.ruleConfig);
         return regexComment.shiftTopLineAboveComment(activeEditor, documentSymbol);
     }
 

@@ -5,7 +5,6 @@
 
 import { ExtensionContext, Uri, workspace } from "vscode";
 import { RuleConfig } from "./config";
-import { Container } from "../container";
 
 const textDecoder = new TextDecoder('utf8');
 
