@@ -14,6 +14,8 @@ export class RegexComment {
        this._config = config       
     }
     
+    // TODO: Multiline comments on the same line are not supported
+    // TODO: Multiline comments with empty lines are not supported
     public shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): number {
         let lineAbove = documentSymbol.range.start.line - 1;
         let lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
