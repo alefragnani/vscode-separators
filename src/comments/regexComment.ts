@@ -14,7 +14,7 @@ export class RegexComment {
        this._config = config       
     }
     
-    // TODO: Multiline comments on the same line are not supported
+    // TODO [OK]: Multiline comments on the same line are not supported
     // TODO: Multiline comments with empty lines are not supported
     public shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol): number {
         let lineAbove = documentSymbol.range.start.line - 1;
@@ -31,6 +31,10 @@ export class RegexComment {
         }
         
         if (this.isMultiLineCommentEnd(lineTextAbove)) {
+            if (this.isMultiLineCommentStart(lineTextAbove)) {
+                return lineAbove;
+            }
+            
             lineAbove--;
             lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
             let didFoundMultiLineCommentStart = this.isMultiLineCommentStart(lineTextAbove);
@@ -69,8 +73,8 @@ export class RegexComment {
         let isEndOfMultilineComment = false;
 
         for (let index = 0; index < this._config.rules.multiLine.length; index++) {
-            const multiLineCommentStartRegex = new RegExp(this._config.rules.multiLine[index].end);
-            isEndOfMultilineComment = multiLineCommentStartRegex.test(lineText);
+            const multiLineCommentEndRegex = new RegExp(this._config.rules.multiLine[index].end);
+            isEndOfMultilineComment = multiLineCommentEndRegex.test(lineText);
             if (isEndOfMultilineComment) {
                 this._currentMultilineRule = index;
                 break;
