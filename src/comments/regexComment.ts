@@ -42,7 +42,7 @@ export class RegexComment {
                 lineAbove--;
                 lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
                 
-                if (!lineTextAbove) break;
+                if (lineTextAbove === undefined) break;
                 
                 didFoundMultiLineCommentStart = this.isMultiLineCommentStart(lineTextAbove);
             } 
