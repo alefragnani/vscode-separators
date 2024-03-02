@@ -8,6 +8,7 @@ import { RuleConfig } from "./config";
 
 export class RegexComment {
     private _config: RuleConfig;
+    private _currentMultilineRule = 0;
     
    constructor(config: RuleConfig) {
        this._config = config       
@@ -58,13 +59,23 @@ export class RegexComment {
     
     
     private isMultiLineCommentStart(lineText: string): boolean {
-        const multiLineCommentStartRegex = new RegExp(this._config.rules.multiLine.start);
+        const multiLineCommentStartRegex = new RegExp(this._config.rules.multiLine[this._currentMultilineRule].start);
         return multiLineCommentStartRegex.test(lineText);
     }
     
     private isMultiLineCommentEnd(lineText: string): boolean {
-        const multiLineCommentStartRegex = new RegExp(this._config.rules.multiLine.end);
-        return multiLineCommentStartRegex.test(lineText);
+        let isEndOfMultilineComment = false;
+
+        for (let index = 0; index < this._config.rules.multiLine.length; index++) {
+            const multiLineCommentStartRegex = new RegExp(this._config.rules.multiLine[index].end);
+            isEndOfMultilineComment = multiLineCommentStartRegex.test(lineText);
+            if (isEndOfMultilineComment) {
+                this._currentMultilineRule = index;
+                break;
+            }
+        }
+
+        return isEndOfMultilineComment;
     }
 }
 

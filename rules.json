@@ -18,10 +18,33 @@
         ],
         "rules": {
             "singleLine": "^\\s*\/\/",
-            "multiLine": {
-                "start": "^\\s*\\/\\*",
-                "end": "\\*\\/\\s*$"
-            }
+            "multiLine": [
+                {
+                    "start": "^\\s*\\/\\*",
+                    "end": "\\*\\/\\s*$"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Pascal based comments",
+        "languageIds": [
+            "pascal", 
+            "objectpascal",
+            "delphi"
+        ],
+        "rules": {
+            "singleLine": "^\\s*\/\/",
+            "multiLine": [
+                {
+                    "start": "^\\s*\\{",
+                    "end": "}\\s*$"
+                },
+                {
+                    "start": "^\\s*\\(\\*",
+                    "end": "\\*\\)\\s*$"
+                }
+            ]
         }
     },
     {
@@ -31,10 +54,12 @@
         ],
         "rules": {
             "singleLine": "^\\s*--",
-            "multiLine": {
-                "start": "^\\s*\\-\\-\\[\\[",
-                "end": "\\]\\]\\s*$"
-            }
+            "multiLine": [
+                {
+                    "start": "^\\s*\\-\\-\\[\\[",
+                    "end": "\\]\\]\\s*$"
+                }
+            ]
         }
     }
 ]

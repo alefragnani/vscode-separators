@@ -11,7 +11,7 @@ export interface RuleConfig {
 
 export interface Rules {
     singleLine: string;
-    multiLine: MultiLineRule;
+    multiLine: MultiLineRule[];
 }
 
 export interface MultiLineRule {
