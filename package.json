@@ -158,11 +158,12 @@
                     "separators.aboveComments.enabled": {
                         "type": "boolean",
                         "default": false,
-                        "description": "%separators.configuration.aboveComments.enabled.description%"
+                        "description": "separators.configuration.aboveComments.enabled.description"
                     },
                     "separators.aboveComments.rules": {
                         "type": "array",
 						"default": [],
+                        "description": "%separators.configuration.aboveComments.rules.description%",
 						"items": {
 							"type": "object",
 							"required": [
@@ -173,7 +174,7 @@
 							"properties": {
 								"name": {
 									"type": "string",
-									"description": "Specifies the name of the rule"
+									"description": "%separators.configuration.aboveComments.rules.name.description%"
 								},
                                 "languageIds": {
                                     "type": "array",
@@ -181,22 +182,24 @@
                                         "type": "string",
                                         "uniqueItems": true
                                     },
-                                    "description": "Specifies the list of language IDs to which this rule applies"
+                                    "description": "%separators.configuration.aboveComments.rules.languageIds.description%"
                                 },
 								"rules": {
 									"type": "object",
-									"items": {
-										"type": "object",
-										"required": [
-											"singleLine",
-											"multiLine"
-										],
-										"properties": {
-											"singleLine": {
-												"type": "string",
-												"description": "Specifies the glob pattern to match single line comments"
-											},
-                                            "multiLine": {
+                                    "required": [
+                                        "singleLine",
+                                        "multiLine"
+                                    ],
+                                    "description": "%separators.configuration.aboveComments.rules.rules.description%",
+									"properties": {
+                                        "singleLine": {
+                                            "type": "string",
+                                            "description": "%separators.configuration.aboveComments.rules.rules.singleLine.description%"
+                                        },
+                                        "multiLine": {
+                                            "type": "array",
+                                            "description": "%separators.configuration.aboveComments.rules.rules.multiLine.description%",
+                                            "items": {
                                                 "type": "object",
                                                 "required": [
                                                     "start",
@@ -205,22 +208,19 @@
                                                 "properties": {
                                                     "start": {
                                                         "type": "string",
-                                                        "description": "Specifies the glob pattern to match multi line comments start"
+                                                        "description": "%separators.configuration.aboveComments.rules.rules.multiLine.start.description%"
                                                     },
-                                                    "end": {
+                                                    "end": {                                                        
                                                         "type": "string",
-                                                        "description": "Specifies the glob pattern to match multi line comments end"
+                                                        "description": "%separators.configuration.aboveComments.rules.rules.multiLine.end.description%"
                                                     }
                                                 }
                                             }
-										},
-										"uniqueItems": true
-									},
-									"description": "Specifies the list of rules to match comments"
+                                        }
+									}									
 								}
 							}
 						},
-						"markdownDescription": "%separators.configuration.aboveComments.rules.description%",
 						"scope": "window"
                     }
                 }
