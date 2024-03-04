@@ -145,20 +145,17 @@
                         "default": "aboveTheSymbol",
                         "enum": [
                             "aboveTheSymbol",
+                            "aboveTheComment",
                             "belowTheSymbol",
                             "surroundingTheSymbol"
                         ],
                         "enumDescriptions": [
                             "A single separator located above the symbol",
+                            "A single separator located above the comments of the symbol",
                             "A single separator located below the symbol",
                             "Two separators surrounding the symbol"
                         ],
                         "description": "%separators.configuration.location.description%"
-                    },
-                    "separators.aboveComments.enabled": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "separators.configuration.aboveComments.enabled.description"
                     },
                     "separators.aboveComments.rules": {
                         "type": "array",

@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
-import { DEFAULT_GREENISH_COLOR, Location } from "./constants";
+import { DEFAULT_GREENISH_COLOR, Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./constants";
 import { shiftTopLineAboveComment } from "./comments";
 
 export interface TextEditorDecorationTypePair {
@@ -88,13 +88,14 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
     for (let i = 0; i < symbols.length; i++) {
         const element = symbols[i];
         const elementAbove = i === 0 ? undefined : symbols[i - 1];
-        if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
+        
+        if (shouldHaveSeparatorAbove(location)) {
             const topLine = await shiftTopLineAboveComment(activeEditor, element, elementAbove);
             const decorationAbove = new Range(topLine, 0, topLine, 0);
             rangesAbove.push(decorationAbove);
         }
         
-        if (location === Location.belowTheSymbol || location === Location.surroundingTheSymbol) {
+        if (shouldHaveSeparatorBelow(location)) {
             const decorationBelow = new Range(element.range.end.line, 0, element.range.end.line, 0);
             rangesBelow.push(decorationBelow);
         }
