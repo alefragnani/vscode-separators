@@ -4,8 +4,9 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
-import { DEFAULT_GREENISH_COLOR, Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./constants";
-import { shiftTopLineAboveComment } from "./comments";
+import { DEFAULT_GREENISH_COLOR, } from "./constants";
+import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./location";
+import { shiftTopLineAboveComment } from "./comments/comments";
 
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;

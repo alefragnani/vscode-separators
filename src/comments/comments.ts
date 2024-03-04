@@ -4,9 +4,9 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { DocumentSymbol, TextEditor, workspace } from "vscode";
-import { RegexComment } from "./comments/regexComment";
-import { Container } from "./container";
-import { Location } from "./constants";
+import { RegexComment } from "./regexComment";
+import { Container } from "../container";
+import { Location } from "../location";
 
 export async function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol, documentSymbolAbove: DocumentSymbol): Promise<number> {
 
