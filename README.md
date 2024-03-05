@@ -10,11 +10,10 @@
 
 # What's new in Separators 2.5
 
+* Adds new option to draw separators above comments
 * Adds new setting to choose separator's location
 * Adds **Localization** support
 * Adds **Web** support
-* Adds separators for `Struct` symbol
-* Adds **Virtual Workspaces** support
 
 ## Support
 
@@ -132,10 +131,71 @@ You can customize the appearance of each kind of Symbol.
     "separators.structs.borderStyle": "solid",
 ```
 
-* Indicates the locations (relative to the symbols) where the separators will be drawn _(choose between `aboveTheSymbol`, `belowTheSymbol` and `surroundingTheSymbol`)
+* Indicates the locations (relative to the symbols) where the separators will be drawn _(default `aboveTheSymbol`)
+
+| Option                 | Behavior                                                   |
+|------------------------|------------------------------------------------------------|
+| `aboveTheSymbol`       | A single separator located above the symbol                |
+| `aboveTheComment`      | A single separator located above the comment of the symbol |
+| `belowTheSymbol`       | A single separator located below the symbol                |
+| `surroundingTheSymbol` | A pair of separators located above and below the symbol    |
+
 ```json
    "separators.location": "aboveTheSymbol"
 ```
+
+* Indicates the comment rules to draw separators above comments
+
+Out of the box, the extension supports three _patterns_ of comments:
+  * **Slash based comments**: Like those found in JavaScript, TypeScript, C, C++, C#, Java, etc
+```javascript
+   // this is a single line comment
+   
+   /* this is a multi line comment 
+      this is a multi line comment */
+```
+  * **Pascal based comments**: Like those found in Pascal, Object Pascal, etc
+```pascal
+   // this is a single line comment
+      
+   { this is a multi line comment 
+      this is a multi line comment }
+
+   (* this is an old school multi line comment 
+      this is an old school multi line comment *)
+```
+  * **Lua based comments**: Like those found in Lua
+```lua
+   -- this is a single line comment
+   
+   --[[ this is a multi line comment 
+        this is a multi line comment ]]
+```
+
+If you want to add support for a custom language, you can add a new rule to the `separators.aboveComments.rules` setting. Here is an example for Lua:
+```json
+   "separators.aboveComments.rules": [
+        {
+            "name": "Lua",
+            "languageIds": [
+                "lua"
+            ],
+            "rules": {
+                "singleLine": "^\\s*--",
+                "multiLine": [
+                    {
+                        "start": "^\\s*\\-\\-\\[\\[",
+                        "end": "\\]\\]\\s*$"
+                    }
+                ]
+            }
+        }
+    ],
+```
+
+Or you can open a PR, an contribute to the built in rules in the extension. These are located in the `./rules.json` file
+
+> Be aware that regex must be escaped, so `\\` is used instead of `\`
 
 ## Available colors
 

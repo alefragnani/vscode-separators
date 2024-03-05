@@ -145,15 +145,80 @@
                         "default": "aboveTheSymbol",
                         "enum": [
                             "aboveTheSymbol",
+                            "aboveTheComment",
                             "belowTheSymbol",
                             "surroundingTheSymbol"
                         ],
                         "enumDescriptions": [
                             "A single separator located above the symbol",
+                            "A single separator located above the comments of the symbol",
                             "A single separator located below the symbol",
                             "Two separators surrounding the symbol"
                         ],
                         "description": "%separators.configuration.location.description%"
+                    },
+                    "separators.aboveComments.rules": {
+                        "type": "array",
+						"default": [],
+                        "description": "%separators.configuration.aboveComments.rules.description%",
+						"items": {
+							"type": "object",
+							"required": [
+								"name",
+                                "languageIds",
+								"rules"
+							],
+							"properties": {
+								"name": {
+									"type": "string",
+									"description": "%separators.configuration.aboveComments.rules.name.description%"
+								},
+                                "languageIds": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "uniqueItems": true
+                                    },
+                                    "description": "%separators.configuration.aboveComments.rules.languageIds.description%"
+                                },
+								"rules": {
+									"type": "object",
+                                    "required": [
+                                        "singleLine",
+                                        "multiLine"
+                                    ],
+                                    "description": "%separators.configuration.aboveComments.rules.rules.description%",
+									"properties": {
+                                        "singleLine": {
+                                            "type": "string",
+                                            "description": "%separators.configuration.aboveComments.rules.rules.singleLine.description%"
+                                        },
+                                        "multiLine": {
+                                            "type": "array",
+                                            "description": "%separators.configuration.aboveComments.rules.rules.multiLine.description%",
+                                            "items": {
+                                                "type": "object",
+                                                "required": [
+                                                    "start",
+                                                    "end"
+                                                ],
+                                                "properties": {
+                                                    "start": {
+                                                        "type": "string",
+                                                        "description": "%separators.configuration.aboveComments.rules.rules.multiLine.start.description%"
+                                                    },
+                                                    "end": {                                                        
+                                                        "type": "string",
+                                                        "description": "%separators.configuration.aboveComments.rules.rules.multiLine.end.description%"
+                                                    }
+                                                }
+                                            }
+                                        }
+									}									
+								}
+							}
+						},
+						"scope": "window"
                     }
                 }
             },

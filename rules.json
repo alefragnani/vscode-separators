@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Slash based comments",
+        "languageIds": [
+            "c", 
+            "cpp", 
+            "csharp", 
+            "go",
+            "java", 
+            "javascript", 
+            "kotlin",
+            "php",
+            "rust",
+            "scala",
+            "swift",
+            "typescript", 
+            "zig"
+        ],
+        "rules": {
+            "singleLine": "^\\s*\/\/",
+            "multiLine": [
+                {
+                    "start": "^\\s*\\/\\*",
+                    "end": "\\*\\/\\s*$"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Pascal based comments",
+        "languageIds": [
+            "pascal", 
+            "objectpascal",
+            "delphi"
+        ],
+        "rules": {
+            "singleLine": "^\\s*\/\/",
+            "multiLine": [
+                {
+                    "start": "^\\s*\\{",
+                    "end": "}\\s*$"
+                },
+                {
+                    "start": "^\\s*\\(\\*",
+                    "end": "\\*\\)\\s*$"
+                }
+            ]
+        }
+    },
+    {
+        "name": "Lua",
+        "languageIds": [
+            "lua"
+        ],
+        "rules": {
+            "singleLine": "^\\s*--",
+            "multiLine": [
+                {
+                    "start": "^\\s*\\-\\-\\[\\[",
+                    "end": "\\]\\]\\s*$"
+                }
+            ]
+        }
+    }
+]

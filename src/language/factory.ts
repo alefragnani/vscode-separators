@@ -16,7 +16,7 @@ export class LanguageFactory {
         } else if (LUA_LANGUAGE_IDS.includes(languageId)) {
             return new LuaLanguage();
         } else {
-            return undefined
+            return undefined;
         }
     }
 }

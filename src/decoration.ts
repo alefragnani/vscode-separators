@@ -4,7 +4,9 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
-import { DEFAULT_GREENISH_COLOR, Location } from "./constants";
+import { DEFAULT_GREENISH_COLOR, } from "./constants";
+import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./location";
+import { shiftTopLineAboveComment } from "./comments/comments";
 
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;
@@ -65,7 +67,7 @@ export function createTextEditorDecoration(symbolKind: string): TextEditorDecora
     }
 }
 
-export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
+export async function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
     symbols: DocumentSymbol[] | undefined,
     decorationType: TextEditorDecorationTypePair) {
     if (!activeEditor) {
@@ -84,13 +86,17 @@ export function updateDecorationsInActiveEditor(activeEditor: TextEditor | undef
     const rangesAbove: Range[] = [];
     const rangesBelow: Range[] = [];
 
-    for (const element of symbols) {
-        if (location === Location.aboveTheSymbol || location === Location.surroundingTheSymbol) {
-            const decorationAbove = new Range(element.range.start.line, 0, element.range.start.line, 0);
+    for (let i = 0; i < symbols.length; i++) {
+        const element = symbols[i];
+        const elementAbove = i === 0 ? undefined : symbols[i - 1];
+        
+        if (shouldHaveSeparatorAbove(location)) {
+            const topLine = await shiftTopLineAboveComment(activeEditor, element, elementAbove);
+            const decorationAbove = new Range(topLine, 0, topLine, 0);
             rangesAbove.push(decorationAbove);
         }
         
-        if (location === Location.belowTheSymbol || location === Location.surroundingTheSymbol) {
+        if (shouldHaveSeparatorBelow(location)) {
             const decorationBelow = new Range(element.range.end.line, 0, element.range.end.line, 0);
             rangesBelow.push(decorationBelow);
         }

@@ -3,10 +3,18 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-export const DEFAULT_ENABLED_SYMBOLS = ["Classes", "Constructors", "Enums", "Functions", "Interfaces", "Methods", "Namespaces", "Structs"];
+export interface RuleConfig {
+    name: string;
+    languageIds: string[];
+    rules: Rules;
+}
 
-export const DEFAULT_GREENISH_COLOR = "#65EAB9";
+export interface Rules {
+    singleLine: string;
+    multiLine: MultiLineRule[];
+}
 
-export const JAVASCRIPT_TYPESCRIPT_LANGUAGE_IDS = ["javascript", "javascripreact", "typescript", "typescriptreact"];
-
-export const LUA_LANGUAGE_IDS = ["lua"];
+export interface MultiLineRule {
+    start: string;
+    end: string;
+}

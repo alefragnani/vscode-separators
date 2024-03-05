@@ -31,6 +31,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let isVisible = context.workspaceState.get<boolean>('separators.visible', true);
 
 	if (activeEditor) {
+		Container.ruleConfig = await Container.rulesProvider.getRuleConfigForLanguage(<string>activeEditor.document?.languageId);
 		triggerUpdateDecorations();
 	}
 
@@ -64,7 +65,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
-            updateDecorationsInActiveEditor(
+            await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
                 symbols.filter(s => s.kind === getSymbolKindAsKind(symbol)),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -72,9 +73,10 @@ export async function activate(context: vscode.ExtensionContext) {
         }
 	}
 
-	vscode.window.onDidChangeActiveTextEditor(editor => {
+	vscode.window.onDidChangeActiveTextEditor(async editor => {
 		if (editor) {
 			activeEditor = editor;
+			Container.ruleConfig = await Container.rulesProvider.getRuleConfigForLanguage(<string>activeEditor.document?.languageId);
 			triggerUpdateDecorations();
 		}
 	}, null, context.subscriptions);
