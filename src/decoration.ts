@@ -7,6 +7,7 @@ import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, Decora
 import { DEFAULT_GREENISH_COLOR, } from "./constants";
 import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./location";
 import { shiftTopLineAboveComment } from "./comments/comments";
+import { symbolHasAtLeastNLines } from "./symbols";
 
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;
@@ -82,6 +83,7 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
     }
 
     const location = workspace.getConfiguration("separators").get<string>("location", Location.aboveTheSymbol);
+    const minimumLineCount = workspace.getConfiguration("separators", window.activeTextEditor?.document).get<number>("minimumLineCount", 0);
 
     const rangesAbove: Range[] = [];
     const rangesBelow: Range[] = [];
@@ -89,6 +91,10 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
     for (let i = 0; i < symbols.length; i++) {
         const element = symbols[i];
         const elementAbove = i === 0 ? undefined : symbols[i - 1];
+
+        if (!symbolHasAtLeastNLines(element, minimumLineCount)) {
+            continue;
+        }
         
         if (shouldHaveSeparatorAbove(location)) {
             const topLine = await shiftTopLineAboveComment(activeEditor, element, elementAbove);

@@ -219,6 +219,12 @@
 							}
 						},
 						"scope": "window"
+                    },
+                    "separators.minimumLineCount": {
+                        "type": "integer",
+                        "default": 0,
+                        "description": "%separators.configuration.minimumLineCount.description%",
+                        "scope": "language-overridable"
                     }
                 }
             },
