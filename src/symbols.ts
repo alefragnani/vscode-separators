@@ -75,3 +75,7 @@ export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<Document
 
     return docSymbolsFunctionsMethods;
 }
+
+export function symbolHasAtLeastNLines(element: DocumentSymbol, minimunLineCount: number) {
+    return minimunLineCount <= 0 || (element.range.end.line - element.range.start.line >= minimunLineCount);
+}

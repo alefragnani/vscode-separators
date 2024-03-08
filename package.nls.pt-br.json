@@ -14,6 +14,7 @@
     "separators.configuration.aboveComments.rules.rules.multiLine.description": "Especifica a lista de padrões para comentário de múltiplas linha",
     "separators.configuration.aboveComments.rules.rules.multiLine.start.description": "Especifica o padrão glob para início de comentário de múltiplas linhas",
     "separators.configuration.aboveComments.rules.rules.multiLine.end.description": "Especifica o padrão glob para fim de comentário de múltiplas linhas",
+    "separators.configuration.minimumLineCount.description": "Especifica o número mínimo de linhas que um símbolo deve ter para desenhar separadores",
     "separators.configuration.functions.ignoreCallbackInline.description": "Controla se funções callback/inline Functions devem ser ignoradas",
     "separators.configuration.maxDepth.description": "Indica a profundidade máxima (nível) na qual separadores devem ser desenhados. Qualquer valor abaixo de 1 significa que não tem limite.",
     "separators.configuration.useOriginalGreenishSeparator.description": "Usar a cor de separador verde original para Métodos, Funções e Construtores",

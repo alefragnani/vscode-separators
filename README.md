@@ -11,6 +11,7 @@
 # What's new in Separators 2.5
 
 * Adds new option to draw separators above comments
+* Adds new setting to define the minimum number of lines for symbols
 * Adds new setting to choose separator's location
 * Adds **Localization** support
 * Adds **Web** support
@@ -104,6 +105,16 @@ You can customize the appearance of each kind of Symbol.
     // per-language setting
     "[javascript]": {
         "separators.maxDepth": 2
+    }
+```
+
+* Specifies the minimum number of lines that a symbol must have to draw separators _(default is `0` - unlimited)_
+```json
+    "separators.minimumLineCount": 2
+
+    // per-language setting
+    "[javascript]": {
+        "separators.minimumLineCount": 2
     }
 ```
 

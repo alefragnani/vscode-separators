@@ -14,6 +14,7 @@
     "separators.configuration.aboveComments.rules.rules.multiLine.description": "Specifies the list of patterns to match multi line comments",
     "separators.configuration.aboveComments.rules.rules.multiLine.start.description": "Specifies the glob pattern to match multi line comments start",
     "separators.configuration.aboveComments.rules.rules.multiLine.end.description": "Specifies the glob pattern to match multi line comments end",
+    "separators.configuration.minimumLineCount.description": "Specifies the minimum number of lines that a symbol must have to draw separators",
     "separators.configuration.functions.ignoreCallbackInline.description": "Controls whether callback/inline Functions should be ignored",
     "separators.configuration.maxDepth.description": "Indicates the maximum depth (level) which the separators should be rendered. Any value below 1 means there is no limit.",
     "separators.configuration.useOriginalGreenishSeparator.description": "Use the original greenish separator for Methods, Functions and Constructors",
