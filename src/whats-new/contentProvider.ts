@@ -23,7 +23,7 @@ export class SeparatorsContentProvider implements ContentProvider {
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
 
-        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.6.0", releaseDate: "January 2023" } });
+        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.6.1", releaseDate: "February 2024" } });
         changeLog.push({
             kind: ChangeLogKind.NEW,
             detail: {

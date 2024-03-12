@@ -1,3 +1,7 @@
+## [2.6.1] - 2024-03-12
+### Internal
+- Typo in release date of v2.6.0
+
 ## [2.6.0] - 2024-03-11
 ### Added
 - New option to draw separators above comments (issue [#21](https://github.com/alefragnani/vscode-separators/issues/21))
