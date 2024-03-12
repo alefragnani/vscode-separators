@@ -1,3 +1,8 @@
+## [2.6.0] - 2024-03-11
+### Added
+- New option to draw separators above comments (issue [#21](https://github.com/alefragnani/vscode-separators/issues/21))
+- New setting to define the minimum number of lines for symbols (issue [#3](https://github.com/alefragnani/vscode-separators/issues/3))
+
 ## [2.5.0] - 2023-02-10
 ### Added
 - New setting to choose the separator's location (issue [#74](https://github.com/alefragnani/vscode-separators/issues/74))
