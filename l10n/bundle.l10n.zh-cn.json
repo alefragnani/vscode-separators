@@ -1,0 +1,11 @@
+{
+	"Select which symbols should have separators": "选择需要显示分割线的符号类型",
+	"Classes": "类",
+	"Constructors": "构造函数",
+	"Enums": "枚举类",
+	"Functions": "函数",
+	"Interfaces": "接口",
+	"Methods": "方法",
+	"Namespaces": "命名空间",
+	"Structs": "结构体"
+}
