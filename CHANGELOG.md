@@ -1,3 +1,8 @@
+## [2.7.0] - 2024-04-05
+### Added
+- Published to Open VSX (issue [#60](https://github.com/alefragnani/vscode-separators/issues/60))
+- Simplified Chinese translations (thanks to @Stehsaer [PR #98](https://github.com/alefragnani/vscode-separators/pull/98))
+
 ## [2.6.1] - 2024-03-12
 ### Internal
 - Typo in release date of v2.6.0
