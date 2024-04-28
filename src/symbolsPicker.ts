@@ -3,8 +3,9 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { QuickInputButton, QuickPickItem, ThemeIcon, commands, l10n, window } from "vscode";
+import { QuickInputButton, QuickPickItem, ThemeIcon, l10n, window } from "vscode";
 import { ThemeIcons } from "vscode-ext-codicons";
+import { openSettings } from "./openSettings";
 
 export interface SymbolQuickPickItem extends QuickPickItem {
     pickLabel: string;
@@ -95,10 +96,3 @@ export async function pickSymbols(selectedSymbols: string[]): Promise<string[] |
         input.show();
     });
 }
-
-
-
-function openSettings(pickLabel: string) {
-    commands.executeCommand("workbench.action.openSettings", `separators.${pickLabel.toLocaleLowerCase()}`);
-}
-
