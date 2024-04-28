@@ -568,5 +568,8 @@
         "webpack": "^5.52.1",
         "webpack-cli": "^4.8.0",
         "mocha": "^9.1.3"
+    },
+    "dependencies": {
+		"vscode-ext-codicons": "^1.4.0"
     }
 }
