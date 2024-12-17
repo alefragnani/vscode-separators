@@ -532,6 +532,39 @@
                     "highContrast": "symbolIcon.structForeground"
                 }
             }
+        ],
+        "walkthroughs": [
+            {
+                "id": "separatorsWelcome",
+                "title": "%separators.walkthroughs.title%",
+                "description": "%separators.walkthroughs.description%",
+                "steps": [
+                    {
+                        "id": "automaticDetection",
+                        "title": "%separators.walkthroughs.automaticDetection.title%",
+                        "description": "%separators.walkthroughs.automaticDetection.description%",
+                        "media": {
+                            "markdown": "walkthrough/automaticDetection.md"
+                        }
+                    },
+                    {
+                        "id": "selectSymbols",
+                        "title": "%separators.walkthroughs.selectSymbols.title%",
+                        "description": "%separators.walkthroughs.selectSymbols.description%",
+                        "media": {
+                            "markdown": "walkthrough/selectSymbols.md"
+                        }
+                    },
+                    {
+                        "id": "customizingAppearance",
+                        "title": "%separators.walkthroughs.customizingAppearance.title%",
+                        "description": "%separators.walkthroughs.customizingAppearance.description%",
+                        "media": {
+                            "markdown": "walkthrough/customizingAppearance.md"
+                        }
+                    }
+                ]
+            }
         ]
     },
     "eslintConfig": {
