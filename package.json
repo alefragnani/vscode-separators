@@ -562,6 +562,14 @@
                         "media": {
                             "markdown": "walkthrough/customizingAppearance.md"
                         }
+                    },
+                    {
+                        "id": "customizingLocation",
+                        "title": "%separators.walkthroughs.customizingLocation.title%",
+                        "description": "%separators.walkthroughs.customizingLocation.description%",
+                        "media": {
+                            "markdown": "walkthrough/customizingLocation.md"
+                        }
                     }
                 ]
             }

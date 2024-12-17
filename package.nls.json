@@ -49,5 +49,7 @@
     "separators.walkthroughs.selectSymbols.title": "Select Symbols",
     "separators.walkthroughs.selectSymbols.description": "Select the symbols in which the separators will be drawn",
     "separators.walkthroughs.customizingAppearance.title": "Customizing Appearance",
-    "separators.walkthroughs.customizingAppearance.description": "Customize how Separators are presented, the line style, position and colors\n[Open Settings - Separators](command:workbench.action.openSettings?%5B%22separators)"
+    "separators.walkthroughs.customizingAppearance.description": "Customize how Separators are presented, the line style and colors\n[Open Settings - Separators](command:workbench.action.openSettings?%5B%22separators%22%5D)",
+    "separators.walkthroughs.customizingLocation.title": "Customizing Location",
+    "separators.walkthroughs.customizingLocation.description": "Customize the location of the separators, above or below the symbols, or comments\n[Open Settings - Separators](command:workbench.action.openSettings?%5B%22separators.location%22%5D)"
 }
