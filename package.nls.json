@@ -41,5 +41,13 @@
     "separators.colors.namespaces.borderColor.description": "Color of the border on top of Namespaces",
     "separators.configuration.structs.borderWidth.description": "Width of the border on top of Structs (in px)",
     "separators.configuration.structs.borderStyle.description": "Style of the border on top of Structs",
-    "separators.colors.structs.borderColor.description": "Color of the border on top of Structs"
+    "separators.colors.structs.borderColor.description": "Color of the border on top of Structs",
+    "separators.walkthroughs.title": "Get Started with Separators",
+    "separators.walkthroughs.description": "Learn more about Separators to optimize your workflow",
+    "separators.walkthroughs.automaticDetection.title": "Automatic Detection",
+    "separators.walkthroughs.automaticDetection.description": "Separators automatically detects the symbols in your code and draws separators above them",
+    "separators.walkthroughs.selectSymbols.title": "Select Symbols",
+    "separators.walkthroughs.selectSymbols.description": "Select the symbols in which the separators will be drawn",
+    "separators.walkthroughs.customizingAppearance.title": "Customizing Appearance",
+    "separators.walkthroughs.customizingAppearance.description": "Customize how Separators are presented, the line style, position and colors\n[Open Settings - Separators](command:workbench.action.openSettings?%5B%22separators)"
 }
