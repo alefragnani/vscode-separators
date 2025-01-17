@@ -41,5 +41,15 @@
     "separators.colors.namespaces.borderColor.description": "Cor da borda em Namespaces",
     "separators.configuration.structs.borderWidth.description": "Largura da borda em Estruturas (em px)",
     "separators.configuration.structs.borderStyle.description": "Estilo da borda em Estruturas",
-    "separators.colors.structs.borderColor.description": "Cor da borda em Estruturas"
+    "separators.colors.structs.borderColor.description": "Cor da borda em Estruturas",
+    "separators.walkthroughs.title": "Começar a trabalhar com Separators",
+    "separators.walkthroughs.description": "Aprenda mais sobre Separators para otimizar seu trabalho",
+    "separators.walkthroughs.automaticDetection.title": "Deteção Automática",
+    "separators.walkthroughs.automaticDetection.description": "Separators automaticamente detecta os símbolos no seu código e desenha os separadores acima deles",
+    "separators.walkthroughs.selectSymbols.title": "Selecionar Símbolos",
+    "separators.walkthroughs.selectSymbols.description": "Selecione os símbolos onde os separadores devem ser desenhados",
+    "separators.walkthroughs.customizingAppearance.title": "Personalizando a Aparência",
+    "separators.walkthroughs.customizingAppearance.description": "Personalize como Separators são apresentados, o estilo da linha e cores\n[Abrir Configuraçõess - Separators](command:workbench.action.openSettings?%5B%22separators%22%5D)",
+    "separators.walkthroughs.customizingLocation.title": "Personalizando Localização",
+    "separators.walkthroughs.customizingLocation.description": "Personalize a localização dos Separators, acima e/ou abaixo dos símbolos, ou acima dos comentários\n[Abrir Configurações Settings - Separators](command:workbench.action.openSettings?%5B%22separators.location%22%5D)"
 }
