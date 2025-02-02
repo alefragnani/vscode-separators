@@ -1,3 +1,8 @@
+## [2.8.0] - 2025-02-02
+### Added
+- Getting Started/Walkthrough (issue [#56](https://github.com/alefragnani/vscode-separators/issues/56))
+- `Edit Settings` option in `Separators: Select Symbols` command (issue [#64](https://github.com/alefragnani/vscode-separators/issues/64))
+
 ## [2.7.0] - 2024-04-05
 ### Added
 - Published to Open VSX (issue [#60](https://github.com/alefragnani/vscode-separators/issues/60))

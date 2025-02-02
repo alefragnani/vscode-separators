@@ -8,14 +8,12 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
-# What's new in Separators 2.7
+# What's new in Separators 2.8
 
+* Adds **Getting Started / Walkthrough**
 * Published to **Open VSX**
 * Adds new option to draw separators above comments
 * Adds new setting to define the minimum number of lines for symbols
-* Adds new setting to choose separator's location
-* Adds **Localization** support
-* Adds **Web** support
 
 ## Support
 
