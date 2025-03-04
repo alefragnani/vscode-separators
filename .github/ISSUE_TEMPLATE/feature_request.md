@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for the extension
+about: Suggest an idea for Separators
 title: "[FEATURE] - "
 labels: enhancement
 assignees: ''
