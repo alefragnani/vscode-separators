@@ -69,7 +69,7 @@ export function createTextEditorDecoration(symbolKind: string): TextEditorDecora
 }
 
 export async function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
-    symbols: DocumentSymbol[] | undefined,
+    symbols: DocumentSymbol[],
     decorationType: TextEditorDecorationTypePair) {
     if (!activeEditor) {
         return;

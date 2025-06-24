@@ -5,7 +5,7 @@
 
 import { window, commands, FoldingRange, FoldingRangeKind } from "vscode";
 
-export async function findRegions(): Promise<FoldingRange[] | undefined> {
+export async function findRegions(): Promise<FoldingRange[]> {
     if (!window.activeTextEditor) {
         return [];
     }
@@ -16,7 +16,7 @@ export async function findRegions(): Promise<FoldingRange[] | undefined> {
     ) as FoldingRange[];
 
     if (!foldingRanges) {
-        return undefined;
+        return [];
     }
 
     const regions: FoldingRange[] = [];

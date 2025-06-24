@@ -45,7 +45,6 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
         symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
         symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
-        // Add regions decoration
         symbolsDecorationsType.set("regions", createTextEditorDecoration("regions"));
     }
 
@@ -63,11 +62,10 @@ export async function activate(context: vscode.ExtensionContext) {
     }
 
     async function updateSymbolsDecortations() {
-		let symbols: vscode.DocumentSymbol[] | undefined;
+		let symbols: vscode.DocumentSymbol[] = [];
 		if (isVisible) {
 			const selectedSymbols = getEnabledSymbols(); 
 			symbols = await findSymbols(selectedSymbols);
-            if (!symbols) { return; }
 		} else {
 			symbols = [];
 		}
@@ -82,7 +80,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 
     async function updateRegionsDecorations() {
-        let regionsRaw: vscode.FoldingRange[] | undefined;
+        let regionsRaw: vscode.FoldingRange[];
         let regions: vscode.DocumentSymbol[] = [];
 		if (isVisible) {
             regionsRaw = await findRegions();
@@ -101,19 +99,16 @@ export async function activate(context: vscode.ExtensionContext) {
                     );
                 });
             }
-            if (regions.length == 0) { return; }
 		} else {
             regions = [];
 		}
 
-        if (regions && regions.length > 0) {
-            await updateDecorationsInActiveEditor(
-                vscode.window.activeTextEditor,
-                regions,
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                symbolsDecorationsType.get("regions")!
-            );
-        }
+        await updateDecorationsInActiveEditor(
+            vscode.window.activeTextEditor,
+            regions,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            symbolsDecorationsType.get("regions")!
+        );
 	}
 
 	vscode.window.onDidChangeActiveTextEditor(async editor => {
