@@ -533,12 +533,12 @@
                 }
             },
             {
-                "id": "separators.regions.borderColor",
-                "description": "%separators.colors.regions.borderColor.description%",
+                "id": "separators.foldingRanges.borderColor",
+                "description": "%separators.colors.foldingRanges.borderColor.description%",
                 "defaults": {
-                    "light": "symbolIcon.methodForeground",
-                    "dark": "symbolIcon.methodForeground",
-                    "highContrast": "symbolIcon.methodForeground"
+                    "light": "editor.foldPlaceholderForeground",
+                    "dark": "editor.foldPlaceholderForeground",
+                    "highContrast": "editor.foldPlaceholderForeground"
                 }
             }
         ],

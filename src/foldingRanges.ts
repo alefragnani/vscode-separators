@@ -3,9 +3,9 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { window, commands, FoldingRange, FoldingRangeKind } from "vscode";
+import { window, commands, FoldingRange } from "vscode";
 
-export async function findRegions(): Promise<FoldingRange[]> {
+export async function findFoldingRanges(): Promise<FoldingRange[]> {
     if (!window.activeTextEditor) {
         return [];
     }
@@ -21,7 +21,7 @@ export async function findRegions(): Promise<FoldingRange[]> {
 
     const regions: FoldingRange[] = [];
     for (const range of foldingRanges) {
-        if (range.kind === FoldingRangeKind.Region) {
+        if (range.kind !== undefined) {
             regions.push(range);
         }
     }

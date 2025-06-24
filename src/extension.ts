@@ -12,7 +12,7 @@ import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorat
 import { getEnabledSymbols, getSymbolKindAsKind, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 import { registerWhatsNew } from './whats-new/command';
-import { findRegions } from './regions';
+import { findFoldingRanges } from './foldingRanges';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -45,7 +45,7 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
         symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
         symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
-        symbolsDecorationsType.set("regions", createTextEditorDecoration("regions"));
+        symbolsDecorationsType.set("foldingRanges", createTextEditorDecoration("foldingRanges"));
     }
 
 	function triggerUpdateDecorations() {
@@ -57,11 +57,11 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
-        await updateSymbolsDecortations();
-        await updateRegionsDecorations();
+        await updateSymbolsDecorations();
+        await updateFoldingRangesDecorations();
     }
 
-    async function updateSymbolsDecortations() {
+    async function updateSymbolsDecorations() {
 		let symbols: vscode.DocumentSymbol[] = [];
 		if (isVisible) {
 			const selectedSymbols = getEnabledSymbols(); 
@@ -79,15 +79,15 @@ export async function activate(context: vscode.ExtensionContext) {
         }
 	}
 
-    async function updateRegionsDecorations() {
-        let regionsRaw: vscode.FoldingRange[];
-        let regions: vscode.DocumentSymbol[] = [];
+    async function updateFoldingRangesDecorations() {
+        let foldingRangesRaw: vscode.FoldingRange[];
+        let foldingRanges: vscode.DocumentSymbol[] = [];
 		if (isVisible) {
-            regionsRaw = await findRegions();
+            foldingRangesRaw = await findFoldingRanges();
             // Convert FoldingRange[] to DocumentSymbol[] for decoration
-            if (regionsRaw && regionsRaw.length > 0 && vscode.window.activeTextEditor) {
+            if (foldingRangesRaw && foldingRangesRaw.length > 0 && vscode.window.activeTextEditor) {
                 const doc = vscode.window.activeTextEditor.document;
-                regions = regionsRaw.map((r, idx) => {
+                foldingRanges = foldingRangesRaw.map((r, idx) => {
                     const start = new vscode.Position(r.start, 0);
                     const end = new vscode.Position(r.end, 0);
                     return new vscode.DocumentSymbol(
@@ -100,14 +100,14 @@ export async function activate(context: vscode.ExtensionContext) {
                 });
             }
 		} else {
-            regions = [];
+            foldingRanges = [];
 		}
 
         await updateDecorationsInActiveEditor(
             vscode.window.activeTextEditor,
-            regions,
+            foldingRanges,
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            symbolsDecorationsType.get("regions")!
+            symbolsDecorationsType.get("foldingRanges")!
         );
 	}
 
