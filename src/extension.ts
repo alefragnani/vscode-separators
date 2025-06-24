@@ -12,6 +12,7 @@ import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorat
 import { getEnabledSymbols, getSymbolKindAsKind, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 import { registerWhatsNew } from './whats-new/command';
+import { findRegions } from './regions';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -44,6 +45,8 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
         symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
         symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+        // Add regions decoration
+        symbolsDecorationsType.set("regions", createTextEditorDecoration("regions"));
     }
 
 	function triggerUpdateDecorations() {
@@ -55,11 +58,16 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
+        await updateSymbolsDecortations();
+        await updateRegionsDecorations();
+    }
+
+    async function updateSymbolsDecortations() {
 		let symbols: vscode.DocumentSymbol[] | undefined;
 		if (isVisible) {
 			const selectedSymbols = getEnabledSymbols(); 
 			symbols = await findSymbols(selectedSymbols);
-			if (!symbols) { return; }
+            if (!symbols) { return; }
 		} else {
 			symbols = [];
 		}
@@ -70,6 +78,41 @@ export async function activate(context: vscode.ExtensionContext) {
                 symbols.filter(s => s.kind === getSymbolKindAsKind(symbol)),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
+        }
+	}
+
+    async function updateRegionsDecorations() {
+        let regionsRaw: vscode.FoldingRange[] | undefined;
+        let regions: vscode.DocumentSymbol[] = [];
+		if (isVisible) {
+            regionsRaw = await findRegions();
+            // Convert FoldingRange[] to DocumentSymbol[] for decoration
+            if (regionsRaw && regionsRaw.length > 0 && vscode.window.activeTextEditor) {
+                const doc = vscode.window.activeTextEditor.document;
+                regions = regionsRaw.map((r, idx) => {
+                    const start = new vscode.Position(r.start, 0);
+                    const end = new vscode.Position(r.end, 0);
+                    return new vscode.DocumentSymbol(
+                        `region ${idx + 1}`,
+                        '',
+                        vscode.SymbolKind.Key,
+                        new vscode.Range(start, end),
+                        new vscode.Range(start, start)
+                    );
+                });
+            }
+            if (regions.length == 0) { return; }
+		} else {
+            regions = [];
+		}
+
+        if (regions && regions.length > 0) {
+            await updateDecorationsInActiveEditor(
+                vscode.window.activeTextEditor,
+                regions,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                symbolsDecorationsType.get("regions")!
+            );
         }
 	}
 

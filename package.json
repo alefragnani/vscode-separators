@@ -531,6 +531,15 @@
                     "dark": "symbolIcon.structForeground",
                     "highContrast": "symbolIcon.structForeground"
                 }
+            },
+            {
+                "id": "separators.regions.borderColor",
+                "description": "%separators.colors.regions.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.methodForeground",
+                    "dark": "symbolIcon.methodForeground",
+                    "highContrast": "symbolIcon.methodForeground"
+                }
             }
         ],
         "walkthroughs": [
