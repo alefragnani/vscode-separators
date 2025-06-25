@@ -49,6 +49,30 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
     }
 }
 
+export function getSymbolKindAsString(kind: SymbolKind): string {
+    switch (kind) {
+        case SymbolKind.Method:
+            return "Methods";
+        case SymbolKind.Function:
+            return "Functions";
+        case SymbolKind.Constructor:
+            return "Constructors";
+        case SymbolKind.Class:
+            return "Classes";
+        case SymbolKind.Interface:
+            return "Interfaces";
+        case SymbolKind.Enum:
+            return "Enums";
+        case SymbolKind.Namespace:
+            return "Namespaces";
+        case SymbolKind.Struct:
+            return "Structs";
+
+        default:
+            return "Object";
+    }
+}
+
 export function getEnabledSymbols(): SymbolKind[] {
     const symbols = workspace.getConfiguration("separators", window.activeTextEditor?.document).get("enabledSymbols", DEFAULT_ENABLED_SYMBOLS)
     const symbolsKind: SymbolKind[] = [];

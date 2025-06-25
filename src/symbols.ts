@@ -5,6 +5,7 @@
 
 import { commands, DocumentSymbol, SymbolKind, TextDocument, window, workspace } from "vscode";
 import { LanguageFactory } from "./language/factory";
+import { SeparatorSymbol } from "./symbol";
 
 function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[] {
 
@@ -76,6 +77,6 @@ export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<Document
     return docSymbolsFunctionsMethods;
 }
 
-export function symbolHasAtLeastNLines(element: DocumentSymbol, minimunLineCount: number) {
-    return minimunLineCount <= 0 || (element.range.end.line - element.range.start.line >= minimunLineCount);
+export function symbolHasAtLeastNLines(element: SeparatorSymbol, minimunLineCount: number) {
+    return minimunLineCount <= 0 || (element.endLine - element.startLine >= minimunLineCount);
 }

@@ -457,6 +457,90 @@
                         "description": "%separators.configuration.structs.borderStyle.description%"
                     }
                 }
+            },
+            {
+                "id": "separators-foldingRanges-comments",
+                "title": "Comments (Folding Ranges)",
+                "properties": {
+                    "separators.foldingRanges.comments.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.foldingRanges.comments.borderWidth.description%"
+                    },
+                    "separators.foldingRanges.comments.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.foldingRanges.comments.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-foldingRanges-imports",
+                "title": "Imports (Folding Ranges)",
+                "properties": {
+                    "separators.foldingRanges.imports.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.foldingRanges.imports.borderWidth.description%"
+                    },
+                    "separators.foldingRanges.imports.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.foldingRanges.imports.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-foldingRanges-regions",
+                "title": "Regions (Folding Ranges)",
+                "properties": {
+                    "separators.foldingRanges.regions.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.foldingRanges.regions.borderWidth.description%"
+                    },
+                    "separators.foldingRanges.regions.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.foldingRanges.regions.borderStyle.description%"
+                    }
+                }
             }
         ],
         "colors": [
@@ -533,8 +617,26 @@
                 }
             },
             {
-                "id": "separators.foldingRanges.borderColor",
-                "description": "%separators.colors.foldingRanges.borderColor.description%",
+                "id": "separators.foldingRanges.comments.borderColor",
+                "description": "%separators.colors.foldingRanges.comments.borderColor.description%",
+                "defaults": {
+                    "light": "editor.foldPlaceholderForeground",
+                    "dark": "editor.foldPlaceholderForeground",
+                    "highContrast": "editor.foldPlaceholderForeground"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.imports.borderColor",
+                "description": "%separators.colors.foldingRanges.imports.borderColor.description%",
+                "defaults": {
+                    "light": "editor.foldPlaceholderForeground",
+                    "dark": "editor.foldPlaceholderForeground",
+                    "highContrast": "editor.foldPlaceholderForeground"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.regions.borderColor",
+                "description": "%separators.colors.foldingRanges.regions.borderColor.description%",
                 "defaults": {
                     "light": "editor.foldPlaceholderForeground",
                     "dark": "editor.foldPlaceholderForeground",

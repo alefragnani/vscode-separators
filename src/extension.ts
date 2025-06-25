@@ -6,13 +6,14 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { DEFAULT_ENABLED_SYMBOLS } from './constants';
+import { DEFAULT_ENABLED_FOLDING_RANGES, DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
 import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor } from './decoration';
-import { getEnabledSymbols, getSymbolKindAsKind, selectSymbols } from './selectSymbols';
+import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './selectSymbols';
 import { findSymbols } from './symbols';
 import { registerWhatsNew } from './whats-new/command';
-import { findFoldingRanges } from './foldingRanges';
+import { findFoldingRanges, getFoldingRangeKindAsString } from './foldingRanges';
+import { SeparatorSymbol } from './symbol';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -45,7 +46,9 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
         symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
         symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
-        symbolsDecorationsType.set("foldingRanges", createTextEditorDecoration("foldingRanges"));
+        symbolsDecorationsType.set("foldingRanges.comments", createTextEditorDecoration("foldingRanges.comments"));
+        symbolsDecorationsType.set("foldingRanges.imports", createTextEditorDecoration("foldingRanges.imports"));
+        symbolsDecorationsType.set("foldingRanges.regions", createTextEditorDecoration("foldingRanges.regions"));
     }
 
 	function triggerUpdateDecorations() {
@@ -70,45 +73,49 @@ export async function activate(context: vscode.ExtensionContext) {
 			symbols = [];
 		}
 
+        const symbols2: SeparatorSymbol[] = symbols.map(symbol => {
+			return {
+				name: getSymbolKindAsString(symbol.kind),
+				startLine: symbol.range.start.line,
+				endLine: symbol.range.end.line
+			};
+		});
+        console.log(`Found ${symbols2.length} symbols.`);
+
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
             await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
-                symbols.filter(s => s.kind === getSymbolKindAsKind(symbol)),
+                symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase()),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
         }
 	}
 
     async function updateFoldingRangesDecorations() {
-        let foldingRangesRaw: vscode.FoldingRange[];
-        let foldingRanges: vscode.DocumentSymbol[] = [];
-		if (isVisible) {
-            foldingRangesRaw = await findFoldingRanges();
-            // Convert FoldingRange[] to DocumentSymbol[] for decoration
-            if (foldingRangesRaw && foldingRangesRaw.length > 0 && vscode.window.activeTextEditor) {
-                const doc = vscode.window.activeTextEditor.document;
-                foldingRanges = foldingRangesRaw.map((r, idx) => {
-                    const start = new vscode.Position(r.start, 0);
-                    const end = new vscode.Position(r.end, 0);
-                    return new vscode.DocumentSymbol(
-                        `region ${idx + 1}`,
-                        '',
-                        vscode.SymbolKind.Key,
-                        new vscode.Range(start, end),
-                        new vscode.Range(start, start)
-                    );
-                });
-            }
-		} else {
+        let foldingRanges: vscode.FoldingRange[] = [];
+        if (isVisible) {
+            foldingRanges = await findFoldingRanges();
+        } else {
             foldingRanges = [];
-		}
+        }
 
-        await updateDecorationsInActiveEditor(
-            vscode.window.activeTextEditor,
-            foldingRanges,
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            symbolsDecorationsType.get("foldingRanges")!
-        );
+		const symbols: SeparatorSymbol[] = foldingRanges.map(foldingRange => {
+			return {
+				name: getFoldingRangeKindAsString(foldingRange.kind),
+				startLine: foldingRange.start,
+				endLine: foldingRange.end
+			};
+		}); 
+		console.log(`Found ${symbols.length} folding ranges.`);
+
+        for (const foldingRange of DEFAULT_ENABLED_FOLDING_RANGES) {
+            await updateDecorationsInActiveEditor(
+                vscode.window.activeTextEditor,
+                symbols.filter(s => s.name.toLocaleLowerCase() === foldingRange.toLocaleLowerCase()),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                symbolsDecorationsType.get(`foldingRanges.${foldingRange.toLocaleLowerCase()}`)!
+            );
+        }
 	}
 
 	vscode.window.onDidChangeActiveTextEditor(async editor => {

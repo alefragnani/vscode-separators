@@ -3,7 +3,7 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { window, commands, FoldingRange } from "vscode";
+import { window, commands, FoldingRange, FoldingRangeKind } from "vscode";
 
 export async function findFoldingRanges(): Promise<FoldingRange[]> {
     if (!window.activeTextEditor) {
@@ -27,4 +27,18 @@ export async function findFoldingRanges(): Promise<FoldingRange[]> {
     }
 
     return regions;
+}
+
+export function getFoldingRangeKindAsString(kind: FoldingRangeKind) {
+    switch (kind) {
+        case FoldingRangeKind.Comment:
+            return "Comments";
+        case FoldingRangeKind.Imports:
+            return "Imports";
+        case FoldingRangeKind.Region:
+            return "Regions";
+
+        default:
+            return "Other";
+    }
 }
