@@ -60,6 +60,10 @@
                 "title": "%separators.commands.selectSymbols.title%"
             },
             {
+                "command": "separators.selectFoldingRanges",
+                "title": "%separators.commands.selectFoldingRanges.title%"
+            },
+            {
                 "command": "separators.whatsNew",
                 "title": "%separators.commands.whatsNew.title%"
             },
@@ -138,6 +142,32 @@
                         "maxItems": 8,
                         "uniqueItems": true,
                         "description": "%separators.configuration.enabledSymbols.description%",
+                        "scope": "language-overridable"
+                    },
+                    "separators.enabledFoldingRanges": {
+                        "type": "array",
+                        "default": [
+                            "Comments",
+                            "Imports",
+                            "Regions"
+                        ],
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Comments",
+                                "Imports",
+                                "Regions"
+                            ],
+                            "enumDescriptions": [
+                                "Enable `Comments`",
+                                "Enable `Imports`",
+                                "Enable `Regions`"
+                            ]
+                        },
+                        "minItems": 0,
+                        "maxItems": 8,
+                        "uniqueItems": true,
+                        "description": "%separators.configuration.enabledFoldingRanges.description%",
                         "scope": "language-overridable"
                     },
                     "separators.location": {

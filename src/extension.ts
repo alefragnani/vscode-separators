@@ -14,6 +14,7 @@ import { findSymbols } from './symbols';
 import { registerWhatsNew } from './whats-new/command';
 import { findFoldingRanges, getFoldingRangeKindAsString } from './foldingRanges';
 import { SeparatorSymbol } from './symbol';
+import { getEnabledFoldingRanges, selectFoldingRanges } from './selectFoldingRanges';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -94,7 +95,8 @@ export async function activate(context: vscode.ExtensionContext) {
     async function updateFoldingRangesDecorations() {
         let foldingRanges: vscode.FoldingRange[] = [];
         if (isVisible) {
-            foldingRanges = await findFoldingRanges();
+            const selectedFoldingRanges = getEnabledFoldingRanges()
+            foldingRanges = await findFoldingRanges(selectedFoldingRanges);
         } else {
             foldingRanges = [];
         }
@@ -160,5 +162,10 @@ export async function activate(context: vscode.ExtensionContext) {
 		if (await selectSymbols()) {
 			updateDecorations();
 		}});
+
+    vscode.commands.registerCommand("separators.selectFoldingRanges", async () => {
+        if (await selectFoldingRanges()) {
+            updateDecorations();
+        }});
 
 }

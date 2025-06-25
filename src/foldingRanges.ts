@@ -5,7 +5,7 @@
 
 import { window, commands, FoldingRange, FoldingRangeKind } from "vscode";
 
-export async function findFoldingRanges(): Promise<FoldingRange[]> {
+export async function findFoldingRanges(foldingRangesToFind: FoldingRangeKind[]): Promise<FoldingRange[]> {
     if (!window.activeTextEditor) {
         return [];
     }
@@ -21,12 +21,26 @@ export async function findFoldingRanges(): Promise<FoldingRange[]> {
 
     const regions: FoldingRange[] = [];
     for (const range of foldingRanges) {
-        if (range.kind !== undefined) {
+        if (range.kind !== undefined && foldingRangesToFind.includes(range.kind)) {
             regions.push(range);
         }
     }
 
     return regions;
+}
+
+export function getFoldingRangeKindAsKind(kind: string): FoldingRangeKind {
+    switch (kind) {
+        case "Comments":
+            return FoldingRangeKind.Comment;
+        case "Imports":
+            return FoldingRangeKind.Imports;
+        case "Regions":
+            return FoldingRangeKind.Region;
+
+        default:
+            return FoldingRangeKind.Comment;
+    }
 }
 
 export function getFoldingRangeKindAsString(kind: FoldingRangeKind) {
