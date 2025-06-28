@@ -3,8 +3,8 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-export interface SeparatorSymbol {
-    name: string;
-    startLine: number;
-    endLine: number;
-} 
+import { commands } from "vscode";
+
+export function openSettings(foldingRangeKind: string) {
+    commands.executeCommand("workbench.action.openSettings", `separators.foldingRanges.${foldingRangeKind.toLocaleLowerCase()}`);
+}

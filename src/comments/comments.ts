@@ -6,7 +6,7 @@
 import { TextEditor, workspace } from "vscode";
 import { RegexComment } from "./regexComment";
 import { Container } from "../container";
-import { Location } from "../location";
+import { Location } from "../symbols/location";
 import { SeparatorSymbol } from "../symbol";
 
 export async function shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: SeparatorSymbol, documentSymbolAbove: SeparatorSymbol): Promise<number> {

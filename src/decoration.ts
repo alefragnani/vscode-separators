@@ -5,9 +5,9 @@
 
 import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, workspace } from "vscode";
 import { DEFAULT_GREENISH_COLOR, } from "./constants";
-import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./location";
+import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./symbols/location";
 import { shiftTopLineAboveComment } from "./comments/comments";
-import { symbolHasAtLeastNLines } from "./symbols";
+import { symbolHasAtLeastNLines } from "./symbols/symbols";
 import { SeparatorSymbol } from "./symbol";
 
 export interface TextEditorDecorationTypePair {

@@ -4,8 +4,8 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { SymbolKind, window, workspace } from "vscode";
-import { areEquivalent } from "./array";
-import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
+import { areEquivalent } from "../utils/array";
+import { DEFAULT_ENABLED_SYMBOLS } from "../constants";
 import { pickSymbols } from "./symbolsPicker";
 
 export async function selectSymbols(): Promise<boolean> {

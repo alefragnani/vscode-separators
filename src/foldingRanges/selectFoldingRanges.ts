@@ -5,8 +5,8 @@
 
 import { FoldingRangeKind, window, workspace } from "vscode";
 import { pickFoldingRanges } from "./foldingRangesPicker";
-import { DEFAULT_ENABLED_FOLDING_RANGES } from "./constants";
-import { areEquivalent } from "./array";
+import { DEFAULT_ENABLED_FOLDING_RANGES } from "../constants";
+import { areEquivalent } from "../utils/array";
 import { getFoldingRangeKindAsKind } from "./foldingRanges";
 
 export async function selectFoldingRanges(): Promise<boolean> {

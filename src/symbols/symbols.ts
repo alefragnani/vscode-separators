@@ -4,8 +4,8 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { commands, DocumentSymbol, SymbolKind, TextDocument, window, workspace } from "vscode";
-import { LanguageFactory } from "./language/factory";
-import { SeparatorSymbol } from "./symbol";
+import { LanguageFactory } from "../language/factory";
+import { SeparatorSymbol } from "../symbol";
 
 function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[] {
 

@@ -9,12 +9,12 @@ import * as vscode from 'vscode';
 import { DEFAULT_ENABLED_FOLDING_RANGES, DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
 import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor } from './decoration';
-import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './selectSymbols';
-import { findSymbols } from './symbols';
+import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './symbols/selectSymbols';
+import { findSymbols } from './symbols/symbols';
 import { registerWhatsNew } from './whats-new/command';
-import { findFoldingRanges, getFoldingRangeKindAsString } from './foldingRanges';
+import { findFoldingRanges, getFoldingRangeKindAsString } from './foldingRanges/foldingRanges';
 import { SeparatorSymbol } from './symbol';
-import { getEnabledFoldingRanges, selectFoldingRanges } from './selectFoldingRanges';
+import { getEnabledFoldingRanges, selectFoldingRanges } from './foldingRanges/selectFoldingRanges';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
