@@ -1,12 +1,16 @@
 {
     "Select which symbols should have separators": "Select which symbols should have separators",
     "Classes": "Classes",
-    "Constructors": "Construtores",
-    "Enums": "Enumerados",
-    "Functions": "Funções",
+    "Constructors": "Constructors",
+    "Enums": "Enums",
+    "Functions": "Functions",
     "Interfaces": "Interfaces",
-    "Methods": "Métodos",
+    "Methods": "MMethods",
     "Namespaces": "Namespaces",
-    "Structs": "Estruturas",
-    "Edit Settings": "Edit Settings"
+    "Structs": "Structs",
+    "Edit Settings": "Edit Settings",
+    "Comments": "Comments",
+    "Imports": "Imports",
+    "Regions": "Regions",
+    "Select which folding ranges should have separators": "Select which folding ranges should have separators"
 }

@@ -8,5 +8,9 @@
     "Methods": "Métodos",
     "Namespaces": "Namespaces",
     "Structs": "Estruturas",
-    "Edit Settings": "Editar Configurações"
+    "Edit Settings": "Editar Configurações",
+    "Comments": "Comentários",
+    "Imports": "Imports",
+    "Regions": "Regiões",
+    "Select which folding ranges should have separators": "Selecione quais regiões de dobra deveriam apresentar separadores"
 }
