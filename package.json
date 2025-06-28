@@ -147,7 +147,6 @@
                     "separators.enabledFoldingRanges": {
                         "type": "array",
                         "default": [
-                            "Comments",
                             "Imports",
                             "Regions"
                         ],
@@ -189,20 +188,20 @@
                     },
                     "separators.aboveComments.rules": {
                         "type": "array",
-						"default": [],
+                        "default": [],
                         "description": "%separators.configuration.aboveComments.rules.description%",
-						"items": {
-							"type": "object",
-							"required": [
-								"name",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "name",
                                 "languageIds",
-								"rules"
-							],
-							"properties": {
-								"name": {
-									"type": "string",
-									"description": "%separators.configuration.aboveComments.rules.name.description%"
-								},
+                                "rules"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "%separators.configuration.aboveComments.rules.name.description%"
+                                },
                                 "languageIds": {
                                     "type": "array",
                                     "items": {
@@ -211,14 +210,14 @@
                                     },
                                     "description": "%separators.configuration.aboveComments.rules.languageIds.description%"
                                 },
-								"rules": {
-									"type": "object",
+                                "rules": {
+                                    "type": "object",
                                     "required": [
                                         "singleLine",
                                         "multiLine"
                                     ],
                                     "description": "%separators.configuration.aboveComments.rules.rules.description%",
-									"properties": {
+                                    "properties": {
                                         "singleLine": {
                                             "type": "string",
                                             "description": "%separators.configuration.aboveComments.rules.rules.singleLine.description%"
@@ -237,18 +236,18 @@
                                                         "type": "string",
                                                         "description": "%separators.configuration.aboveComments.rules.rules.multiLine.start.description%"
                                                     },
-                                                    "end": {                                                        
+                                                    "end": {
                                                         "type": "string",
                                                         "description": "%separators.configuration.aboveComments.rules.rules.multiLine.end.description%"
                                                     }
                                                 }
                                             }
                                         }
-									}									
-								}
-							}
-						},
-						"scope": "window"
+                                    }
+                                }
+                            }
+                        },
+                        "scope": "window"
                     },
                     "separators.minimumLineCount": {
                         "type": "integer",
@@ -752,6 +751,6 @@
         "mocha": "^11.3.0"
     },
     "dependencies": {
-		"vscode-ext-codicons": "^1.4.0"
+        "vscode-ext-codicons": "^1.4.0"
     }
 }
