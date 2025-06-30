@@ -4,7 +4,8 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { commands, DocumentSymbol, SymbolKind, TextDocument, window, workspace } from "vscode";
-import { LanguageFactory } from "./language/factory";
+import { LanguageFactory } from "../language/factory";
+import { SeparatorSymbol } from "../symbol";
 
 function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[] {
 
@@ -48,7 +49,7 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
     return language?.isCallback(symbol);
 }
 
-export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[] | undefined> {
+export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[]> {
     if (!window.activeTextEditor) {
         return [];
     }
@@ -59,7 +60,7 @@ export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<Document
     ) as DocumentSymbol[];
 
     if (!docSymbols) {
-        return undefined;
+        return [];
     }
 
     const symbols: DocumentSymbol[] = [];
@@ -71,11 +72,11 @@ export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<Document
 
     const docSymbolsFunctionsMethods = symbols
         ? symbols.filter(symbol => symbolsToFind.includes(symbol.kind) && !shouldIgnore(symbol, window.activeTextEditor?.document))
-        : undefined;
+        : [];
 
     return docSymbolsFunctionsMethods;
 }
 
-export function symbolHasAtLeastNLines(element: DocumentSymbol, minimunLineCount: number) {
-    return minimunLineCount <= 0 || (element.range.end.line - element.range.start.line >= minimunLineCount);
+export function symbolHasAtLeastNLines(element: SeparatorSymbol, minimunLineCount: number) {
+    return minimunLineCount <= 0 || (element.endLine - element.startLine >= minimunLineCount);
 }

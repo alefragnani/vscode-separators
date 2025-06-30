@@ -10,6 +10,7 @@
 
 # What's new in Separators 2.8
 
+* Adds **Folding Ranges** support
 * Adds **Getting Started / Walkthrough**
 * Published to **Open VSX**
 * Adds new option to draw separators above comments
@@ -35,21 +36,25 @@
 
 # Separators
 
-It improves the readability of your source code, by drawing lines on top of each symbol. 
+It improves the readability of your source code, by drawing lines on top of each symbol or specific folding ranges.
 
 ![Print](images/vscode-separators-print-readme.png)
 
 Here are some of the features that **Separators** provides:
 
 * Customize the separators appearance
-* Each kind of symbol can have its own customization
-* Select which symbols will have separators
+* Each kind of symbol or folding range can have its own customization
+* Select which symbols or folding ranges will have separators
 
 ## Language Support
 
-The extension will automatically work with any language you have installed in VS Code. The only requirement is that the language itself does support `Go to Symbol`. 
+The extension will automatically work with any language you have installed in VS Code. The only requirement is that the language itself does support `Go to Symbol`.
 
 To be sure your desired language will work on Separators, take a look at `Outline` view in VS Code. If it display contents, then Separators will work perfectly.
+
+### Folding Ranges
+
+The extension only draws separators for specific (special) folding ranges, like `Comments`, `Imports` and `Regions`. Just like in `Symbols`, the only requirement is that the language itself does support these folding ranges.
 
 # Features
 
@@ -57,6 +62,7 @@ To be sure your desired language will work on Separators, take a look at `Outlin
 
 * `Separators: Toggle Visibility` 
 * `Separators: Select Symbols` 
+* `Separators: Select Folding Ranges`
 
 ## Available settings
 
@@ -207,6 +213,38 @@ Or you can open a PR, an contribute to the built in rules in the extension. Thes
 
 > Be aware that regex must be escaped, so `\\` is used instead of `\`
 
+* List of folding ranges in which the separators will be drawn
+```json
+    // globally (user/workspace setting)
+    "separators.enabledFoldingRanges": [ 
+        "Comments", 
+        "Imports",
+        "Regions"
+    ],
+
+    // per-language setting
+    "[csharp]": {
+        "separators.enabledFoldingRanges": [
+            "Regions"
+        ],
+    }
+```
+
+* Defines the border width _(in `px`)_
+```json
+    "separators.foldingRanges.comments.borderWidth": 1,
+    "separators.foldingRanges.imports.borderWidth": 1,
+    "separators.foldingRanges.regions.borderWidth": 1
+```
+
+* Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
+```json
+    "separators.foldingRanges.comments.borderStyle": "solid",
+    "separators.foldingRanges.imports.borderStyle": "solid",
+    "separators.foldingRanges.regions.borderStyle": "solid",
+```
+
+
 ## Available colors
 
 For more information about customizing colors in VSCode, see [Theme Color](https://code.visualstudio.com/api/references/theme-color).
@@ -221,7 +259,10 @@ For more information about customizing colors in VSCode, see [Theme Color](https
       "separators.interfaces.borderColor": "#65EAB9",  
       "separators.methods.borderColor": "#65EAB9",  
       "separators.namespaces.borderColor": "#65EAB9",  
-      "separators.structs.borderColor": "#65EAB9",  
+      "separators.structs.borderColor": "#65EAB9",
+      "separators.foldingRanges.comments.borderColor": "#65EAB9",
+      "separators.foldingRanges.imports.borderColor": "#65EAB9",
+      "separators.foldingRanges.regions.borderColor": "#65EAB9",
     }
 ```
 

@@ -4,8 +4,8 @@
 *--------------------------------------------------------------------------------------------*/
 
 import { SymbolKind, window, workspace } from "vscode";
-import { areEquivalent } from "./array";
-import { DEFAULT_ENABLED_SYMBOLS } from "./constants";
+import { areEquivalent } from "../utils/array";
+import { DEFAULT_ENABLED_SYMBOLS } from "../constants";
 import { pickSymbols } from "./symbolsPicker";
 
 export async function selectSymbols(): Promise<boolean> {
@@ -46,6 +46,30 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
 
         default:
             return SymbolKind.Object;
+    }
+}
+
+export function getSymbolKindAsString(kind: SymbolKind): string {
+    switch (kind) {
+        case SymbolKind.Method:
+            return "Methods";
+        case SymbolKind.Function:
+            return "Functions";
+        case SymbolKind.Constructor:
+            return "Constructors";
+        case SymbolKind.Class:
+            return "Classes";
+        case SymbolKind.Interface:
+            return "Interfaces";
+        case SymbolKind.Enum:
+            return "Enums";
+        case SymbolKind.Namespace:
+            return "Namespaces";
+        case SymbolKind.Struct:
+            return "Structs";
+
+        default:
+            return "Object";
     }
 }
 

@@ -7,5 +7,10 @@
 	"Interfaces": "接口",
 	"Methods": "方法",
 	"Namespaces": "命名空间",
-	"Structs": "结构体"
+	"Structs": "结构体",
+    "Edit Settings": "编辑设置",
+    "Comments": "注释",
+    "Imports": "导入",
+    "Regions": "区域",
+    "Select which folding ranges should have separators": "选择需要显示分割线的折叠范围"
 }

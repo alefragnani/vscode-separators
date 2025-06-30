@@ -3,8 +3,9 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { TextEditor, DocumentSymbol } from "vscode";
+import { TextEditor } from "vscode";
 import { RuleConfig } from "./config";
+import { SeparatorSymbol } from "../symbol";
 
 export class RegexComment {
     private _config: RuleConfig;
@@ -17,8 +18,8 @@ export class RegexComment {
     // TODO [OK]: Multiline comments on the same line are not supported
     // TODO [OK]: Multiline comments with empty lines are not supported
     // TODO [OK]: Multiline comments with no start are not supported
-    public shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: DocumentSymbol, documentSymbolAbove: DocumentSymbol): number {
-        let lineAbove = documentSymbol.range.start.line - 1;
+    public shiftTopLineAboveComment(activeEditor: TextEditor, documentSymbol: SeparatorSymbol, documentSymbolAbove: SeparatorSymbol): number {
+        let lineAbove = documentSymbol.startLine - 1;
         let lineTextAbove = getLineTextAbove(activeEditor, lineAbove);
 
         if (lineAbove < 0) return 0;
@@ -47,11 +48,11 @@ export class RegexComment {
                 if (lineTextAbove === undefined) break;
                 
                 didFoundMultiLineCommentStart = this.isMultiLineCommentStart(lineTextAbove);
-                didFoundSymbolAbove = documentSymbolAbove?.range.end.line === lineAbove;
+                didFoundSymbolAbove = documentSymbolAbove?.endLine === lineAbove;
             } 
             
             if (!didFoundMultiLineCommentStart) {
-                return documentSymbol.range.start.line;
+                return documentSymbol.startLine;
             }
 
             return lineAbove;   

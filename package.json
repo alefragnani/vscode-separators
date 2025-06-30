@@ -60,6 +60,10 @@
                 "title": "%separators.commands.selectSymbols.title%"
             },
             {
+                "command": "separators.selectFoldingRanges",
+                "title": "%separators.commands.selectFoldingRanges.title%"
+            },
+            {
                 "command": "separators.whatsNew",
                 "title": "%separators.commands.whatsNew.title%"
             },
@@ -140,6 +144,31 @@
                         "description": "%separators.configuration.enabledSymbols.description%",
                         "scope": "language-overridable"
                     },
+                    "separators.enabledFoldingRanges": {
+                        "type": "array",
+                        "default": [
+                            "Imports",
+                            "Regions"
+                        ],
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Comments",
+                                "Imports",
+                                "Regions"
+                            ],
+                            "enumDescriptions": [
+                                "Enable `Comments`",
+                                "Enable `Imports`",
+                                "Enable `Regions`"
+                            ]
+                        },
+                        "minItems": 0,
+                        "maxItems": 8,
+                        "uniqueItems": true,
+                        "description": "%separators.configuration.enabledFoldingRanges.description%",
+                        "scope": "language-overridable"
+                    },
                     "separators.location": {
                         "type": "string",
                         "default": "aboveTheSymbol",
@@ -159,20 +188,20 @@
                     },
                     "separators.aboveComments.rules": {
                         "type": "array",
-						"default": [],
+                        "default": [],
                         "description": "%separators.configuration.aboveComments.rules.description%",
-						"items": {
-							"type": "object",
-							"required": [
-								"name",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "name",
                                 "languageIds",
-								"rules"
-							],
-							"properties": {
-								"name": {
-									"type": "string",
-									"description": "%separators.configuration.aboveComments.rules.name.description%"
-								},
+                                "rules"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "%separators.configuration.aboveComments.rules.name.description%"
+                                },
                                 "languageIds": {
                                     "type": "array",
                                     "items": {
@@ -181,14 +210,14 @@
                                     },
                                     "description": "%separators.configuration.aboveComments.rules.languageIds.description%"
                                 },
-								"rules": {
-									"type": "object",
+                                "rules": {
+                                    "type": "object",
                                     "required": [
                                         "singleLine",
                                         "multiLine"
                                     ],
                                     "description": "%separators.configuration.aboveComments.rules.rules.description%",
-									"properties": {
+                                    "properties": {
                                         "singleLine": {
                                             "type": "string",
                                             "description": "%separators.configuration.aboveComments.rules.rules.singleLine.description%"
@@ -207,18 +236,18 @@
                                                         "type": "string",
                                                         "description": "%separators.configuration.aboveComments.rules.rules.multiLine.start.description%"
                                                     },
-                                                    "end": {                                                        
+                                                    "end": {
                                                         "type": "string",
                                                         "description": "%separators.configuration.aboveComments.rules.rules.multiLine.end.description%"
                                                     }
                                                 }
                                             }
                                         }
-									}									
-								}
-							}
-						},
-						"scope": "window"
+                                    }
+                                }
+                            }
+                        },
+                        "scope": "window"
                     },
                     "separators.minimumLineCount": {
                         "type": "integer",
@@ -457,6 +486,90 @@
                         "description": "%separators.configuration.structs.borderStyle.description%"
                     }
                 }
+            },
+            {
+                "id": "separators-foldingRanges-comments",
+                "title": "Comments (Folding Ranges)",
+                "properties": {
+                    "separators.foldingRanges.comments.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.foldingRanges.comments.borderWidth.description%"
+                    },
+                    "separators.foldingRanges.comments.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.foldingRanges.comments.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-foldingRanges-imports",
+                "title": "Imports (Folding Ranges)",
+                "properties": {
+                    "separators.foldingRanges.imports.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.foldingRanges.imports.borderWidth.description%"
+                    },
+                    "separators.foldingRanges.imports.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.foldingRanges.imports.borderStyle.description%"
+                    }
+                }
+            },
+            {
+                "id": "separators-foldingRanges-regions",
+                "title": "Regions (Folding Ranges)",
+                "properties": {
+                    "separators.foldingRanges.regions.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.foldingRanges.regions.borderWidth.description%"
+                    },
+                    "separators.foldingRanges.regions.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.foldingRanges.regions.borderStyle.description%"
+                    }
+                }
             }
         ],
         "colors": [
@@ -530,6 +643,33 @@
                     "light": "symbolIcon.structForeground",
                     "dark": "symbolIcon.structForeground",
                     "highContrast": "symbolIcon.structForeground"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.comments.borderColor",
+                "description": "%separators.colors.foldingRanges.comments.borderColor.description%",
+                "defaults": {
+                    "light": "editor.foldPlaceholderForeground",
+                    "dark": "editor.foldPlaceholderForeground",
+                    "highContrast": "editor.foldPlaceholderForeground"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.imports.borderColor",
+                "description": "%separators.colors.foldingRanges.imports.borderColor.description%",
+                "defaults": {
+                    "light": "editor.foldPlaceholderForeground",
+                    "dark": "editor.foldPlaceholderForeground",
+                    "highContrast": "editor.foldPlaceholderForeground"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.regions.borderColor",
+                "description": "%separators.colors.foldingRanges.regions.borderColor.description%",
+                "defaults": {
+                    "light": "editor.foldPlaceholderForeground",
+                    "dark": "editor.foldPlaceholderForeground",
+                    "highContrast": "editor.foldPlaceholderForeground"
                 }
             }
         ],
@@ -611,6 +751,6 @@
         "mocha": "^11.3.0"
     },
     "dependencies": {
-		"vscode-ext-codicons": "^1.4.0"
+        "vscode-ext-codicons": "^1.4.0"
     }
 }

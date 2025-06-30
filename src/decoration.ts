@@ -3,11 +3,12 @@
 *  Licensed under the GPLv3 License. See License.md in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, DocumentSymbol, workspace } from "vscode";
+import { window, ThemeColor, TextEditor, Range, TextEditorDecorationType, DecorationRenderOptions, workspace } from "vscode";
 import { DEFAULT_GREENISH_COLOR, } from "./constants";
-import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./location";
+import { Location, shouldHaveSeparatorAbove, shouldHaveSeparatorBelow } from "./symbols/location";
 import { shiftTopLineAboveComment } from "./comments/comments";
-import { symbolHasAtLeastNLines } from "./symbols";
+import { symbolHasAtLeastNLines } from "./symbols/symbols";
+import { SeparatorSymbol } from "./symbol";
 
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;
@@ -69,7 +70,7 @@ export function createTextEditorDecoration(symbolKind: string): TextEditorDecora
 }
 
 export async function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
-    symbols: DocumentSymbol[] | undefined,
+    symbols: SeparatorSymbol[],
     decorationType: TextEditorDecorationTypePair) {
     if (!activeEditor) {
         return;
@@ -103,7 +104,7 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
         }
         
         if (shouldHaveSeparatorBelow(location)) {
-            const decorationBelow = new Range(element.range.end.line, 0, element.range.end.line, 0);
+            const decorationBelow = new Range(element.endLine, 0, element.endLine, 0);
             rangesBelow.push(decorationBelow);
         }
     }
