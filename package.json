@@ -113,7 +113,8 @@
                             "Interfaces",
                             "Methods",
                             "Namespaces",
-                            "Structs"
+                            "Structs",
+                            "Properties"
                         ],
                         "items": {
                             "type": "string",
@@ -125,7 +126,8 @@
                                 "Interfaces",
                                 "Methods",
                                 "Namespaces",
-                                "Structs"
+                                "Structs",
+                                "Properties"
                             ],
                             "enumDescriptions": [
                                 "Enable `Methods`",
@@ -135,7 +137,8 @@
                                 "Enable `Interfaces`",
                                 "Enable `Enums`",
                                 "Enable `Namespaces`",
-                                "Enable `Structs`"
+                                "Enable `Structs`",
+                                "Enable `Properties`"
                             ]
                         },
                         "minItems": 0,
@@ -488,6 +491,34 @@
                 }
             },
             {
+                "id": "separators-properties",
+                "title": "Properties",
+                "properties": {
+                    "separators.properties.borderWidth": {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "%separators.configuration.properties.borderWidth.description%"
+                    },
+                    "separators.properties.borderStyle": {
+                        "type": "string",
+                        "default": "solid",
+                        "enum": [
+                            "solid",
+                            "dotted",
+                            "dashed",
+                            "double"
+                        ],
+                        "enumDescriptions": [
+                            "Specifies a solid border",
+                            "Specifies a dotted border",
+                            "Specifies a dashed border",
+                            "Specifies a double border"
+                        ],
+                        "description": "%separators.configuration.properties.borderStyle.description%"
+                    }
+                }
+            },
+            {
                 "id": "separators-foldingRanges-comments",
                 "title": "Comments (Folding Ranges)",
                 "properties": {
@@ -643,6 +674,15 @@
                     "light": "symbolIcon.structForeground",
                     "dark": "symbolIcon.structForeground",
                     "highContrast": "symbolIcon.structForeground"
+                }
+            },
+            {
+                "id": "separators.properties.borderColor",
+                "description": "%separators.colors.properties.borderColor.description%",
+                "defaults": {
+                    "light": "symbolIcon.propertyForeground",
+                    "dark": "symbolIcon.propertyForeground",
+                    "highContrast": "symbolIcon.propertyForeground"
                 }
             },
             {

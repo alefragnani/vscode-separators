@@ -11,4 +11,8 @@ export class JavaScriptTypeScriptLanguage implements Language {
     isCallback(symbol: DocumentSymbol): boolean {
         return symbol.name.endsWith(' callback');
     }
+
+    isGetterSetter(symbol: DocumentSymbol): boolean {
+        return symbol.name.startsWith('(get) ') || symbol.name.startsWith('(set) ');
+    }
 }

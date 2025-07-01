@@ -11,4 +11,13 @@ export class LuaLanguage implements Language {
     isCallback(symbol: DocumentSymbol): boolean {
         return symbol.name === "<Anonymous>" && symbol.detail.includes("-> function");
     }
+
+    isGetterSetter(symbol: DocumentSymbol): boolean {
+        // In Lua, getters are typically implemented as functions with 'get' in their name or detail.
+        // This is a heuristic, as Lua does not have native getter syntax.
+        return (
+            typeof symbol.name === "string" &&
+            /^(get|set)[A-Z_]/.test(symbol.name)
+        );
+    }
 }

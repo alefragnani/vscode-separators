@@ -7,4 +7,5 @@ import { DocumentSymbol } from "vscode";
 
 export interface Language {
     isCallback(symbol: DocumentSymbol): boolean;
+    isGetterSetter(symbol: DocumentSymbol): boolean;
 }

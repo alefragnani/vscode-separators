@@ -67,6 +67,12 @@ export async function pickSymbols(selectedSymbols: string[]): Promise<string[] |
         pickLabel: "Structs",
         buttons: [editSettingsButton]
     });
+    allSymbols.push({
+        label: l10n.t("Properties"),
+        picked: selectedSymbols.includes("Properties"),
+        pickLabel: "Properties",
+        buttons: [editSettingsButton]
+    });
 
     return new Promise<string[] | undefined>((resolve, reject) => {
         const input = window.createQuickPick<SymbolQuickPickItem>();

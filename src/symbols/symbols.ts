@@ -33,7 +33,7 @@ function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[]
 
 function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undefined): boolean {
 
-    if (symbol.kind !== SymbolKind.Function) {
+    if (symbol.kind !== SymbolKind.Function && symbol.kind !== SymbolKind.Property) {
         return false;
     }
 
@@ -45,8 +45,9 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
     if (!language) {
         return false;
     }
-    
-    return language?.isCallback(symbol);
+
+    return (symbol.kind === SymbolKind.Function && language?.isCallback(symbol)) ||
+           (symbol.kind === SymbolKind.Property && !language?.isGetterSetter(symbol));
 }
 
 export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[]> {
