@@ -142,7 +142,7 @@
                             ]
                         },
                         "minItems": 0,
-                        "maxItems": 8,
+                        "maxItems": 9,
                         "uniqueItems": true,
                         "description": "%separators.configuration.enabledSymbols.description%",
                         "scope": "language-overridable"
@@ -494,6 +494,12 @@
                 "id": "separators-properties",
                 "title": "Properties",
                 "properties": {
+                    "separators.properties.onlyGetterAndSetter": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "%separators.configuration.properties.onlyGetterAndSetter.description%",
+                        "scope": "language-overridable"
+                    },
                     "separators.properties.borderWidth": {
                         "type": "integer",
                         "default": 1,

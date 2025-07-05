@@ -37,17 +37,20 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
         return false;
     }
 
-    if (!workspace.getConfiguration("separators", textDocument).get("functions.ignoreCallbackInline", false)) {
-        return false;
-    }
-
     const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
     if (!language) {
         return false;
     }
 
-    return (symbol.kind === SymbolKind.Function && language?.isCallback(symbol)) ||
-           (symbol.kind === SymbolKind.Property && !language?.isGetterSetter(symbol));
+    if (symbol.kind === SymbolKind.Function && workspace.getConfiguration("separators", textDocument).get("functions.onlyCallback", false)) {
+        return !language.isCallback(symbol);
+    }
+
+    if (symbol.kind === SymbolKind.Property && workspace.getConfiguration("separators", textDocument).get("properties.onlyGetterAndSetter", true)) {
+        return !language.isGetterSetter(symbol);
+    }
+
+    return false;
 }
 
 export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[]> {
