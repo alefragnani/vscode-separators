@@ -47,6 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
         symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
         symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+        symbolsDecorationsType.set("properties", createTextEditorDecoration("properties"));
         symbolsDecorationsType.set("foldingRanges.comments", createTextEditorDecoration("foldingRanges.comments"));
         symbolsDecorationsType.set("foldingRanges.imports", createTextEditorDecoration("foldingRanges.imports"));
         symbolsDecorationsType.set("foldingRanges.regions", createTextEditorDecoration("foldingRanges.regions"));

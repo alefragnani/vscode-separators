@@ -33,11 +33,7 @@ function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[]
 
 function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undefined): boolean {
 
-    if (symbol.kind !== SymbolKind.Function) {
-        return false;
-    }
-
-    if (!workspace.getConfiguration("separators", textDocument).get("functions.ignoreCallbackInline", false)) {
+    if (symbol.kind !== SymbolKind.Function && symbol.kind !== SymbolKind.Property) {
         return false;
     }
 
@@ -45,8 +41,16 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
     if (!language) {
         return false;
     }
-    
-    return language?.isCallback(symbol);
+
+    if (symbol.kind === SymbolKind.Function && workspace.getConfiguration("separators", textDocument).get("functions.onlyCallback", false)) {
+        return !language.isCallback(symbol);
+    }
+
+    if (symbol.kind === SymbolKind.Property && workspace.getConfiguration("separators", textDocument).get("properties.onlyGetterAndSetter", true)) {
+        return !language.isGetterSetter(symbol);
+    }
+
+    return false;
 }
 
 export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[]> {
