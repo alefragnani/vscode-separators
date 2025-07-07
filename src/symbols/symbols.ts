@@ -44,9 +44,6 @@ function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undef
         }
 
         case SymbolKind.Property: {
-            const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
-            if (!language) return false;
-
             const onlyGetterSetter = workspace.getConfiguration("separators", textDocument).get("properties.onlyGetterAndSetter", true);
             if (onlyGetterSetter) {
                 return !language.isGetterSetter(symbol);
