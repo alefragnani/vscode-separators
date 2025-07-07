@@ -32,11 +32,11 @@ function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[]
 }
 
 function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undefined): boolean {
+    const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
+    if (!language) return false;
+
     switch (symbol.kind) {
         case SymbolKind.Function: {
-            const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
-            if (!language) return false;
-
             const ignoreCallback = workspace.getConfiguration("separators", textDocument).get("functions.ignoreCallbackInline", false);
             if (!ignoreCallback) return false;
             
