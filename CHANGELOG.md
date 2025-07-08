@@ -1,7 +1,7 @@
-## [2.8.0] - 2025-02-02
+## [2.9.0] - 2025-07-08
 ### Added
-- Getting Started/Walkthrough (issue [#56](https://github.com/alefragnani/vscode-separators/issues/56))
-- `Edit Settings` option in `Separators: Select Symbols` command (issue [#64](https://github.com/alefragnani/vscode-separators/issues/64))
+- Separators for `Properties`, `Getters` and `Setters` properties (issue [#38](https://github.com/alefragnani/vscode-separators/issues/38))
+- Separators for `#regions` (issue [#116](https://github.com/alefragnani/vscode-separators/issues/116))
 
 ## [2.7.0] - 2024-04-05
 ### Added

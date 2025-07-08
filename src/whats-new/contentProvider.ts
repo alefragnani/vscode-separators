@@ -23,6 +23,24 @@ export class SeparatorsContentProvider implements ContentProvider {
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
 
+        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.9.0", releaseDate: "June 2025" } });
+        changeLog.push({
+            kind: ChangeLogKind.NEW,
+            detail: {
+                message: "Add separators for <b>Properties</b>, <b>Getters</b> and <b>Setters</b> properties",
+                id: 38,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.NEW,
+            detail: {
+                message: "Add separators for <b>#regions</b>",
+                id: 116,
+                kind: IssueKind.Issue
+            }
+        });
+
         changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.8.0", releaseDate: "January 2025" } });
         changeLog.push({
             kind: ChangeLogKind.NEW,
@@ -102,46 +120,6 @@ export class SeparatorsContentProvider implements ContentProvider {
                 id: 76,
                 kind: IssueKind.PR,
                 kudos: "dependabot"
-            }
-        });
-
-        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.4.1", releaseDate: "June 2022" } });
-        changeLog.push({
-            kind: ChangeLogKind.INTERNAL,
-            detail: "Add <b>GitHub Sponsors</b> support"
-        });
-
-        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.4.0", releaseDate: "March 2022" } });
-        changeLog.push({
-            kind: ChangeLogKind.NEW,
-            detail: {
-                message: "Add <b>Web</b> support",
-                id: 54,
-                kind: IssueKind.Issue
-            }
-        });
-        changeLog.push({
-            kind: ChangeLogKind.INTERNAL,
-            detail: {
-                message: "Support Settings Categories API",
-                id: 58,
-                kind: IssueKind.Issue
-            }
-        });
-        changeLog.push({
-            kind: ChangeLogKind.INTERNAL,
-            detail: {
-                message: "Add CONTRIBUTING documentation",
-                id: 57,
-                kind: IssueKind.Issue
-            }
-        });
-        changeLog.push({
-            kind: ChangeLogKind.INTERNAL,
-            detail: {
-                message: "Bump devDependencies",
-                id: 59,
-                kind: IssueKind.Issue
             }
         });
 
