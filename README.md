@@ -8,8 +8,10 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
-# What's new in Separators 2.8
+# What's new in Separators 2.9
 
+* Adds **Property** support
+* Adds **Getter and Setters properties** support
 * Adds **Folding Ranges** support
 * Adds **Getting Started / Walkthrough**
 * Published to **Open VSX**
@@ -79,7 +81,8 @@ You can customize the appearance of each kind of Symbol.
         "Interfaces", 
         "Methods",
         "Namespaces",
-        "Structs"
+        "Structs",
+        "Properties"
     ],
 
     // per-language setting
@@ -99,6 +102,18 @@ You can customize the appearance of each kind of Symbol.
     // per-language setting
     "[javascript]": {
         "separators.functions.ignoreCallbackInline": true
+    }
+```
+> For now, only **JavaScript**, **TypeScript** and **Lua** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
+
+* Controls whether only Getter and Setter kind of Properties should have separators drawn _(default is `true`)_
+```json
+    // globally (user/workspace setting)
+    "separators.properties.onlyGetterAndSetter": false
+
+    // per-language setting
+    "[javascript]": {
+        "separators.properties.onlyGetterAndSetter": false
     }
 ```
 > For now, only **JavaScript**, **TypeScript** and **Lua** languages are supported. If you would like to see it on other languages, please open an issue providing details/samples
@@ -133,6 +148,7 @@ You can customize the appearance of each kind of Symbol.
     "separators.methods.borderWidth": 1, 
     "separators.namespaces.borderWidth": 1,
     "separators.structs.borderWidth": 1,
+    "separators.properties.borderWidth": 1,
 ```
 
 * Define how border style _(choose between `solid`, `dotted`, `dashed` or `double`)_
@@ -145,6 +161,7 @@ You can customize the appearance of each kind of Symbol.
     "separators.methods.borderStyle": "solid",
     "separators.namespaces.borderStyle": "solid",
     "separators.structs.borderStyle": "solid",
+    "separators.properties.borderStyle": "solid",
 ```
 
 * Indicates the locations (relative to the symbols) where the separators will be drawn _(default `aboveTheSymbol`)

@@ -32,21 +32,28 @@ function getSymbolsFrom(symbol: DocumentSymbol, level: number): DocumentSymbol[]
 }
 
 function shouldIgnore(symbol: DocumentSymbol, textDocument: TextDocument | undefined): boolean {
-
-    if (symbol.kind !== SymbolKind.Function) {
-        return false;
-    }
-
-    if (!workspace.getConfiguration("separators", textDocument).get("functions.ignoreCallbackInline", false)) {
-        return false;
-    }
-
     const language = LanguageFactory.getLanguage(<string>textDocument?.languageId);
-    if (!language) {
-        return false;
+    if (!language) return false;
+
+    switch (symbol.kind) {
+        case SymbolKind.Function: {
+            const ignoreCallback = workspace.getConfiguration("separators", textDocument).get("functions.ignoreCallbackInline", false);
+            if (!ignoreCallback) return false;
+            
+            return language.isCallback(symbol);
+        }
+
+        case SymbolKind.Property: {
+            const onlyGetterSetter = workspace.getConfiguration("separators", textDocument).get("properties.onlyGetterAndSetter", true);
+            if (onlyGetterSetter) {
+                return !language.isGetterSetter(symbol);
+            }
+            
+            return false;
+        }
+        default:
+            return false;
     }
-    
-    return language?.isCallback(symbol);
 }
 
 export async function findSymbols(symbolsToFind: SymbolKind[]): Promise<DocumentSymbol[]> {

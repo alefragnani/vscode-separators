@@ -47,6 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("enums", createTextEditorDecoration("enums"));
         symbolsDecorationsType.set("namespaces", createTextEditorDecoration("namespaces"));
         symbolsDecorationsType.set("structs", createTextEditorDecoration("structs"));
+        symbolsDecorationsType.set("properties", createTextEditorDecoration("properties"));
         symbolsDecorationsType.set("foldingRanges.comments", createTextEditorDecoration("foldingRanges.comments"));
         symbolsDecorationsType.set("foldingRanges.imports", createTextEditorDecoration("foldingRanges.imports"));
         symbolsDecorationsType.set("foldingRanges.regions", createTextEditorDecoration("foldingRanges.regions"));
@@ -81,7 +82,6 @@ export async function activate(context: vscode.ExtensionContext) {
 				endLine: symbol.range.end.line
 			};
 		});
-        console.log(`Found ${symbols2.length} symbols.`);
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
             await updateDecorationsInActiveEditor(
@@ -108,7 +108,6 @@ export async function activate(context: vscode.ExtensionContext) {
 				endLine: foldingRange.end
 			};
 		}); 
-		console.log(`Found ${symbols.length} folding ranges.`);
 
         for (const foldingRange of DEFAULT_ENABLED_FOLDING_RANGES) {
             await updateDecorationsInActiveEditor(

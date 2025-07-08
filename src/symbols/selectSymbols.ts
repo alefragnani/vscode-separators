@@ -43,6 +43,8 @@ export function getSymbolKindAsKind(kind: string): SymbolKind {
             return SymbolKind.Namespace;
         case "Structs":
             return SymbolKind.Struct;
+        case "Properties":
+            return SymbolKind.Property;
 
         default:
             return SymbolKind.Object;
@@ -67,6 +69,8 @@ export function getSymbolKindAsString(kind: SymbolKind): string {
             return "Namespaces";
         case SymbolKind.Struct:
             return "Structs";
+        case SymbolKind.Property:
+            return "Properties";
 
         default:
             return "Object";
