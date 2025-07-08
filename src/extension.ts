@@ -82,7 +82,6 @@ export async function activate(context: vscode.ExtensionContext) {
 				endLine: symbol.range.end.line
 			};
 		});
-        console.log(`Found ${symbols2.length} symbols.`);
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
             await updateDecorationsInActiveEditor(
@@ -109,7 +108,6 @@ export async function activate(context: vscode.ExtensionContext) {
 				endLine: foldingRange.end
 			};
 		}); 
-		console.log(`Found ${symbols.length} folding ranges.`);
 
         for (const foldingRange of DEFAULT_ENABLED_FOLDING_RANGES) {
             await updateDecorationsInActiveEditor(
