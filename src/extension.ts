@@ -95,26 +95,27 @@ export async function activate(context: vscode.ExtensionContext) {
     async function updateFoldingRangesDecorations() {
         let foldingRanges: vscode.FoldingRange[] = [];
         if (isVisible) {
-            const selectedFoldingRanges = getEnabledFoldingRanges()
+            const selectedFoldingRanges = getEnabledFoldingRanges();
             foldingRanges = await findFoldingRanges(selectedFoldingRanges);
         } else {
             foldingRanges = [];
         }
 
-		const symbols: SeparatorSymbol[] = foldingRanges.map(foldingRange => {
-			return {
-				name: getFoldingRangeKindAsString(foldingRange.kind),
-				startLine: foldingRange.start,
-				endLine: foldingRange.end
-			};
-		}); 
+        const symbols: SeparatorSymbol[] = foldingRanges.map(foldingRange => {
+            return {
+                name: getFoldingRangeKindAsString(foldingRange.kind),
+                startLine: foldingRange.start,
+                endLine: foldingRange.end
+            };
+        });
 
-        for (const foldingRange of DEFAULT_ENABLED_FOLDING_RANGES) {
+        const selectedFoldingRanges = getEnabledFoldingRanges();
+        for (const foldingRange of selectedFoldingRanges) {
             await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
-                symbols.filter(s => s.name.toLocaleLowerCase() === foldingRange.toLocaleLowerCase()),
+                symbols.filter(s => s.name.toLocaleLowerCase() === getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                symbolsDecorationsType.get(`foldingRanges.${foldingRange.toLocaleLowerCase()}`)!
+                symbolsDecorationsType.get(`foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`)!
             );
         }
 	}
