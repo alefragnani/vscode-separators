@@ -6,7 +6,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { DEFAULT_ENABLED_FOLDING_RANGES, DEFAULT_ENABLED_SYMBOLS } from './constants';
+import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
 import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor } from './decoration';
 import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './symbols/selectSymbols';
