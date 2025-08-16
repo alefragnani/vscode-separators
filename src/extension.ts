@@ -6,6 +6,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { Range } from 'vscode';
 import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
 import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor } from './decoration';
@@ -53,6 +54,19 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("foldingRanges.regions", createTextEditorDecoration("foldingRanges.regions"));
     }
 
+    function clearAllDecorations() {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return;
+        }
+
+        const emptyRanges: Range[] = [];
+        symbolsDecorationsType.forEach((decorationType) => {
+            editor.setDecorations(decorationType.above, emptyRanges);
+            editor.setDecorations(decorationType.below, emptyRanges);
+        });
+    }
+
 	function triggerUpdateDecorations() {
 		if (timeout) {
 			clearTimeout(timeout);
@@ -62,26 +76,27 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
+        // Early return when separators are not visible - clear all decorations and avoid unnecessary processing
+        if (!isVisible) {
+            clearAllDecorations();
+            return;
+        }
+        
         await updateSymbolsDecorations();
         await updateFoldingRangesDecorations();
     }
 
     async function updateSymbolsDecorations() {
-		let symbols: vscode.DocumentSymbol[] = [];
-		if (isVisible) {
-			const selectedSymbols = getEnabledSymbols(); 
-			symbols = await findSymbols(selectedSymbols);
-		} else {
-			symbols = [];
-		}
+        const selectedSymbols = getEnabledSymbols(); 
+        const symbols = await findSymbols(selectedSymbols);
 
         const symbols2: SeparatorSymbol[] = symbols.map(symbol => {
-			return {
-				name: getSymbolKindAsString(symbol.kind),
-				startLine: symbol.range.start.line,
-				endLine: symbol.range.end.line
-			};
-		});
+            return {
+                name: getSymbolKindAsString(symbol.kind),
+                startLine: symbol.range.start.line,
+                endLine: symbol.range.end.line
+            };
+        });
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
             await updateDecorationsInActiveEditor(
@@ -93,13 +108,8 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 
     async function updateFoldingRangesDecorations() {
-        let foldingRanges: vscode.FoldingRange[] = [];
-        if (isVisible) {
-            const selectedFoldingRanges = getEnabledFoldingRanges();
-            foldingRanges = await findFoldingRanges(selectedFoldingRanges);
-        } else {
-            foldingRanges = [];
-        }
+        const selectedFoldingRanges = getEnabledFoldingRanges();
+        const foldingRanges = await findFoldingRanges(selectedFoldingRanges);
 
         const symbols: SeparatorSymbol[] = foldingRanges.map(foldingRange => {
             return {
@@ -109,7 +119,6 @@ export async function activate(context: vscode.ExtensionContext) {
             };
         });
 
-        const selectedFoldingRanges = getEnabledFoldingRanges();
         for (const foldingRange of selectedFoldingRanges) {
             await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
