@@ -69,6 +69,19 @@ export function createTextEditorDecoration(symbolKind: string): TextEditorDecora
     }
 }
 
+export function clearAllDecorations(symbolsDecorationsType: Map<string, TextEditorDecorationTypePair>) {
+    const editor = window.activeTextEditor;
+    if (!editor) {
+        return;
+    }
+
+    const emptyRanges: Range[] = [];
+    symbolsDecorationsType.forEach((decorationType) => {
+        editor.setDecorations(decorationType.above, emptyRanges);
+        editor.setDecorations(decorationType.below, emptyRanges);
+    });
+}
+
 export async function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
     symbols: SeparatorSymbol[],
     decorationType: TextEditorDecorationTypePair) {
