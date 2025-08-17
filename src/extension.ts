@@ -6,10 +6,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { Range } from 'vscode';
 import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
-import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor } from './decoration';
+import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor, clearAllDecorations } from './decoration';
 import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './symbols/selectSymbols';
 import { findSymbols } from './symbols/symbols';
 import { registerWhatsNew } from './whats-new/command';
@@ -54,20 +53,7 @@ export async function activate(context: vscode.ExtensionContext) {
         symbolsDecorationsType.set("foldingRanges.regions", createTextEditorDecoration("foldingRanges.regions"));
     }
 
-    function clearAllDecorations() {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            return;
-        }
-
-        const emptyRanges: Range[] = [];
-        symbolsDecorationsType.forEach((decorationType) => {
-            editor.setDecorations(decorationType.above, emptyRanges);
-            editor.setDecorations(decorationType.below, emptyRanges);
-        });
-    }
-
-	function triggerUpdateDecorations() {
+    function triggerUpdateDecorations() {
 		if (timeout) {
 			clearTimeout(timeout);
 		}
@@ -78,7 +64,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	async function updateDecorations() {
         // Early return when separators are not visible - clear all decorations and avoid unnecessary processing
         if (!isVisible) {
-            clearAllDecorations();
+            clearAllDecorations(symbolsDecorationsType);
             return;
         }
         
