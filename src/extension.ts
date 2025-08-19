@@ -24,7 +24,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	
 	await registerWhatsNew();
 	
-	let timeout: NodeJS.Timer;
+	let timeout: NodeJS.Timeout;
 
 	const symbolsDecorationsType = new Map<string, TextEditorDecorationTypePair>();
 	createDecorations();
