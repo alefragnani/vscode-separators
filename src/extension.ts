@@ -16,6 +16,8 @@ import { findFoldingRanges, getFoldingRangeKindAsString } from './foldingRanges/
 import { SeparatorSymbol } from './symbol';
 import { getEnabledFoldingRanges, selectFoldingRanges } from './foldingRanges/selectFoldingRanges';
 
+import { navigateToPrevious, navigateToNext } from './navigation';
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
@@ -32,6 +34,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let activeEditor = vscode.window.activeTextEditor;
 
 	let isVisible = context.workspaceState.get<boolean>('separators.visible', true);
+	let currentSeparatorLines: number[] = [];
 
 	if (activeEditor) {
 		Container.ruleConfig = await Container.rulesProvider.getRuleConfigForLanguage(<string>activeEditor.document?.languageId);
@@ -62,6 +65,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
+        currentSeparatorLines = [];
         // Early return when separators are not visible - clear all decorations and avoid unnecessary processing
         if (!isVisible) {
             clearAllDecorations(symbolsDecorationsType);
@@ -85,11 +89,12 @@ export async function activate(context: vscode.ExtensionContext) {
         });
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
-            await updateDecorationsInActiveEditor(
+            const lines = await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
                 symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase()),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
+            currentSeparatorLines.push(...lines);
         }
 	}
 
@@ -106,12 +111,13 @@ export async function activate(context: vscode.ExtensionContext) {
         });
 
         for (const foldingRange of selectedFoldingRanges) {
-            await updateDecorationsInActiveEditor(
+            const lines = await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
                 symbols.filter(s => s.name.toLocaleLowerCase() === getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(`foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`)!
             );
+            currentSeparatorLines.push(...lines);
         }
 	}
 
@@ -162,5 +168,8 @@ export async function activate(context: vscode.ExtensionContext) {
         if (await selectFoldingRanges()) {
             updateDecorations();
         }});
+
+    vscode.commands.registerCommand("separators.navigateToPrevious", () => navigateToPrevious(currentSeparatorLines));
+    vscode.commands.registerCommand("separators.navigateToNext", () => navigateToNext(currentSeparatorLines));
 
 }

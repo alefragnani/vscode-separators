@@ -64,6 +64,14 @@
                 "title": "%separators.commands.selectFoldingRanges.title%"
             },
             {
+                "command": "separators.navigateToPrevious",
+                "title": "%separators.commands.navigateToPrevious.title%"
+            },
+            {
+                "command": "separators.navigateToNext",
+                "title": "%separators.commands.navigateToNext.title%"
+            },
+            {
                 "command": "separators.whatsNew",
                 "title": "%separators.commands.whatsNew.title%"
             },

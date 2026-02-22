@@ -2,6 +2,8 @@
     "separators.commands.toggleVisibility.title": "Separators: Alternar Visibilidade",
     "separators.commands.selectSymbols.title": "Separators: Selecionar Símbolos",
     "separators.commands.selectFoldingRanges.title": "Separators: Selecionar Intervalos de Dobra",
+    "separators.commands.navigateToPrevious.title": "Separators: Navegar para Anterior",
+    "separators.commands.navigateToNext.title": "Separators: Navegar para Próximo",
     "separators.commands.whatsNew.title": "Separators: Novidades",
     "separators.commands.whatsNew#contextMenu.title": "Novidades",
     "separators.configuration.title": "Separators",

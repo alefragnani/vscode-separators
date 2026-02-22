@@ -84,16 +84,16 @@ export function clearAllDecorations(symbolsDecorationsType: Map<string, TextEdit
 
 export async function updateDecorationsInActiveEditor(activeEditor: TextEditor | undefined,
     symbols: SeparatorSymbol[],
-    decorationType: TextEditorDecorationTypePair) {
+    decorationType: TextEditorDecorationTypePair): Promise<number[]> {
     if (!activeEditor) {
-        return;
+        return [];
     }
 
     if (!symbols) {
         const bks: Range[] = [];
         activeEditor.setDecorations(decorationType.above, bks);
         activeEditor.setDecorations(decorationType.below, bks);
-        return;
+        return [];
     }
 
     const location = workspace.getConfiguration("separators").get<string>("location", Location.aboveTheSymbol);
@@ -124,4 +124,9 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
 
     activeEditor.setDecorations(decorationType.above, rangesAbove);
     activeEditor.setDecorations(decorationType.below, rangesBelow);
+
+    return [
+        ...rangesAbove.map(r => r.start.line),
+        ...rangesBelow.map(r => r.start.line)
+    ];
 }
