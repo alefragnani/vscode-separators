@@ -2,6 +2,8 @@
     "separators.commands.toggleVisibility.title": "Separators: Toggle Visibility",
     "separators.commands.selectSymbols.title": "Separators: Select Symbols",
     "separators.commands.selectFoldingRanges.title": "Separators: Select Folding Ranges",
+    "separators.commands.navigateToPrevious.title": "Separators: Navigate to Previous",
+    "separators.commands.navigateToNext.title": "Separators: Navigate to Next",
     "separators.commands.whatsNew.title": "Separators: What's New",
     "separators.commands.whatsNew#contextMenu.title": "What's New",
     "separators.configuration.title": "Separators",

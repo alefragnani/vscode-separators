@@ -2,6 +2,8 @@
 	"separators.commands.toggleVisibility.title": "Separators: 切换分割线显示",
 	"separators.commands.selectSymbols.title": "Separators: 选择符号",
     "separators.commands.selectFoldingRanges.title": "Separators: 选择折叠范围",
+    "separators.commands.navigateToPrevious.title": "Separators: 导航到上一个分隔符",
+    "separators.commands.navigateToNext.title": "Separators: 导航到下一个分隔符",
 	"separators.commands.whatsNew.title": "Separators: 更新日志",
 	"separators.commands.whatsNew#contextMenu.title": "更新日志",
 	"separators.configuration.title": "Separators扩展",
