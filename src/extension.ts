@@ -73,9 +73,14 @@ export async function activate(context: vscode.ExtensionContext) {
             return;
         }
 
+        if (!activeEditor) {
+            return;
+        }
+
         const newSeparatorLines: number[] = [];
         await updateSymbolsDecorations(newSeparatorLines);
         await updateFoldingRangesDecorations(newSeparatorLines);
+        await updateActiveDecorationsForCurrentCursor(activeEditor);
         currentSeparatorLines = newSeparatorLines;
     }
 
@@ -151,7 +156,14 @@ export async function activate(context: vscode.ExtensionContext) {
 		if (!isVisible || !event.textEditor || event.selections.length === 0 || event.textEditor !== vscode.window.activeTextEditor) {
 			return;
 		}
-		const cursorLine = event.selections[0].active.line;
+		await updateActiveDecorationsForCurrentCursor(event.textEditor);
+	}));
+
+	async function updateActiveDecorationsForCurrentCursor(editor: vscode.TextEditor) {
+		if (!isVisible || !editor.selections.length) {
+			return;
+		}
+		const cursorLine = editor.selections[0].active.line;
 
 		// Find the globally innermost symbol across all kinds so only one separator is highlighted
 		let innermostKind: string | undefined;
@@ -171,8 +183,8 @@ export async function activate(context: vscode.ExtensionContext) {
 		// If there is no symbol under the cursor, clear all active decorations and return early
 		if (!innermostKind) {
 			for (const [, decorationType] of symbolsDecorationsType) {
-				event.textEditor.setDecorations(decorationType.activeAbove, []);
-				event.textEditor.setDecorations(decorationType.activeBelow, []);
+				editor.setDecorations(decorationType.activeAbove, []);
+				editor.setDecorations(decorationType.activeBelow, []);
 			}
 			return;
 		}
@@ -186,13 +198,13 @@ export async function activate(context: vscode.ExtensionContext) {
 			}
 
 			if (kind === innermostKind) {
-				await updateActiveDecorations(event.textEditor, symbols, decorationType, cursorLine);
+				await updateActiveDecorations(editor, symbols, decorationType, cursorLine);
 			} else {
-				event.textEditor.setDecorations(decorationType.activeAbove, []);
-				event.textEditor.setDecorations(decorationType.activeBelow, []);
+				editor.setDecorations(decorationType.activeAbove, []);
+				editor.setDecorations(decorationType.activeBelow, []);
 			}
 		}
-	}));
+	}
 
 	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(cfg => {
         if (cfg.affectsConfiguration("separators")) {
