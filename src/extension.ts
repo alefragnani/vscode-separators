@@ -160,18 +160,18 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 
 
-	vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility());
-	vscode.commands.registerCommand("separators.selectSymbols", async () => {
+	context.subscriptions.push(vscode.commands.registerCommand("separators.toggleVisibility", () => toggleVisibility()));
+	context.subscriptions.push(vscode.commands.registerCommand("separators.selectSymbols", async () => {
 		if (await selectSymbols()) {
 			updateDecorations();
-		}});
+		}}));
 
-    vscode.commands.registerCommand("separators.selectFoldingRanges", async () => {
-        if (await selectFoldingRanges()) {
-            updateDecorations();
-        }});
+	context.subscriptions.push(vscode.commands.registerCommand("separators.selectFoldingRanges", async () => {
+		if (await selectFoldingRanges()) {
+			updateDecorations();
+		}}));
 
-    vscode.commands.registerCommand("separators.navigateToPrevious", () => navigateToPrevious(currentSeparatorLines));
-    vscode.commands.registerCommand("separators.navigateToNext", () => navigateToNext(currentSeparatorLines));
+	context.subscriptions.push(vscode.commands.registerCommand("separators.navigateToPrevious", () => navigateToPrevious(currentSeparatorLines)));
+	context.subscriptions.push(vscode.commands.registerCommand("separators.navigateToNext", () => navigateToNext(currentSeparatorLines)));
 
 }
