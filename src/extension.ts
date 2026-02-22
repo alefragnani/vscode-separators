@@ -8,7 +8,7 @@
 import * as vscode from 'vscode';
 import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
-import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor, clearAllDecorations } from './decoration';
+import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor, clearAllDecorations, updateActiveDecorations } from './decoration';
 import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './symbols/selectSymbols';
 import { findSymbols } from './symbols/symbols';
 import { registerWhatsNew } from './whats-new/command';
@@ -29,6 +29,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let timeout: NodeJS.Timeout;
 
 	const symbolsDecorationsType = new Map<string, TextEditorDecorationTypePair>();
+	const currentSymbolsPerKind = new Map<string, SeparatorSymbol[]>();
 	createDecorations();
 
 	let activeEditor = vscode.window.activeTextEditor;
@@ -72,9 +73,14 @@ export async function activate(context: vscode.ExtensionContext) {
             return;
         }
 
+        if (!activeEditor) {
+            return;
+        }
+
         const newSeparatorLines: number[] = [];
         await updateSymbolsDecorations(newSeparatorLines);
         await updateFoldingRangesDecorations(newSeparatorLines);
+        await updateActiveDecorationsForCurrentCursor(activeEditor);
         currentSeparatorLines = newSeparatorLines;
     }
 
@@ -91,9 +97,11 @@ export async function activate(context: vscode.ExtensionContext) {
         });
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
+            const filteredSymbols = symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase());
+            currentSymbolsPerKind.set(symbol.toLocaleLowerCase(), filteredSymbols);
             const lines = await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
-                symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase()),
+                filteredSymbols,
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
             separatorLines.push(...lines);
@@ -113,11 +121,14 @@ export async function activate(context: vscode.ExtensionContext) {
         });
 
         for (const foldingRange of selectedFoldingRanges) {
+            const kindKey = `foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`;
+            const filteredSymbols = symbols.filter(s => s.name.toLocaleLowerCase() === getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase());
+            currentSymbolsPerKind.set(kindKey, filteredSymbols);
             const lines = await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
-                symbols.filter(s => s.name.toLocaleLowerCase() === getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()),
+                filteredSymbols,
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                symbolsDecorationsType.get(`foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`)!
+                symbolsDecorationsType.get(kindKey)!
             );
             separatorLines.push(...lines);
         }
@@ -141,11 +152,67 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 	}, null, context.subscriptions);
 
+	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(async event => {
+		if (!isVisible || !event.textEditor || event.selections.length === 0 || event.textEditor !== vscode.window.activeTextEditor) {
+			return;
+		}
+		await updateActiveDecorationsForCurrentCursor(event.textEditor);
+	}));
+
+	async function updateActiveDecorationsForCurrentCursor(editor: vscode.TextEditor) {
+		if (!isVisible || !editor.selections.length) {
+			return;
+		}
+		const cursorLine = editor.selections[0].active.line;
+
+		// Find the globally innermost symbol across all kinds so only one separator is highlighted
+		let innermostKind: string | undefined;
+		let innermostRange = Infinity;
+		for (const [kind, symbols] of currentSymbolsPerKind) {
+			for (const symbol of symbols) {
+				if (cursorLine >= symbol.startLine && cursorLine <= symbol.endLine) {
+					const range = symbol.endLine - symbol.startLine;
+					if (range < innermostRange) {
+						innermostRange = range;
+						innermostKind = kind;
+					}
+				}
+			}
+		}
+
+		// If there is no symbol under the cursor, clear all active decorations and return early
+		if (!innermostKind) {
+			for (const [, decorationType] of symbolsDecorationsType) {
+				editor.setDecorations(decorationType.activeAbove, []);
+				editor.setDecorations(decorationType.activeBelow, []);
+			}
+			return;
+		}
+
+		// Only run the potentially expensive updateActiveDecorations for the single innermost kind.
+		// For all other kinds, clear their active decorations synchronously.
+		for (const [kind, symbols] of currentSymbolsPerKind) {
+			const decorationType = symbolsDecorationsType.get(kind);
+			if (!decorationType) {
+				continue;
+			}
+
+			if (kind === innermostKind) {
+				await updateActiveDecorations(editor, symbols, decorationType, cursorLine);
+			} else {
+				editor.setDecorations(decorationType.activeAbove, []);
+				editor.setDecorations(decorationType.activeBelow, []);
+			}
+		}
+	}
+
 	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(cfg => {
         if (cfg.affectsConfiguration("separators")) {
 			symbolsDecorationsType.forEach((value) => {
 				value.above.dispose();
 				value.below.dispose();
+				value.activeAbove.dispose();
+				value.activeBelow.dispose();
 			})
 
 			createDecorations();

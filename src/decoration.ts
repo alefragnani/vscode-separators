@@ -13,6 +13,8 @@ import { SeparatorSymbol } from "./symbol";
 export interface TextEditorDecorationTypePair {
     above: TextEditorDecorationType;
     below: TextEditorDecorationType;
+    activeAbove: TextEditorDecorationType;
+    activeBelow: TextEditorDecorationType;
 }
 
 function createTopLineDecoration(
@@ -57,15 +59,22 @@ function getBorderColor(symbolKind: string): string | ThemeColor {
     return new ThemeColor(`separators.${symbolKind}.borderColor`);
 }
 
+function getActiveBorderColor(symbolKind: string): ThemeColor {
+    return new ThemeColor(`separators.${symbolKind}.activeBorderColor`);
+}
+
 export function createTextEditorDecoration(symbolKind: string): TextEditorDecorationTypePair {
 
-    const borderColor = getBorderColor(symbolKind);    
+    const borderColor = getBorderColor(symbolKind);
+    const activeBorderColor = getActiveBorderColor(symbolKind);
     const borderWidth = workspace.getConfiguration("separators").get(`${symbolKind}.borderWidth`, 1);
     const borderStyle = workspace.getConfiguration("separators").get(`${symbolKind}.borderStyle`, "solid");
 
     return { 
         above: createTopLineDecoration(borderColor, `${borderWidth}px`, borderStyle),
-        below: createBottomLineDecoration(borderColor, `${borderWidth}px`, borderStyle)
+        below: createBottomLineDecoration(borderColor, `${borderWidth}px`, borderStyle),
+        activeAbove: createTopLineDecoration(activeBorderColor, `${borderWidth}px`, borderStyle),
+        activeBelow: createBottomLineDecoration(activeBorderColor, `${borderWidth}px`, borderStyle)
     }
 }
 
@@ -79,6 +88,8 @@ export function clearAllDecorations(symbolsDecorationsType: Map<string, TextEdit
     symbolsDecorationsType.forEach((decorationType) => {
         editor.setDecorations(decorationType.above, emptyRanges);
         editor.setDecorations(decorationType.below, emptyRanges);
+        editor.setDecorations(decorationType.activeAbove, emptyRanges);
+        editor.setDecorations(decorationType.activeBelow, emptyRanges);
     });
 }
 
@@ -129,4 +140,69 @@ export async function updateDecorationsInActiveEditor(activeEditor: TextEditor |
         ...rangesAbove.map(r => r.start.line),
         ...rangesBelow.map(r => r.start.line)
     ];
+}
+
+export async function updateActiveDecorations(
+    activeEditor: TextEditor | undefined,
+    symbols: SeparatorSymbol[],
+    decorationType: TextEditorDecorationTypePair,
+    cursorLine: number
+): Promise<void> {
+    if (!activeEditor) {
+        return;
+    }
+
+    const emptyRanges: Range[] = [];
+    activeEditor.setDecorations(decorationType.activeAbove, emptyRanges);
+    activeEditor.setDecorations(decorationType.activeBelow, emptyRanges);
+
+    if (cursorLine === -1) {
+        return;
+    }
+
+    const separatorsConfig = workspace.getConfiguration("separators", activeEditor.document);
+    const highlightActive = separatorsConfig.get<boolean>("highlightActiveSeparator", false);
+    if (!highlightActive) {
+        return;
+    }
+
+    const location = separatorsConfig.get<string>("location", Location.aboveTheSymbol);
+    const minimumLineCount = separatorsConfig.get<number>("minimumLineCount", 0);
+
+    // Find the innermost symbol containing the cursor
+    let activeSymbol: SeparatorSymbol | undefined;
+    let activeSymbolIndex = -1;
+    let smallestRange = Infinity;
+
+    for (let i = 0; i < symbols.length; i++) {
+        const symbol = symbols[i];
+        if (cursorLine >= symbol.startLine && cursorLine <= symbol.endLine) {
+            const range = symbol.endLine - symbol.startLine;
+            if (range < smallestRange) {
+                smallestRange = range;
+                activeSymbol = symbol;
+                activeSymbolIndex = i;
+            }
+        }
+    }
+
+    if (!activeSymbol || !symbolHasAtLeastNLines(activeSymbol, minimumLineCount)) {
+        return;
+    }
+
+    const activeRangesAbove: Range[] = [];
+    const activeRangesBelow: Range[] = [];
+
+    if (shouldHaveSeparatorAbove(location)) {
+        const elementAbove = activeSymbolIndex === 0 ? undefined : symbols[activeSymbolIndex - 1];
+        const topLine = await shiftTopLineAboveComment(activeEditor, activeSymbol, elementAbove);
+        activeRangesAbove.push(new Range(topLine, 0, topLine, 0));
+    }
+
+    if (shouldHaveSeparatorBelow(location)) {
+        activeRangesBelow.push(new Range(activeSymbol.endLine, 0, activeSymbol.endLine, 0));
+    }
+
+    activeEditor.setDecorations(decorationType.activeAbove, activeRangesAbove);
+    activeEditor.setDecorations(decorationType.activeBelow, activeRangesBelow);
 }
