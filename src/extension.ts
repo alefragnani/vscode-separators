@@ -148,7 +148,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	}, null, context.subscriptions);
 
 	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(async event => {
-		if (!isVisible || !event.textEditor || event.selections.length === 0) {
+		if (!isVisible || !event.textEditor || event.selections.length === 0 || event.textEditor !== vscode.window.activeTextEditor) {
 			return;
 		}
 		const cursorLine = event.selections[0].active.line;

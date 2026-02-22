@@ -156,13 +156,18 @@ export async function updateActiveDecorations(
     activeEditor.setDecorations(decorationType.activeAbove, emptyRanges);
     activeEditor.setDecorations(decorationType.activeBelow, emptyRanges);
 
-    const highlightActive = workspace.getConfiguration("separators").get<boolean>("highlightActiveSeparator", false);
+    if (cursorLine === -1) {
+        return;
+    }
+
+    const separatorsConfig = workspace.getConfiguration("separators", activeEditor.document);
+    const highlightActive = separatorsConfig.get<boolean>("highlightActiveSeparator", false);
     if (!highlightActive) {
         return;
     }
 
-    const location = workspace.getConfiguration("separators").get<string>("location", Location.aboveTheSymbol);
-    const minimumLineCount = workspace.getConfiguration("separators", window.activeTextEditor?.document).get<number>("minimumLineCount", 0);
+    const location = separatorsConfig.get<string>("location", Location.aboveTheSymbol);
+    const minimumLineCount = separatorsConfig.get<number>("minimumLineCount", 0);
 
     // Find the innermost symbol containing the cursor
     let activeSymbol: SeparatorSymbol | undefined;
