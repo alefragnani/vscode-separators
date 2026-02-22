@@ -77,6 +77,56 @@ export async function activate(context: vscode.ExtensionContext) {
         await updateSymbolsDecorations(newSeparatorLines);
         await updateFoldingRangesDecorations(newSeparatorLines);
         currentSeparatorLines = newSeparatorLines;
+
+        // Apply active decorations for the current cursor position (e.g. after an editor switch)
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            await updateCurrentActiveDecorations(editor);
+        }
+    }
+
+    async function updateCurrentActiveDecorations(editor: vscode.TextEditor) {
+        const cursorLine = editor.selection.active.line;
+
+        // Find the globally innermost symbol across all kinds so only one separator is highlighted
+        let innermostKind: string | undefined;
+        let innermostRange = Infinity;
+        for (const [kind, symbols] of currentSymbolsPerKind) {
+            for (const symbol of symbols) {
+                if (cursorLine >= symbol.startLine && cursorLine <= symbol.endLine) {
+                    const range = symbol.endLine - symbol.startLine;
+                    if (range < innermostRange) {
+                        innermostRange = range;
+                        innermostKind = kind;
+                    }
+                }
+            }
+        }
+
+        // If there is no symbol under the cursor, clear all active decorations and return early
+        if (!innermostKind) {
+            for (const [, decorationType] of symbolsDecorationsType) {
+                editor.setDecorations(decorationType.activeAbove, []);
+                editor.setDecorations(decorationType.activeBelow, []);
+            }
+            return;
+        }
+
+        // Only run the potentially expensive updateActiveDecorations for the single innermost kind.
+        // For all other kinds, clear their active decorations synchronously.
+        for (const [kind, symbols] of currentSymbolsPerKind) {
+            const decorationType = symbolsDecorationsType.get(kind);
+            if (!decorationType) {
+                continue;
+            }
+
+            if (kind === innermostKind) {
+                await updateActiveDecorations(editor, symbols, decorationType, cursorLine);
+            } else {
+                editor.setDecorations(decorationType.activeAbove, []);
+                editor.setDecorations(decorationType.activeBelow, []);
+            }
+        }
     }
 
     async function updateSymbolsDecorations(separatorLines: number[]) {
@@ -151,47 +201,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		if (!isVisible || !event.textEditor || event.selections.length === 0 || event.textEditor !== vscode.window.activeTextEditor) {
 			return;
 		}
-		const cursorLine = event.selections[0].active.line;
-
-		// Find the globally innermost symbol across all kinds so only one separator is highlighted
-		let innermostKind: string | undefined;
-		let innermostRange = Infinity;
-		for (const [kind, symbols] of currentSymbolsPerKind) {
-			for (const symbol of symbols) {
-				if (cursorLine >= symbol.startLine && cursorLine <= symbol.endLine) {
-					const range = symbol.endLine - symbol.startLine;
-					if (range < innermostRange) {
-						innermostRange = range;
-						innermostKind = kind;
-					}
-				}
-			}
-		}
-
-		// If there is no symbol under the cursor, clear all active decorations and return early
-		if (!innermostKind) {
-			for (const [, decorationType] of symbolsDecorationsType) {
-				event.textEditor.setDecorations(decorationType.activeAbove, []);
-				event.textEditor.setDecorations(decorationType.activeBelow, []);
-			}
-			return;
-		}
-
-		// Only run the potentially expensive updateActiveDecorations for the single innermost kind.
-		// For all other kinds, clear their active decorations synchronously.
-		for (const [kind, symbols] of currentSymbolsPerKind) {
-			const decorationType = symbolsDecorationsType.get(kind);
-			if (!decorationType) {
-				continue;
-			}
-
-			if (kind === innermostKind) {
-				await updateActiveDecorations(event.textEditor, symbols, decorationType, cursorLine);
-			} else {
-				event.textEditor.setDecorations(decorationType.activeAbove, []);
-				event.textEditor.setDecorations(decorationType.activeBelow, []);
-			}
-		}
+		await updateCurrentActiveDecorations(event.textEditor);
 	}));
 
 	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(cfg => {
