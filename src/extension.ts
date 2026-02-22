@@ -65,18 +65,20 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Evaluate (prepare the list) and DRAW
 	async function updateDecorations() {
-        currentSeparatorLines = [];
         // Early return when separators are not visible - clear all decorations and avoid unnecessary processing
         if (!isVisible) {
             clearAllDecorations(symbolsDecorationsType);
+            currentSeparatorLines = [];
             return;
         }
-        
-        await updateSymbolsDecorations();
-        await updateFoldingRangesDecorations();
+
+        const newSeparatorLines: number[] = [];
+        await updateSymbolsDecorations(newSeparatorLines);
+        await updateFoldingRangesDecorations(newSeparatorLines);
+        currentSeparatorLines = newSeparatorLines;
     }
 
-    async function updateSymbolsDecorations() {
+    async function updateSymbolsDecorations(separatorLines: number[]) {
         const selectedSymbols = getEnabledSymbols(); 
         const symbols = await findSymbols(selectedSymbols);
 
@@ -94,11 +96,11 @@ export async function activate(context: vscode.ExtensionContext) {
                 symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase()),
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
-            currentSeparatorLines.push(...lines);
+            separatorLines.push(...lines);
         }
 	}
 
-    async function updateFoldingRangesDecorations() {
+    async function updateFoldingRangesDecorations(separatorLines: number[]) {
         const selectedFoldingRanges = getEnabledFoldingRanges();
         const foldingRanges = await findFoldingRanges(selectedFoldingRanges);
 
@@ -117,7 +119,7 @@ export async function activate(context: vscode.ExtensionContext) {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(`foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`)!
             );
-            currentSeparatorLines.push(...lines);
+            separatorLines.push(...lines);
         }
 	}
 
