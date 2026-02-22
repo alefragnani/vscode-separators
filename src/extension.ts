@@ -8,7 +8,7 @@
 import * as vscode from 'vscode';
 import { DEFAULT_ENABLED_SYMBOLS } from './constants';
 import { Container } from './container';
-import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor, clearAllDecorations } from './decoration';
+import { createTextEditorDecoration, TextEditorDecorationTypePair, updateDecorationsInActiveEditor, clearAllDecorations, updateActiveDecorations } from './decoration';
 import { getEnabledSymbols, getSymbolKindAsString, selectSymbols } from './symbols/selectSymbols';
 import { findSymbols } from './symbols/symbols';
 import { registerWhatsNew } from './whats-new/command';
@@ -29,6 +29,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	let timeout: NodeJS.Timeout;
 
 	const symbolsDecorationsType = new Map<string, TextEditorDecorationTypePair>();
+	const currentSymbolsPerKind = new Map<string, SeparatorSymbol[]>();
 	createDecorations();
 
 	let activeEditor = vscode.window.activeTextEditor;
@@ -91,9 +92,11 @@ export async function activate(context: vscode.ExtensionContext) {
         });
 
         for (const symbol of DEFAULT_ENABLED_SYMBOLS) {
+            const filteredSymbols = symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase());
+            currentSymbolsPerKind.set(symbol.toLocaleLowerCase(), filteredSymbols);
             const lines = await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
-                symbols2.filter(s => s.name.toLocaleLowerCase() === symbol.toLocaleLowerCase()),
+                filteredSymbols,
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 symbolsDecorationsType.get(symbol.toLocaleLowerCase())!);
             separatorLines.push(...lines);
@@ -113,11 +116,14 @@ export async function activate(context: vscode.ExtensionContext) {
         });
 
         for (const foldingRange of selectedFoldingRanges) {
+            const kindKey = `foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`;
+            const filteredSymbols = symbols.filter(s => s.name.toLocaleLowerCase() === getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase());
+            currentSymbolsPerKind.set(kindKey, filteredSymbols);
             const lines = await updateDecorationsInActiveEditor(
                 vscode.window.activeTextEditor,
-                symbols.filter(s => s.name.toLocaleLowerCase() === getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()),
+                filteredSymbols,
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                symbolsDecorationsType.get(`foldingRanges.${getFoldingRangeKindAsString(foldingRange).toLocaleLowerCase()}`)!
+                symbolsDecorationsType.get(kindKey)!
             );
             separatorLines.push(...lines);
         }
@@ -141,11 +147,26 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 	}, null, context.subscriptions);
 
+	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(async event => {
+		if (!isVisible || !event.textEditor || event.selections.length === 0) {
+			return;
+		}
+		const cursorLine = event.selections[0].active.line;
+		for (const [kind, symbols] of currentSymbolsPerKind) {
+			const decorationType = symbolsDecorationsType.get(kind);
+			if (decorationType) {
+				await updateActiveDecorations(event.textEditor, symbols, decorationType, cursorLine);
+			}
+		}
+	}));
+
 	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(cfg => {
         if (cfg.affectsConfiguration("separators")) {
 			symbolsDecorationsType.forEach((value) => {
 				value.above.dispose();
 				value.below.dispose();
+				value.activeAbove.dispose();
+				value.activeBelow.dispose();
 			})
 
 			createDecorations();

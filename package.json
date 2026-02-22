@@ -265,6 +265,11 @@
                         "default": 0,
                         "description": "%separators.configuration.minimumLineCount.description%",
                         "scope": "language-overridable"
+                    },
+                    "separators.highlightActiveSeparator": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "%separators.configuration.highlightActiveSeparator.description%"
                     }
                 }
             },
@@ -724,6 +729,114 @@
                     "light": "editor.foldPlaceholderForeground",
                     "dark": "editor.foldPlaceholderForeground",
                     "highContrast": "editor.foldPlaceholderForeground"
+                }
+            },
+            {
+                "id": "separators.methods.activeBorderColor",
+                "description": "%separators.colors.methods.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.functions.activeBorderColor",
+                "description": "%separators.colors.functions.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.constructors.activeBorderColor",
+                "description": "%separators.colors.constructors.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.classes.activeBorderColor",
+                "description": "%separators.colors.classes.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.interfaces.activeBorderColor",
+                "description": "%separators.colors.interfaces.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.enums.activeBorderColor",
+                "description": "%separators.colors.enums.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.namespaces.activeBorderColor",
+                "description": "%separators.colors.namespaces.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.structs.activeBorderColor",
+                "description": "%separators.colors.structs.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.properties.activeBorderColor",
+                "description": "%separators.colors.properties.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.comments.activeBorderColor",
+                "description": "%separators.colors.foldingRanges.comments.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.imports.activeBorderColor",
+                "description": "%separators.colors.foldingRanges.imports.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
+                }
+            },
+            {
+                "id": "separators.foldingRanges.regions.activeBorderColor",
+                "description": "%separators.colors.foldingRanges.regions.activeBorderColor.description%",
+                "defaults": {
+                    "light": "editorIndentGuide.activeBackground1",
+                    "dark": "editorIndentGuide.activeBackground1",
+                    "highContrast": "editorIndentGuide.activeBackground1"
                 }
             }
         ],
