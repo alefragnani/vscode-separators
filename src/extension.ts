@@ -152,10 +152,27 @@ export async function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 		const cursorLine = event.selections[0].active.line;
+
+		// Find the globally innermost symbol across all kinds so only one separator is highlighted
+		let innermostKind: string | undefined;
+		let innermostRange = Infinity;
+		for (const [kind, symbols] of currentSymbolsPerKind) {
+			for (const symbol of symbols) {
+				if (cursorLine >= symbol.startLine && cursorLine <= symbol.endLine) {
+					const range = symbol.endLine - symbol.startLine;
+					if (range < innermostRange) {
+						innermostRange = range;
+						innermostKind = kind;
+					}
+				}
+			}
+		}
+
 		for (const [kind, symbols] of currentSymbolsPerKind) {
 			const decorationType = symbolsDecorationsType.get(kind);
 			if (decorationType) {
-				await updateActiveDecorations(event.textEditor, symbols, decorationType, cursorLine);
+				// Pass -1 for non-innermost kinds so their active decorations are cleared
+				await updateActiveDecorations(event.textEditor, symbols, decorationType, kind === innermostKind ? cursorLine : -1);
 			}
 		}
 	}));
