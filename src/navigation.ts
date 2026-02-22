@@ -5,6 +5,18 @@
 
 import { Position, Range, Selection, window } from "vscode";
 
+export function findPreviousSeparatorLine(separatorLines: number[], currentLine: number, fallbackLine: number): number {
+    const sorted = [...separatorLines].sort((a, b) => a - b);
+    const above = sorted.filter(line => line < currentLine);
+    return above.length > 0 ? above[above.length - 1] : fallbackLine;
+}
+
+export function findNextSeparatorLine(separatorLines: number[], currentLine: number, fallbackLine: number): number {
+    const sorted = [...separatorLines].sort((a, b) => a - b);
+    const below = sorted.filter(line => line > currentLine);
+    return below.length > 0 ? below[0] : fallbackLine;
+}
+
 export function navigateToPrevious(separatorLines: number[]): void {
     const editor = window.activeTextEditor;
     if (!editor) {
@@ -12,9 +24,7 @@ export function navigateToPrevious(separatorLines: number[]): void {
     }
 
     const currentLine = editor.selection.active.line;
-    const sorted = [...separatorLines].sort((a, b) => a - b);
-    const above = sorted.filter(line => line < currentLine);
-    const targetLine = above.length > 0 ? above[above.length - 1] : 0;
+    const targetLine = findPreviousSeparatorLine(separatorLines, currentLine, 0);
 
     const position = new Position(targetLine, 0);
     editor.selection = new Selection(position, position);
@@ -28,10 +38,8 @@ export function navigateToNext(separatorLines: number[]): void {
     }
 
     const currentLine = editor.selection.active.line;
-    const sorted = [...separatorLines].sort((a, b) => a - b);
-    const below = sorted.filter(line => line > currentLine);
     const lastLine = editor.document.lineCount - 1;
-    const targetLine = below.length > 0 ? below[0] : lastLine;
+    const targetLine = findNextSeparatorLine(separatorLines, currentLine, lastLine);
 
     const position = new Position(targetLine, 0);
     editor.selection = new Selection(position, position);
