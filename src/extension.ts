@@ -168,11 +168,28 @@ export async function activate(context: vscode.ExtensionContext) {
 			}
 		}
 
+		// If there is no symbol under the cursor, clear all active decorations and return early
+		if (!innermostKind) {
+			for (const [, decorationType] of symbolsDecorationsType) {
+				event.textEditor.setDecorations(decorationType.activeAbove, []);
+				event.textEditor.setDecorations(decorationType.activeBelow, []);
+			}
+			return;
+		}
+
+		// Only run the potentially expensive updateActiveDecorations for the single innermost kind.
+		// For all other kinds, clear their active decorations synchronously.
 		for (const [kind, symbols] of currentSymbolsPerKind) {
 			const decorationType = symbolsDecorationsType.get(kind);
-			if (decorationType) {
-				// Pass -1 for non-innermost kinds so their active decorations are cleared
-				await updateActiveDecorations(event.textEditor, symbols, decorationType, kind === innermostKind ? cursorLine : -1);
+			if (!decorationType) {
+				continue;
+			}
+
+			if (kind === innermostKind) {
+				await updateActiveDecorations(event.textEditor, symbols, decorationType, cursorLine);
+			} else {
+				event.textEditor.setDecorations(decorationType.activeAbove, []);
+				event.textEditor.setDecorations(decorationType.activeBelow, []);
 			}
 		}
 	}));
