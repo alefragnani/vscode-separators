@@ -901,7 +901,7 @@
         "test": "npm run test-compile && npm run just-test"
     },
     "devDependencies": {
-        "@types/node": "^18.17.0",
+        "@types/node": "^22.18.10",
         "@types/vscode": "^1.73.0",
         "@types/mocha": "^10.0.0",
         "@types/glob": "^8.1.0",
