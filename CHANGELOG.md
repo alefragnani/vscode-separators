@@ -1,3 +1,19 @@
+## [3.0.0] - 2026-03-23
+### Added
+- Add commands to navigate to previous/next separator (issue [#62](https://github.com/alefragnani/vscode-separators/issues/62))
+- Highlight separator line in the current block (issue [#66](https://github.com/alefragnani/vscode-separators/issues/66))
+
+### Changed
+- Optimize separator decoration updates when separators are disabled (issue [#124](https://github.com/alefragnani/vscode-separators/issues/124))
+
+### Fixed
+- Fix separators for comments in folding ranges not working properly (issue [#122](https://github.com/alefragnani/vscode-separators/issues/122))
+
+### Internal
+- Add vscode-ext Copilot skills from Awesome Copilot (PR [#137](https://github.com/alefragnani/vscode-separators/pull/137))
+- Bump Node dependency to v22 (issue [#138](https://github.com/alefragnani/vscode-separators/issues/138))
+- Bump vscode-whats-new submodule to March 2026 release (issue [#140](https://github.com/alefragnani/vscode-separators/issues/140))
+
 ## [2.9.0] - 2025-07-08
 ### Added
 - Separators for `Properties`, `Getters` and `Setters` properties (issue [#38](https://github.com/alefragnani/vscode-separators/issues/38))

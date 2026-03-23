@@ -8,8 +8,10 @@
   <a title="Learn more about Separators" href="http://github.com/alefragnani/vscode-separators"><img src="https://raw.githubusercontent.com/alefragnani/vscode-separators/master/images/vscode-separators-logo-readme.png" alt="Separators Logo" width="70%" /></a>
 </p>
 
-# What's new in Separators 2.9
+# What's new in Separators 3.0
 
+* Adds commands to **navigate** between separators
+* Adds **highlighting** to current block
 * Adds **Property** support
 * Adds **Getter and Setters properties** support
 * Adds **Folding Ranges** support
@@ -65,6 +67,8 @@ The extension only draws separators for specific (special) folding ranges, like 
 * `Separators: Toggle Visibility` 
 * `Separators: Select Symbols` 
 * `Separators: Select Folding Ranges`
+* `Separators: Navigate to Previous`
+* `Separators: Navigate to Next`
 
 ## Available settings
 
@@ -92,6 +96,11 @@ You can customize the appearance of each kind of Symbol.
             "Interfaces"
         ],
     }
+```
+
+* Controls whether the separator line of the symbol that contains the cursor should be highlighted _(default is `false`)_
+```json
+    "separators.highlightActiveSeparator": true
 ```
 
 * Controls whether callback/inline Functions should be ignored _(default is `false`)_

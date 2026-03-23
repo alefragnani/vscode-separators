@@ -23,6 +23,64 @@ export class SeparatorsContentProvider implements ContentProvider {
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
 
+        changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "3.0.0", releaseDate: "March 2026" } });
+        changeLog.push({
+            kind: ChangeLogKind.NEW,
+            detail: {
+                message: "Add commands to navigate to previous/next separator",
+                id: 62,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.NEW,
+            detail: {
+                message: "Highlight separator line in the current block",
+                id: 66,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.CHANGED,
+            detail: {
+                message: "Optimize separator decoration updates when separators are disabled",
+                id: 124,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.FIXED,
+            detail: {
+                message: "Fix separators for comments in folding ranges not working properly",
+                id: 122,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.INTERNAL,
+            detail: {
+                message: "Add vscode-ext Copilot skills from Awesome Copilot",
+                id: 137,
+                kind: IssueKind.PR
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.INTERNAL,
+            detail: {
+                message: "Bump Node dependency to v22",
+                id: 138,
+                kind: IssueKind.Issue
+            }
+        });
+        changeLog.push({
+            kind: ChangeLogKind.INTERNAL,
+            detail: {
+                message: "Bump vscode-whats-new submodule to March 2026 release",
+                id: 140,
+                kind: IssueKind.Issue
+            }
+        });
+
         changeLog.push({ kind: ChangeLogKind.VERSION, detail: { releaseNumber: "2.9.0", releaseDate: "June 2025" } });
         changeLog.push({
             kind: ChangeLogKind.NEW,
