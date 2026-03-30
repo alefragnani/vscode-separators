@@ -1,196 +1,181 @@
 # VS Code Separators Extension
 
+Always reference these instructions first and fall back to additional search or terminal commands only when project files do not provide enough context.
+
+## Project Overview
+
 VS Code Separators is a TypeScript extension that draws separator lines above code symbols (methods, functions, classes, interfaces, etc.) to improve source code readability. The extension supports multiple programming languages and is distributed as both a desktop and web extension.
 
-Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
+## Technology Stack
+
+- Language: TypeScript
+- Runtime: VS Code Extension API (Node + Web)
+- Bundler: Webpack 5
+- Linting: ESLint (`eslint-config-vscode-ext`)
+- Testing: Mocha + `@vscode/test-electron`
 
 ## Working Effectively
 
-### Bootstrap and Build
-Run these commands in sequence to set up the development environment:
+Bootstrap and local setup:
 
 ```bash
 git submodule init
 git submodule update
 npm install
+```
+
+Build and development quickstart:
+
+```bash
 npm run build
-```
-
-- `git submodule init && git submodule update` -- initializes the vscode-whats-new submodule (required dependency)
-- `npm install` -- installs dependencies, takes ~37 seconds
-- `npm run build` -- webpack build for both Node.js and Web extensions, takes ~4 seconds. NEVER CANCEL.
-
-### Development Workflow
-For active development with automatic rebuilding:
-
-```bash
-npm run watch
-```
-
-- `npm run watch` -- starts webpack in watch mode, takes ~3-4 seconds to build initially, then rebuilds incrementally. NEVER CANCEL. Leave running during development.
-
-### Quality Assurance
-Run these commands before committing changes:
-
-```bash
-npm run lint
-npm run pretest
-```
-
-- `npm run lint` -- runs ESLint on source code, takes ~1.4 seconds
-- `npm run pretest` -- compiles TypeScript and runs lint, takes ~4 seconds total
-- ALWAYS run `npm run lint` before committing or the CI (.github/workflows/main.yml) will fail
-
-### Testing Limitations
-```bash
-npm test
-```
-
-- `npm test` -- attempts to run VS Code extension tests but FAILS in headless environments due to VS Code download requirements
-- Tests require internet connectivity to download VS Code from update.code.visualstudio.com
-- Tests work only in interactive environments with VS Code installed
-- DO NOT rely on automated tests for validation in CI-like environments
-
-## Manual Validation
-
-Since automated tests fail in headless environments, use these validation approaches:
-
-### Build Validation
-Always validate builds manually:
-
-```bash
-npm run build && echo "Build completed successfully"
-ls -la dist/
-```
-
-- Verify that `dist/extension-node.js` and `dist/extension-web.js` are generated
-- File sizes should be ~206KB each
-- Source maps should be present (.js.map files)
-
-### Code Quality Validation
-```bash
 npm run lint
 ```
 
-- Extension currently has 5 warnings (not errors) - this is expected
-- Focus on fixing new warnings you introduce, not existing ones
-- Zero errors should be maintained
+- Use `npm run watch` during active development.
+- Use VS Code "Launch Extension" (F5) to validate behavior in Extension Development Host.
+- Expected command timings are usually under 10 seconds.
+- Never cancel `npm install`, `npm run watch`, or `npm test` once started.
+## Build and Development Commands
 
-### Clean Build Validation
-Test that the build works from a clean state:
+- `npm run compile` - TypeScript compilation
+- `npm run build` - Webpack development build
+- `npm run watch` - Continuous webpack build
+- `npm run lint` - ESLint validation
+- `npm run test` - Full test suite
+- `npm run vscode:prepublish` - Production build
 
-```bash
-rm -rf dist/ out/
-npm run build
-```
+## Testing and Validation
 
-- Verifies that the build process is reproducible
-- Ensures no missing dependencies or build artifacts
-- Both `dist/` and `out/` directories should be recreated
+Automated tests can fail in headless or restricted-network environments due to VS Code download requirements.
 
-### VS Code Extension Development
-To test the extension in VS Code:
+Manual validation checklist:
 
-1. Open the repository folder in VS Code
-2. Press `F5` or use "Run Extension" launch configuration
-3. This opens a new Extension Development Host window
-4. Open any source code file (TypeScript, JavaScript, Python, etc.)
-5. Verify separator lines appear above functions, classes, methods
-6. Test the command palette commands:
+1. Run `npm run build` and confirm both bundles are generated.
+2. Run `npm run lint` and ensure no new warnings/errors are introduced.
+3. Launch Extension Host (F5) and verify separator rendering on sample code.
+4. Validate commands:
    - `Separators: Toggle Visibility`
    - `Separators: Select Symbols`
    - `Separators: Select Folding Ranges`
 
-### Web Extension Testing
-Use the "Run Web Extension in VS Code" launch configuration to test the web version.
+## Project Structure and Key Files
 
-## Project Structure and Navigation
-
-### Key Directories
 ```
-├── src/                    # TypeScript source code
-│   ├── extension.ts        # Main extension entry point
-│   ├── constants.ts        # Configuration constants
-│   ├── symbols/            # Symbol detection and filtering
-│   ├── foldingRanges/      # Folding range detection
-│   ├── comments/           # Comment detection logic
-│   ├── language/           # Language-specific rules
-│   └── test/               # Test suites
-├── dist/                   # Webpack output (extension-node.js, extension-web.js)
-├── out/                    # TypeScript compilation output
-├── vscode-whats-new/       # Git submodule for "What's New" functionality
-├── .vscode/                # VS Code workspace configuration
-│   ├── launch.json         # Debug configurations
-│   └── tasks.json          # Build tasks
-├── rules.json              # Built-in comment detection rules
-└── package.json            # Extension manifest and npm scripts
+src/
+├── extension.ts          # Main extension entry point
+├── decoration.ts         # Separator rendering logic
+├── constants.ts          # Configuration constants
+├── symbols/              # Symbol detection/filtering
+├── foldingRanges/        # Folding range detection
+├── comments/             # Comment detection logic
+└── language/             # Language-specific rules
+
+dist/                     # Webpack bundles (extension.js)
+l10n/                     # Localization files
+out/                      # Compiled TypeScript files
+vscode-whats-new/         # Git submodule for What's New
+walkthrough/              # Getting Started walkthrough content
+
+rules.json                # Built-in comment detection rules
 ```
 
-### Important Files to Know
-- `src/extension.ts` -- main extension activation and decoration logic
-- `src/decoration.ts` -- separator line rendering logic
-- `package.json` -- extension manifest, commands, settings, and build scripts
-- `rules.json` -- language-specific comment detection patterns
-- `CONTRIBUTING.md` -- development workflow documentation
-- `.github/workflows/main.yml` -- CI pipeline configuration
+## Coding Conventions and Patterns
 
-### Common Navigation Patterns
-- After changing settings in `package.json`, run `npm run build`
-- After modifying language rules, check `rules.json` and `src/constants.ts`
-- When adding new symbol types, update both `src/constants.ts` and decoration logic
-- Always check `src/test/suite/` for existing test patterns when adding new features
+### Indentation
 
-## Build Configuration
+- We spaces, not tabs.
+- Use 4 spaces for indentation.
 
-### TypeScript Configuration
-- Target: ES2020
-- Output: `out/` directory for development, `dist/` for bundled extension
-- Source maps enabled for debugging
+### Naming Conventions
 
-### Webpack Configuration
-- Generates two bundles: `extension-node.js` (desktop) and `extension-web.js` (web)
-- Uses Terser for minification in production mode
-- Development builds include source maps
+- Use PascalCase for `type` names
+- Use PascalCase for `enum` values
+- Use camelCase for `function` and `method` names
+- Use camelCase for `property` names and `local variables`
+- Use whole words in names when possible
 
-### Timing Expectations
-- Initial `npm install`: ~37 seconds
-- `npm run build`: ~4 seconds - NEVER CANCEL
-- `npm run lint`: ~1.4 seconds  
-- `npm run watch` initial build: ~3-4 seconds, then incremental
-- TypeScript compilation: ~2 seconds
-- Full CI pipeline: ~2-3 minutes across multiple OS platforms
+### Types
 
-## CI and Deployment
+- Do not export `types` or `functions` unless you need to share it across multiple components
+- Do not introduce new `types` or `values` to the global namespace
+- Prefer `const` over `let` when possible.
 
-### GitHub Actions
-The CI pipeline (.github/workflows/main.yml):
-- Runs on Ubuntu, macOS, and Windows
-- Installs Node.js 16.x
-- Initializes git submodules
-- Runs `npm install` and `npm test`
-- Uses `xvfb-run` on Linux for headless testing
+### Strings
 
-### Prerequisites for CI Success
-- All lint warnings must be addressed for new code
-- Git submodules must be properly initialized
-- No compilation errors allowed
-- Extension must load successfully in VS Code
+- Use "double quotes"
+- All strings visible to the user need to be externalized using the `l10n` API
+- Externalized strings must not use string concatenation. Use placeholders instead (`{0}`).
 
-## Troubleshooting
+### Code Quality
 
-### Common Issues
-- **Tests fail with network errors**: Expected in headless environments. Use manual validation instead.
-- **"vscode module not found"**: Extension requires VS Code runtime. Use `F5` debugging or Extension Development Host.
-- **Webpack build fails**: Check TypeScript compilation first with `npm run compile`.
-- **Submodule not found**: Run `git submodule init && git submodule update`.
+- All files must include copyright header
+- Prefer `async` and `await` over `Promise` and `then` calls
+- All user facing messages must be localized using the applicable localization framework (for example `l10n.t` method)
+- Keep imports organized: VS Code first, then internal modules.
+- Use semicolons at the end of statements.
+- Keep changes minimal and aligned with existing style.
+- Keep language rules and constants synchronized.
 
-### Build Issues
-- Clean build: Delete `dist/` and `out/` directories, then run `npm run build`
-- Watch mode stuck: Kill the process and restart `npm run watch`
-- Extension not loading: Check VS Code Developer Tools console for errors
+### Import Organization
 
-### Development Tips
-- Use VS Code's built-in TypeScript language server for navigation
-- Reload the Extension Development Host window (`Ctrl+R`/`Cmd+R`) after code changes
-- Check the Extension Host output channel for runtime errors
-- Use the debugger by setting breakpoints and pressing `F5`
+- Import VS Code API first: `import * as vscode from "vscode"`
+- Group related imports together
+- Use named imports for specific VS Code types
+- Import from local modules using relative paths
+
+### Architecture Patterns
+- **Container Pattern**: The `Container` class stores global state like `Container.context`
+- **Factory Pattern**: The `LanguageFactory` class creates language-specific symbol and comment providers based on document language
+- **Strategy Pattern**: Separate classes implement symbol detection, folding range detection, and comment detection strategies that can be swapped based on language rules
+- **Provider Pattern**: The `RulesProvider` class provides built in and user defined rules for comment detection
+- **Decoration Pattern**: Separate decoration types created for each _kind_ of separator and folding range
+- **Event-Driven**: Heavy use of VS Code events (`onDidChangeConfiguration`, `onDidChangeTextDocument`, etc.)
+- **Language Provider Dependency**: The extension relies on language providers (like `DocumentSymbolProvider` and `FoldingRangeProvider`) to determine where to draw separators, so behavior can vary based on the quality of those providers for each language.
+
+## Extension Features and Configuration
+
+- Draw separators above symbols and/or folding ranges.
+- Language-aware symbol and comment handling.
+- Commands to toggle and refine separator behavior.
+- Supports both desktop and web extension targets.
+
+### Key Features
+1. **Draw Separators**: Draw separators above symbols and/or folding ranges based on language-aware rules.
+2. **Language-Aware Handling**: Use language-specific rules to determine which symbols to draw separators for and when to suppress separators above comments.
+3. **Commands**: Provide commands to toggle separator visibility and select symbols/folding ranges.
+4. **Customizable Appearance**: Gutter icons, line backgrounds, colors
+5. **Remote Development**: Support for remote development scenarios
+6. **Internationalization support**: Localization of all user-facing strings
+7. **Walkthrough**: Getting Started guide for new users
+
+### Important Settings
+- `separators.enabledSymbols`: Define which symbols should have separators drawn
+- `separators.functions.ignoreCallbackInline`: Suppress separators above inline callback functions
+- `separators.comments.enabled`: Enable comment-aware separator suppression
+
+## Dependencies and External Tools
+
+- Requires `vscode-whats-new` submodule initialization.
+- No external runtime tools are required beyond standard extension toolchain.
+- Uses `@vscode/test-electron` for integration testing.
+
+## Troubleshooting and Known Limitations
+
+- Network failures in tests are often environment-related (`update.code.visualstudio.com`).
+- If build fails, clean `dist/` and `out/` and rebuild.
+- If separators do not appear, verify language symbol provider behavior and extension settings.
+
+## CI and Pre-Commit Validation
+
+Before committing:
+
+1. Run `npm run lint`.
+2. Run `npm run pretest`.
+3. Run `npm run build`.
+4. Validate extension behavior manually in Extension Host.
+
+## Common Tasks
+
+1. Update separator logic in `src/decoration.ts` and related symbol/folding modules.
+2. Adjust rules in `rules.json` and corresponding constants.
+3. Keep command/configuration and localization keys synchronized.
