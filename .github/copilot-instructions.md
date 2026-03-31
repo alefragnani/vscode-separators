@@ -102,8 +102,10 @@ rules.json                # Built-in comment detection rules
 
 ### Strings
 
-- Use "double quotes"
-- All strings visible to the user need to be externalized using the `l10n` API
+- Prefer double quotes for new code; some existing files may still use single quotes.
+- User-facing strings use two localization mechanisms:
+  - **Manifest contributions** (commands, settings, walkthrough metadata): use `%key%` placeholders in `package.json`, with translations in `package.nls.json` and `package.nls.{LANGID}.json`. Do **not** use `l10n.t` for these.
+  - **Runtime messages** (shown from extension code): use `l10n.t("message")`, with translations in `l10n/bundle.l10n.json` and `l10n/bundle.l10n.{LANGID}.json`.
 - Externalized strings must not use string concatenation. Use placeholders instead (`{0}`).
 
 ### Code Quality
