@@ -83,7 +83,7 @@ rules.json                # Built-in comment detection rules
 
 ### Indentation
 
-- We spaces, not tabs.
+- Use spaces, not tabs.
 - Use 4 spaces for indentation.
 
 ### Naming Conventions
@@ -110,7 +110,7 @@ rules.json                # Built-in comment detection rules
 
 ### Code Quality
 
-- All files must include copyright header
+- All production source files under `src/` (excluding tests under `src/test`) must include the standard project copyright header
 - Prefer `async` and `await` over `Promise` and `then` calls
 - All user facing messages must be localized using the applicable localization framework (for example `l10n.t` method)
 - Keep imports organized: VS Code first, then internal modules.
