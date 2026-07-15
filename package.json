@@ -30,7 +30,7 @@
             "supported": true
         }
     },
-    "icon": "images/icon.png",
+    "icon": "docs/images/icon.png",
     "license": "GPL-3.0",
     "homepage": "https://github.com/alefragnani/vscode-separators/blob/master/README.md",
     "repository": {
