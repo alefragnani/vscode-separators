@@ -42,7 +42,7 @@
 
 It improves the readability of your source code, by drawing lines on top of each symbol or specific folding ranges.
 
-![Print](images/vscode-separators-print-readme.png)
+![Print](docs/images/vscode-separators-print-readme.png)
 
 Here are some of the features that **Separators** provides:
 
