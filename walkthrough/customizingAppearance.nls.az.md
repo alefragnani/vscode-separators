@@ -15,6 +15,6 @@ Ayarlarında buna bənzər bir konfiqurasiya:
 
 Belə bir ayırıcı yarada bilər:
 
-![Customizing Constructor](customizingAppearanceConstructor.png)
+![Konstruktorun fərdiləşdirilməsi](customizingAppearanceConstructor.png)
 
 > İpucu: Bəzi konfiqurasiyalar dilə xas ayarları dəstəkləyir, məsələn, `separators.minimumLineCount`

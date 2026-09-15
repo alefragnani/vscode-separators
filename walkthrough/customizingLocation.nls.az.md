@@ -17,4 +17,4 @@ Ayarlarında buna bənzər bir konfiqurasiya:
 
 Belə bir ayırıcı yarada bilər:
 
-![Customizing Location](customizingLocation.png)
+![Yerləşmənin fərdiləşdirilməsi](customizingLocation.png)
