@@ -1,0 +1,17 @@
+{
+    "Select which symbols should have separators": "Hansı simvolların ayırıcılarının olacağını seçin",
+    "Classes": "Siniflər",
+    "Constructors": "Konstruktorlar",
+    "Enums": "Sadalamalar",
+    "Functions": "Funksiyalar",
+    "Interfaces": "İnterfeyslər",
+    "Methods": "Metodlar",
+    "Namespaces": "Ad sahələri",
+    "Structs": "Strukturlar",
+    "Properties": "Xassələr",
+    "Edit Settings": "Parametrləri redaktə et",
+    "Comments": "Şərhlər",
+    "Imports": "İdxallar",
+    "Regions": "Regionlar",
+    "Select which folding ranges should have separators": "Hansı qatlama aralıqlarının ayırıcılarının olacağını seçin"
+}
