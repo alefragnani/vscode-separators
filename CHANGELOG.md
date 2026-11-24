@@ -1,3 +1,7 @@
+## [3.1.0] - 2026-11-24
+### Added
+- **az** translations (thanks to @jamalkamaladdin [PR #149](https://github.com/alefragnani/vscode-separators/pull/149))
+
 ## [3.0.0] - 2026-03-23
 ### Added
 - Add commands to navigate to previous/next separator (issue [#62](https://github.com/alefragnani/vscode-separators/issues/62))
